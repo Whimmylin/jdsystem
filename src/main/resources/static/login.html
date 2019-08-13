@@ -2,9 +2,216 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>京东商城，欢迎登录</title>
+    <link rel="stylesheet" href="css/login.css">
+    <script src="js/jquery-3.4.1.js"></script>
+    <script src="js/jquery.validate.js"></script>
+    <script src="js/jquery.validate.regex.js"></script>
+    <script>
+        $(function () {
+            // box切换功能
+            $("#zhanhao").click(function () {
+                $(".box_login").removeClass("box_login").addClass("visible");
+                $("#zhanhao").removeClass("lo").addClass("checked");
+                $("#saoma").removeClass("checked").addClass("lo")
+            });
+            $("#saoma").click(function () {
+                $(".visible").removeClass("visible").addClass("box_login");
+                $("#saoma").removeClass("lo").addClass("checked");
+                $("#zhanhao").removeClass("checked").addClass("lo")
+            });
+            $(".b1").hover(function () {
+                $(this).animate({left:"20px"},500)
+            },function () {
+                $(this).animate({left:"84px"},500)
+            });
+            // 验证
+            $("#formlogin").validate({
+                rules: {
+                    loginname: {
+                        required: true,
+                        regex: /^[a-zA-Z\d\u4e00-\u9fa5]{4,12}$/
+                    },
+                    loginpassword: {
+                        required: true,
+                        regex: /^\w{8,20}$/
+                    }
+                },
+                messages: {
+                    loginname: {
+                        required: "请输入用户名",
+                        regex:"用户名格式不正确"
+                    },
+                    loginpassword: {
+                        required: "请输入密码",
+                        regex: "请输入正确的密码"
+                    }
+                }
+            });
+            $("#postLogin").click(function () {
+                if ($('#formlogin').valid()==true){
+                    $.ajax({
+                        url:"http://localhost:8080/checked",
+                        type:"post",
+                        data:{"userName":$("input[name='loginname']").val(),"password":$("input[name='loginpassword']").val()},
+                        dataType:"json",
+                        success:function (data){
+                            alert(data);
+                            if(data){
+                                location.href="http://www.baidu.com";
+                            }
+                        }
+                    })
+                }
+            });
+        })
+    </script>
 </head>
 <body>
+<!--logo-->
+<div id="logo">
+    <img src="./images/logo-201305-b.png" alt="logo">
+    <b></b>
+</div>
+<!--顶部信息-->
+<a href="" class="c1"><b></b>登录页面，调查问卷</a>
+<div class="c2">
+    <div class="d1">
+        <div class="d2">
+            <i class="i1"></i>
+            <p>依据《网络安全法》，为保障您的账户安全和正常使用，请尽快完成手机号验证！ 新版</p>
+                <a href="" id="a1"> 《京东隐私政策》 </a>
+             <p>已上线，将更有利于保护您的个人隐私。</p>
+        </div>
+    </div>
+</div>
+<!--主体部分-->
+<div id="main">
+    <div class="c3">
+        <div id="login">
+            <div class="c2 c4">
+                <i class="i1"></i>
+                <p>京东不会以任何理由要求您转账汇款，谨防诈骗。</p>
+            </div>
+            <div class="tip">
+                <a href="javascript:void(0);" class="checked" id="saoma">扫码登录</a>
+            </div>
+            <div class="tip">
+                <a href="javascript:void(0);" class="lo" id="zhanhao">账号登录</a>
+            </div>
+<!--                第一个登录窗口，二维码-->
+            <div class="c5">
+                <div class="c6">
+                    <div class="b1">
+                        <img src="//qr.m.jd.com/show?appid=133&amp;size=147&amp;t=1564889551544" alt="">
+                    </div>
+                    <div class="c7">
+                    <ul class="u1">
+                        <span>打开</span><a href=""><span class="red">手机京东</span></a><li>扫描二维码</li>
+                    </ul>
+                    </div>
+                    <div class="c8">
+                        <ul class="u2">
+                            <li>
+                                <b></b>
+                                <em>免输入</em>
+                            </li>
+                            <li>
+                                <b class="faster"></b>
+                                <em>更快</em>
+                            </li>
+                            <li>
+                                <b class="more-safe"></b>
+                                <em>更安全</em>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+<!--                第二个登录窗口，账号登录-->
+            <div class="box_login">
+                <div class="msg"></div>
+                <form action="doPost.jsp" method="post" id="formlogin">
+                    <div class="m1">
+                        <lable class="m2"></lable>
+                        <input  type="text" class="itxt" name="loginname" tabindex="1" autocomplete="off" value="" placeholder="邮箱/用户名/已验证手机">
+                    </div>
+                    <div class="m1">
+                        <lable class="m2 m3 "></lable>
+                        <input  type="text" class="itxt" name="loginpassword" tabindex="1" autocomplete="off" value="" placeholder="密码">
+                    </div>
+                    <div class="m4"><a href="">忘记密码</a></div>
+                    <div class="login_btn">
+                        <a href="javascript:void(0)" id="postLogin">
+                            登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录
+                        </a>
+                    </div>
+                </form>
+
+            </div>
+
+            <div class="c9">
+                <ul>
+                    <li>
+                        <a href="" class="pdl">
+                            <b></b><span>QQ</span>
+                        </a>
+                        <span class="line">|</span>
+                    </li>
+                    <li>
+                        <a href="" class="pdl">
+                            <b class="weixin-icon"></b>
+                            <span>微信</span>
+                        </a>
+                    </li>
+                    <li class="b2">
+                        <div>
+                            <a href="">
+                                <b></b>立即注册
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<!--底部-->
+<div id="foot">
+    <div class="links">
+        <a href="">关于我们</a>
+        <span>|</span>
+        <a href="">联系我们</a>
+        <span>|</span>
+        <a href="">人才招聘</a>
+        <span>|</span>
+        <a href="">商家入驻</a>
+        <span>|</span>
+        <a href="">广告服务</a>
+        <span>|</span>
+        <a href="">手机京东</a>
+        <span>|</span>
+        <a href="">友情链接</a>
+        <span>|</span>
+        <a href="">销售联盟</a>
+        <span>|</span>
+        <a href="">京东社区</a>
+        <span>|</span>
+        <a href="">京东公益</a>
+        <span>|</span>
+        <a href="">English&nbsp;Site</a>
+
+    </div>
+    <div class="copyright">
+        Copyright&nbsp;©&nbsp;2004-2019&nbsp;&nbsp;京东JD.com&nbsp;版权所有
+    </div>
+
+</div>
 
 </body>
 </html>
