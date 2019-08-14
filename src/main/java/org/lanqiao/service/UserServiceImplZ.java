@@ -23,7 +23,7 @@ public class UserServiceImplZ implements UserServiceZ {
 
     @Override
     public boolean UserNameisExist(String UserName) {
-        List<Users>  usersList =new ArrayList<>();
+        List<Users> usersList =new ArrayList<>();
         Users users = usersMapperZ.selectByUserName(UserName);
         usersList.add(users);
         if (usersList.size()>0){
