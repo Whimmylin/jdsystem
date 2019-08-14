@@ -16,8 +16,10 @@
   </resultMap>
   <select id="selectByPrimaryKey" resultMap="UsersResultMap">
     select *
+    from (select *
     from users
-    where user_name = #{param1,jdbcType = VARCHAR} and password = #{param2 ,jdbcType = VARCHAR}
+    where phone = #{param1,jdbcType = VARCHAR} or email = #{param1,jdbcType = VARCHAR} or user_name = #{param1,jdbcType = VARCHAR}) c
+    where c.password = #{param2 ,jdbcType = VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from users

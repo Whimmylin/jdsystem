@@ -20,17 +20,19 @@
                 $("#saoma").removeClass("lo").addClass("checked");
                 $("#zhanhao").removeClass("checked").addClass("lo")
             });
+
             $(".b1").hover(function () {
                 $(this).animate({left:"20px"},500)
             },function () {
                 $(this).animate({left:"84px"},500)
             });
+
             // 验证
             $("#formlogin").validate({
                 rules: {
                     loginname: {
                         required: true,
-                        regex: /^[a-zA-Z\d\u4e00-\u9fa5]{4,12}$/
+                        regex: /(^[a-zA-Z\d\u4e00-\u9fa5]{4,12}$)|(^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$)/
                     },
                     loginpassword: {
                         required: true,
@@ -48,7 +50,7 @@
                     }
                 }
             });
-            $("#postLogin").click(function () {
+            $("#postLogin").click(function (){
                 if ($('#formlogin').valid()==true){
                     $.ajax({
                         url:"http://localhost:8080/checked",
