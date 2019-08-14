@@ -60,7 +60,7 @@
 			<!--enableSelectByExample="false" enableUpdateByExample="false">-->
 			<!--<property name="useActualColumnNames" value="false" />-->
 		<!--</table>-->
-		<!--<table tableName="orderItem" domainObjectName="OrderItem"-->
+		<!--<table tableName="users" domainObjectName="Users"-->
 			<!--enableCountByExample="false" enableDeleteByExample="false"-->
 			<!--enableSelectByExample="false" enableUpdateByExample="false">-->
 			<!--<property name="useActualColumnNames" value="false" />-->
