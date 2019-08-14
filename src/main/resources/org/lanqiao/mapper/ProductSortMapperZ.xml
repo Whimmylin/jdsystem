@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.lanqiao.mapper.ProductSortMapperZ" >
+  <resultMap id="ProductSortResultMap" type="org.lanqiao.entity.ProductSort" >
+    <id column="sort_id" property="sortId" jdbcType="INTEGER" />
+    <result column="sort_name" property="sortName" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <!--新增商品种类-->
+  <insert id="insert" parameterType="org.lanqiao.entity.ProductSort" >
+    insert into productsort (sort_name) values (#{sortName,jdbcType=VARCHAR})
+  </insert>
+
+  <!--检查商品种类名是否存在-->
+  <select id="selectBySortName" resultType="java.lang.Integer" parameterType="java.lang.String">
+    SELECT count(*) FROM productsort WHERE sort_name=#{sortName}
+  </select>
+
+  <!--<select id="selectByPrimaryKey" resultMap="ProductSortResultMap" parameterType="java.lang.Integer" >-->
+  <!--select -->
+  <!--<include refid="Base_Column_List" />-->
+  <!--from productsort-->
+  <!--where sort_id = #{sortId,jdbcType=INTEGER}-->
+  <!--</select>-->
+  <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >-->
+  <!--delete from productsort-->
+  <!--where sort_id = #{sortId,jdbcType=INTEGER}-->
+  <!--</delete>-->
+  <!--<update id="updateByPrimaryKeySelective" parameterType="org.lanqiao.entity.ProductSort" >-->
+    <!--update productsort-->
+    <!--<set >-->
+      <!--<if test="sortName != null" >-->
+        <!--sort_name = #{sortName,jdbcType=VARCHAR},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--where sort_id = #{sortId,jdbcType=INTEGER}-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKey" parameterType="org.lanqiao.entity.ProductSort" >-->
+    <!--update productsort-->
+    <!--set sort_name = #{sortName,jdbcType=VARCHAR}-->
+    <!--where sort_id = #{sortId,jdbcType=INTEGER}-->
+  <!--</update>-->
+</mapper>

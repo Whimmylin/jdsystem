@@ -29,8 +29,8 @@
   </insert>
 
   <!--检查用户名-->
-  <select id="selectByUserName" resultMap="UsersResultMap" parameterType="java.lang.String">
-    SELECT * FROM users WHERE user_name=#{userName}
+  <select id="selectByUserName" resultType="java.lang.Integer" parameterType="java.lang.String">
+    SELECT COUNT(*) FROM users WHERE user_name=#{userName}
   </select>
 
 </mapper>

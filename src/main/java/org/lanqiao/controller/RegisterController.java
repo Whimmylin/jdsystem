@@ -21,7 +21,7 @@ public class RegisterController {
     }
 
     @RequestMapping("/check")
-    public boolean checkUser(String userName){
+    public int checkUser(String userName){
         return userServiceZ.UserNameisExist(userName);
     }
 }

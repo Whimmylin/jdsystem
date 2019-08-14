@@ -8,7 +8,8 @@ public interface UsersMapperZ {
 //    int deleteByPrimaryKey(Integer userId);
 
     int insert(Users record);
-    Users selectByUserName(String  UserName);
+
+    int selectByUserName(String  UserName);
 
 //    int insertSelective(Users record);
 
