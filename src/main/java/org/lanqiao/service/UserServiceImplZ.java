@@ -5,6 +5,9 @@ import org.lanqiao.mapper.UsersMapperZ;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by zhangyilin on 2019/8/13.
  */
@@ -20,10 +23,13 @@ public class UserServiceImplZ implements UserServiceZ {
 
     @Override
     public boolean UserNameisExist(String UserName) {
+        List<Users>  usersList =new ArrayList<>();
         Users users = usersMapperZ.selectByUserName(UserName);
-        if (users.getUserName()!=null){
+        usersList.add(users);
+        if (usersList.size()>0){
+            return false;
+        }else {
             return true;
         }
-        return false;
     }
 }
