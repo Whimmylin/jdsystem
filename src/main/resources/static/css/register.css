@@ -1,0 +1,353 @@
+body{font-size: 14px;}
+body {
+    font: 14px/150% tahoma,arial,Microsoft YaHei,Hiragino Sans GB,"\u5b8b\u4f53",sans-serif;
+    -webkit-font-smoothing: antialiased;
+    color: #666;
+    background: #fff;
+}
+a, address, b, big, blockquote, body, center, cite, code, dd, del, div, dl, dt, em, fieldset, font, form, h1, h2, h3, h4, h5, h6, html, i, iframe, img, ins, label, legend, li, ol, p, pre, small, span, strong, u, ul, var {
+    margin: 0;
+    padding: 0;
+}
+a {  color: #666;  text-decoration: none;  }
+div{display: block}
+em, i, u {  font-style: normal;  }
+button, input, select, textarea {  outline: 0;  }
+/*p {*/
+    /*display: block;*/
+    /*margin-block-start: 1em;*/
+    /*margin-block-end: 1em;*/
+    /*margin-inline-start: 0px;*/
+    /*margin-inline-end: 0px;*/
+/*!*}*!*/
+/*input {*/
+    /*-webkit-writing-mode: horizontal-tb !important;*/
+    /*text-rendering: auto;*/
+    /*color: initial;*/
+    /*letter-spacing: normal;*/
+    /*word-spacing: normal;*/
+    /*text-transform: none;*/
+    /*text-indent: 0px;*/
+    /*text-shadow: none;*/
+    /*display: inline-block;*/
+    /*text-align: start;*/
+    /*-webkit-appearance: textfield;*/
+    /*background-color: white;*/
+    /*-webkit-rtl-ordering: logical;*/
+    /*cursor: text;*/
+    /*margin: 0em;*/
+    /*font: 400 11px system-ui;*/
+    /*padding: 1px;*/
+    /*border-width: 2px;*/
+    /*border-style: inset;*/
+    /*border-color: initial;*/
+    /*border-image: initial;*/
+/*}field*/
+
+::-webkit-input-placeholder { color:#c5c5c5; }
+.header {
+    height: 110px;
+    background: url("../images/headbg.jpg") repeat-x left bottom;
+}
+.w{
+    width: 1210px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.header .w{
+    height: 76px;
+}
+.header .logo {
+    width: 160px;
+    height: 50px;
+    float: left;
+    margin-top: 24px;
+}
+.header .logo, .i-company, .i-def, .i-error, .i-error1, .i-global, .i-suc {
+    background: url("../images/icon.png") no-repeat;
+}
+.header .w .logo-title {
+    float: left;
+    height: 34px;
+    line-height: 34px;
+    font-size: 24px;
+    color: #333;
+    margin-top: 34px;
+}
+.header .have-account {
+    font-size: 16px;
+    float: right;
+    margin-top: 55px;
+    color: #999;
+}
+.header .have-account a {
+    color: #e22;
+}
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+/*.container{*/
+    /*width: 1210px;*/
+    /*height: 407px;*/
+/*}*/
+.progress-bar {
+    position: relative;
+    margin: 80px auto 0;
+    width: 400px;
+}
+.main {
+    margin: 50px auto 186px;
+    width: 400px;
+}
+.progress-bar .pro-step {
+    float: left;
+    text-align: center;
+}
+.progress-bar .cur-step .step-index {
+    background-position: 0 -200px;
+    color: #fff;
+}
+.progress-bar .pro-step .step-index {
+    margin: 0 auto;
+    display: block;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    background-position: -45px -200px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #ccc;
+}
+.progress-bar .pro-line, .progress-bar .pro-step .step-index {
+    background: url("../images/reg-icon.png") no-repeat;
+}
+.progress-bar .cur-done .step-desc {
+    color: #3b4;
+}
+.progress-bar .pro-step .step-desc {
+    margin-top: 10px;
+    font-size: 12px;
+    color: #999;
+}
+.progress-bar .person-pro-line1 {
+    left: 55px;
+}
+.progress-bar .pro-line1 {
+    /*left: 50px;*/
+}
+
+.progress-bar .person-pro-line {
+    width: 124px;
+    background-position: 0 -100px;
+}
+.progress-bar .pro-line {
+    position: absolute;
+    top: 7px;
+    /*width: 74px;*/
+    height: 10px;
+    /*background-position: 0 -40px;*/
+}
+.progress-bar .person-cur-line {
+    background-position: 0 -130px;
+}
+.progress-bar .person-pro-step2 {
+    margin-left: 106px;
+}
+.progress-bar .pro-step2 {
+    /*margin-left: 49px;*/
+}
+.progress-bar .person-pro-line2 {
+    left: 228px;
+}
+.progress-bar .pro-line2 {
+    /*left: 169px;*/
+}
+.progress-bar .person-pro-step3 {
+    margin-left: 112px;
+}
+.progress-bar .pro-step3 {
+    /*margin-left: 43px;*/
+}
+.main {
+    margin: 50px auto 186px;
+    width: 400px;
+}
+
+.item-phone-wrap {
+    height: 86px;
+    position: relative;
+    z-index: 2;
+}
+.form-item-phone {
+    border: none;
+}
+.form-item {
+    position: relative;
+    border: solid 1px #ddd;
+    width: 398px;
+    height: 52px;
+    z-index: 0;
+}
+.form-item-phone .select-country {
+    border: solid 1px #ddd;
+    border-right: none;
+    padding: 0 0 0 20px;
+    cursor: pointer;
+    color: #666;
+}
+.form-item label {
+    float: left;
+    /*width: 87px;*/
+    height: 50px;
+    line-height: 50px;
+    padding-left: 20px;
+    position: absolute;
+}
+
+.form-item-phone .arrow {
+    background: url("../images/icon.png") no-repeat;
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    margin-top: 15px;
+    /*margin-left: 5px;*/
+    background-position: -2px -150px;
+    /*zoom: 1;*/
+    /*height: 20px;*/
+}
+
+.form-item .item-input-wrap {
+    /*float: left;*/
+    /*width: 292.68px;*/
+    height: 50px;
+    border: solid 1px #ddd;
+}
+.form-item txt {
+    margin-top: 2px!important;
+    position: absolute;
+    z-index: 2;
+    line-height: 46px;
+    margin-left: 20px;
+    margin-top: 1px;
+    font-size: 14px;
+    font-family: system-ui;
+    color: rgb(204, 204, 204);
+    display: inline;
+}
+.form-item .field {
+    border: 0 none;
+    font-size: 14px;
+    width: 250px;
+    height: 19px;
+    padding-bottom: 11px;
+    padding-left: 120px;
+    padding-top: 16px;
+}
+.input-tip {
+    color: #c5c5c5;
+    height: 27px;
+    font-size: 12px;
+    padding-top: 5px;
+}
+.input-tip .error, .input-tip .orange, .phone-bind-tip {
+    color: #f91;
+}
+.form-item .error {
+    display: block;
+    color: #f91;
+}
+.input-tip span i {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    vertical-align: text-top;
+    margin-right: 8px;
+}
+.i-error {
+    background-position: -17px -100px;
+}
+.checkRegDialog .ico, .form-item-valid .i-status, .i-company, .i-def, .i-error, .i-error1, .i-global, .i-info, .i-pwd-medium, .i-pwd-strong, .i-pwd-weak, .i-suc {
+    background: url("../images/icon.png") no-repeat;
+}
+.form-item-getcode {
+    line-height: 52px;
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    z-index: 2;
+}
+.form-agreen {
+    position: relative;
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 12px;
+    word-wrap: break-word;
+    white-space: nowrap;
+}
+.btn-register {
+    width: 100%;
+    height: 54px;
+    line-height: 54px;
+    text-align: center;
+    color: #fff;
+    background: #e2231a;
+    border: 0;
+    font-size: 16px;
+    font-family: "Microsoft YaHei","Hiragino Sans GB";
+    cursor: pointer;
+}
+#step2-wrap {
+    display: none;
+}
+.reg-other {
+    margin-top: 28px;
+}
+.reg-other .reg-other-person {
+    float: left;
+}
+.reg-other .reg-other-item {
+    color: #333;
+    cursor: pointer;
+}
+.reg-other .reg-other-inter {
+    float: right;
+}
+.reg-other .reg-ohter-icon {
+    display: inline-block;
+    margin: 0 8px 2px 0;
+    vertical-align: middle;
+    width: 26px;
+    height: 26px;
+    background-position: 0 -160px;
+}
+.reg-other .reg-other-person .reg-ohter-icon {
+    background-position: -0px -160px;
+}
+.reg-other .reg-other-inter .reg-ohter-icon {
+    background-position: -40px -160px;
+}
+.form-agreen .agree-tip i, .form-agreen .sim-checkbox, .form-item .i-cancel, .reg-other .reg-ohter-icon {
+    background: url("../images/reg-icon.png") no-repeat;
+}
+
+.footer {
+    font-size: 12px;
+    text-align: center;
+    border-top: solid 1px #e6e6e6;
+    color: #999;
+    padding-bottom: 30px;
+}
+.footer .links {
+    padding-top: 30px;
+    padding-bottom: 15px;
+}
+
+.footer a {
+    color: #999;
+    margin: 0 10px;
+}
