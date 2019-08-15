@@ -12,5 +12,5 @@ public interface UserServiceZ {
     public int addUsers(Users users);
 
     //验证名字
-    public boolean UserNameisExist(String UserName);
+    public int UserNameisExist(String UserName);
 }
