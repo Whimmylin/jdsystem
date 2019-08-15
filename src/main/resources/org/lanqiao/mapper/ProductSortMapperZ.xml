@@ -16,16 +16,31 @@
     SELECT count(*) FROM productsort WHERE sort_name=#{sortName}
   </select>
 
+  <!--查询所有商品种类-->
+  <select id="showProSortList" resultMap="ProductSortResultMap" >
+    SELECT * FROM productsort
+  </select>
+
+  <!--删除商品种类-->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from productsort
+    where sort_id = #{sortId,jdbcType=INTEGER}
+  </delete>
+
+  <!--修改商品种类-->
+  <update id="updateByPrimaryKey" parameterType="org.lanqiao.entity.ProductSort" >
+    update productsort set sort_name = #{sortName,jdbcType=VARCHAR}
+    where sort_id = #{sortId,jdbcType=INTEGER}
+  </update>
+
+
   <!--<select id="selectByPrimaryKey" resultMap="ProductSortResultMap" parameterType="java.lang.Integer" >-->
   <!--select -->
   <!--<include refid="Base_Column_List" />-->
   <!--from productsort-->
   <!--where sort_id = #{sortId,jdbcType=INTEGER}-->
   <!--</select>-->
-  <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >-->
-  <!--delete from productsort-->
-  <!--where sort_id = #{sortId,jdbcType=INTEGER}-->
-  <!--</delete>-->
+
   <!--<update id="updateByPrimaryKeySelective" parameterType="org.lanqiao.entity.ProductSort" >-->
     <!--update productsort-->
     <!--<set >-->
@@ -35,9 +50,5 @@
     <!--</set>-->
     <!--where sort_id = #{sortId,jdbcType=INTEGER}-->
   <!--</update>-->
-  <!--<update id="updateByPrimaryKey" parameterType="org.lanqiao.entity.ProductSort" >-->
-    <!--update productsort-->
-    <!--set sort_name = #{sortName,jdbcType=VARCHAR}-->
-    <!--where sort_id = #{sortId,jdbcType=INTEGER}-->
-  <!--</update>-->
+
 </mapper>

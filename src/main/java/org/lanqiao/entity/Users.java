@@ -5,7 +5,6 @@ import java.util.Date;
 public class Users {
     private Integer userId;
 
-    private Integer cartId;
 
     private String userName;
 
@@ -31,14 +30,6 @@ public class Users {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
-    }
-
-    public Integer getCartId() {
-        return cartId;
-    }
-
-    public void setCartId(Integer cartId) {
-        this.cartId = cartId;
     }
 
     public String getUserName() {
