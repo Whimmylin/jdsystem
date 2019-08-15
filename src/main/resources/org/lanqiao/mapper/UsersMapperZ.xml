@@ -3,7 +3,6 @@
 <mapper namespace="org.lanqiao.mapper.UsersMapperZ" >
   <resultMap id="UsersResultMap" type="org.lanqiao.entity.Users" >
     <id column="user_id" property="userId" jdbcType="INTEGER" />
-    <result column="cart_id" property="cartId" jdbcType="INTEGER" />
     <result column="user_name" property="userName" jdbcType="VARCHAR" />
     <result column="phone" property="phone" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />

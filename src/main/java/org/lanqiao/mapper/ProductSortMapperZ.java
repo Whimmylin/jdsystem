@@ -3,8 +3,11 @@ package org.lanqiao.mapper;
 import org.lanqiao.entity.ProductSort;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface ProductSortMapperZ {
+
     int deleteByPrimaryKey(Integer sortId);
 
     int insert(ProductSort record);
@@ -15,7 +18,11 @@ public interface ProductSortMapperZ {
 
     ProductSort selectByPrimaryKey(Integer sortId);
 
+    List<ProductSort> showProSortList();
+
     int updateByPrimaryKeySelective(ProductSort record);
 
     int updateByPrimaryKey(ProductSort record);
+
+
 }
