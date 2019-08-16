@@ -18,6 +18,11 @@
 
   <!--查询所有商品品牌-->
   <select id="showProBrandList" resultMap="ProductBrandResultMap" >
+    SELECT * FROM productbrand limit #{param1},#{param2}
+  </select>
+
+<!--  获取品牌数目-->
+  <select id="sort3PageCount" resultMap="ProductBrandResultMap" >
     SELECT * FROM productbrand
   </select>
 

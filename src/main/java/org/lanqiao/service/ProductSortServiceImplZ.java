@@ -40,8 +40,8 @@ public class ProductSortServiceImplZ implements ProductSortServiceZ {
     }
 
     @Override
-    public List<ProductSort> showAllProSort() {
-        return productSortMapperZ.showProSortList();
+    public List<ProductSort> showAllProSort(int pageNum,int pageSize) {
+        return productSortMapperZ.showProSortList((pageNum-1)*pageSize,pageSize);
     }
 
     @Override
@@ -58,5 +58,11 @@ public class ProductSortServiceImplZ implements ProductSortServiceZ {
         }else {
             return productSortMapperZ.updateByPrimaryKey(productSort);
         }
+    }
+
+    @Override
+    public int sort2PageCount(){
+        List<ProductSort> list = productSortMapperZ.sort2PageCount();
+        return list.size();
     }
 }

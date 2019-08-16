@@ -18,11 +18,13 @@ public interface ProductSortMapperZ {
 
     ProductSort selectByPrimaryKey(Integer sortId);
 
-    List<ProductSort> showProSortList();
+    List<ProductSort> showProSortList(int pageNum,int pageSize);
 
     int updateByPrimaryKeySelective(ProductSort record);
 
     int updateByPrimaryKey(ProductSort record);
+
+    List<ProductSort> sort2PageCount();
 
 
 }

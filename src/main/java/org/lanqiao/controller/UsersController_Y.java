@@ -12,6 +12,7 @@ public class UsersController_Y {
     UserService_Y userService_y;
 @RequestMapping("/checked")
 public boolean selectByPrimaryKey(String userName , String password){
+
     return userService_y.selectByPrimaryKey(userName,password);
 }
 

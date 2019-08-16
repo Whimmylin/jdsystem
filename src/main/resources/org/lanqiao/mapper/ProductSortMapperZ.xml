@@ -18,6 +18,11 @@
 
   <!--查询所有商品种类-->
   <select id="showProSortList" resultMap="ProductSortResultMap" >
+    SELECT * FROM productsort limit #{param1,jdbcType=INTEGER},#{param2,jdbcType=INTEGER}
+  </select>
+
+<!--  用于查询数目-->
+  <select id="sort2PageCount" resultMap="ProductSortResultMap" >
     SELECT * FROM productsort
   </select>
 

@@ -27,8 +27,8 @@ public class ManaController {
     }
 
     @RequestMapping("/getAllSort")
-    public List<ProductSort> getAllSort(){
-        return productSortServiceZ.showAllProSort();
+    public List<ProductSort> getAllSort(int pageNum,int pageSize){
+        return productSortServiceZ.showAllProSort(pageNum,pageSize);
     }
 
     @RequestMapping("/delSort")
@@ -41,15 +41,14 @@ public class ManaController {
         return productSortServiceZ.updateSort(record);
     }
 
-
     @RequestMapping("/addBrand")
     public int addBrand(ProductBrand record){
         return proBrandServiceZ.addBrand(record);
     }
 
     @RequestMapping("/getAllBrand")
-    public List<ProductBrand> getAllBrand(){
-        return proBrandServiceZ.showAllProBrand();
+    public List<ProductBrand> getAllBrand(int pageNum,int pageSize){
+        return proBrandServiceZ.showAllProBrand(pageNum,pageSize);
     }
 
     @RequestMapping("/delBrand")
@@ -60,5 +59,15 @@ public class ManaController {
     @RequestMapping("/updateBrand")
     public int updateBrand(ProductBrand record){
         return proBrandServiceZ.updateBrand(record);
+    }
+
+    @RequestMapping("/sort2PageCount")
+    public int sort2PageCount(){
+        return productSortServiceZ.sort2PageCount();
+    }
+
+    @RequestMapping("sort3PageCount")
+    public int sort3PageCount(){
+        return proBrandServiceZ.sort3PageCount();
     }
 }

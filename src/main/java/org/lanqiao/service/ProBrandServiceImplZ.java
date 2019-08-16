@@ -37,8 +37,8 @@ public class ProBrandServiceImplZ implements ProBrandServiceZ {
     }
 
     @Override
-    public List<ProductBrand> showAllProBrand() {
-        return productBrandMapperZ.showProBrandList();
+    public List<ProductBrand> showAllProBrand(int pageNum,int pageSize) {
+        return productBrandMapperZ.showProBrandList((pageNum-1)*pageSize,pageSize);
     }
 
     @Override
@@ -55,5 +55,11 @@ public class ProBrandServiceImplZ implements ProBrandServiceZ {
         }else {
             return productBrandMapperZ.updateByPrimaryKey(productBrand);
         }
+    }
+
+    @Override
+    public int sort3PageCount() {
+        List<ProductBrand> list = productBrandMapperZ.sort3PageCount();
+        return list.size();
     }
 }

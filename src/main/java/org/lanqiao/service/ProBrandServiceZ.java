@@ -18,11 +18,14 @@ public interface ProBrandServiceZ {
     public int  BrandNameisExist(String BrandName);
 
     //查询所有的商品品牌
-    public List<ProductBrand> showAllProBrand();
+    public List<ProductBrand> showAllProBrand(int pageNum,int pageSize);
 
     //删除商品某品牌
     public int delBrand(Integer BrandId);
 
     //更新商品某品牌
     public int updateBrand(ProductBrand productBrand);
+
+    //获取品牌总数
+    public int sort3PageCount();
 }
