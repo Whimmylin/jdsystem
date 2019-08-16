@@ -59,4 +59,9 @@ public class ProductSortServiceImplZ implements ProductSortServiceZ {
             return productSortMapperZ.updateByPrimaryKey(productSort);
         }
     }
+
+    @Override
+    public ProductSort searchSort(String sortName) {
+        return productSortMapperZ.searchBySortName(sortName);
+    }
 }

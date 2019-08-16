@@ -18,11 +18,15 @@ public interface ProductSortMapperZ {
 
     ProductSort selectByPrimaryKey(Integer sortId);
 
+    ProductSort searchBySortName(String  SortName);
+
     List<ProductSort> showProSortList();
 
     int updateByPrimaryKeySelective(ProductSort record);
 
     int updateByPrimaryKey(ProductSort record);
+
+
 
 
 }

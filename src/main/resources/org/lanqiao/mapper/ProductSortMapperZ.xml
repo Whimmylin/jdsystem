@@ -33,6 +33,11 @@
     where sort_id = #{sortId,jdbcType=INTEGER}
   </update>
 
+  <!--根据商品种类名找记录-->
+  <select id="searchBySortName" resultMap="ProductSortResultMap" parameterType="java.lang.String">
+   SELECT * FROM productsort WHERE sort_name=#{sortName}
+  </select>
+
 
   <!--<select id="selectByPrimaryKey" resultMap="ProductSortResultMap" parameterType="java.lang.Integer" >-->
   <!--select -->

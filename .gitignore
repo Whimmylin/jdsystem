@@ -19,9 +19,8 @@ target/
 *.iml
 *.ipr
 .mvn
-.yml
 *.yml
-.properties
+*.properties
 
 
 ### NetBeans ###

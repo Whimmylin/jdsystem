@@ -41,6 +41,10 @@ public class ManaController {
         return productSortServiceZ.updateSort(record);
     }
 
+    @RequestMapping("/searchSort")
+    public ProductSort searchSort(String sortName){
+        return productSortServiceZ.searchSort(sortName);
+    }
 
     @RequestMapping("/addBrand")
     public int addBrand(ProductBrand record){
@@ -61,4 +65,6 @@ public class ManaController {
     public int updateBrand(ProductBrand record){
         return proBrandServiceZ.updateBrand(record);
     }
+
+
 }

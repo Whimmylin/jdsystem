@@ -24,4 +24,7 @@ public interface ProductSortServiceZ {
 
     //更新商品某种类
     public int updateSort(ProductSort productSort);
+
+    //根据种类名称找记录
+    public ProductSort searchSort(String sortName);
 }
