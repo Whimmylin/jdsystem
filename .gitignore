@@ -19,10 +19,15 @@ target/
 *.iml
 *.ipr
 .mvn
+<<<<<<< Updated upstream
 .yml
 *.yml
 *.properties
 
+=======
+*.yml
+*.properties
+>>>>>>> Stashed changes
 
 ### NetBeans ###
 /nbproject/private/
