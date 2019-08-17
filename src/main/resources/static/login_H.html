@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Title</title>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/vue.min1.js"></script>
+    <script>
+
+
+        $(function () {
+            var vm = new Vue({
+                el: "#kkk , #ppp ",
+
+                data: {
+                    produces:[{
+
+                    }]
+
+                }, methods: {
+                    toSubmit: function () {
+                        $.ajax({
+                            url: "http://localhost:8080/get",
+                            type: "post",
+                            datatype: "json",
+                            success: function (data) {
+                                for (var i = 0; i < data.length; i++) {
+                                    vm.produces.push({pro_id:data[i].proId,brand_name:data[i].productbrand[0].brandName,
+                                    pro_name:data[i].proName,pro_price:data[i].proPrice,img:data[i].productimg[0].imgUrl,
+                                        pro_stock:data[i].proStock});
+                                }
+                            }
+                        })
+
+                    }
+                }
+
+
+            });
+        });
+
+    </script>
+
+
+
+</head>
+<body>
+
+<div id="kkk">
+<ul v-for="(produce,index) in produces">
+    <li>{{produce.pro_id}}</li>
+    <li>{{produce.pro_name}}</li>
+    <li>{{produce.pro_price}}</li>
+    <li>{{produce.pro_stock}}</li>
+    <li>{{produce.brand_name}}</li>
+    <img src="{{produce.img}}" alt="">
+</ul>
+    <input type="button" value="+" @click="toSubmit">
+    <img src="" alt="">
+</div>
+<div id="ppp">
+
+</div>
+</body>
+</html>
