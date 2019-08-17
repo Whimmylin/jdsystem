@@ -23,6 +23,7 @@ target/
 *.properties
 
 
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
