@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css1/index.css">
+    <link rel="stylesheet" href="css1/base.css">
+    <link href="css1/footer.css" rel="stylesheet">
+<!--    <script src="js_H/jquery.validate.js_H"></script>-->
+<!--    <script src="js_H/jquery.validate.regex.js_H"></script>-->
+    <script src="js_H/jquery-3.4.1.js"></script>
+    <script src="js_H/vue.min.js"></script>
+    <script>
+        $(function () {
+            var vm = new Vue({
+                el: "#BOX",
+                data: {
+                    produces:[],
+                       pagenum:0,
+                        pagesize:4,
+                       Count:0,
+                    Count1:0,
+                    pagenum1:0,
+
+
+                }, methods: {
+                    toSubmit: function () {
+                        vm.produces=[];
+                        vm.count();
+                        $.ajax({
+                            url: "http://localhost:8080/fy",
+                            type: "post",
+                            data:{
+                                "Input":$("input[name='TEXT']").val(),
+                                 "PageNum":vm.pagenum,
+                                 "PageSize":vm.pagesize,
+                            },
+                            datatype: "json",
+                            success: function (data) {
+
+                                        $("#J_filter .myBox-li").remove();
+                                for (var i = 0; i < data.length; i++) {
+                                    vm.produces.push({pro_id:data[i].proId,img:data[i].productimg.imgUrl,
+                                       pro_name:data[i].proName,pro_price:data[i].proPrice,pro_detail:data[i].proDetail,
+                                        pro_stock:data[i].proStock});
+                                }
+                            }
+                        })
+
+                    }, paixu:function () {
+                        vm.produces=[];
+                        vm.count2();
+                        $.ajax({
+                            url: "http://localhost:8080/fy",
+                            type: "post",
+                            data:{
+                                "PX":$("input[name='TEXT']").val(),
+                                "PageNum":vm.pagenum,
+                                "PageSize":vm.pagesize,
+
+                            },
+                            datatype: "json",
+                            success: function (data) {
+
+                                $("#J_filter .myBox-li").remove();
+                                for (var i = 0; i < data.length; i++) {
+                                    vm.produces.push({pro_id:data[i].proId,img:data[i].productimg.imgUrl,
+                                        pro_name:data[i].proName,pro_price:data[i].proPrice,pro_detail:data[i].proDetail,
+                                        pro_stock:data[i].proStock});
+                                }
+                            }
+                        })
+
+                    },ss:function () {
+                        //搜索
+                        vm.produces=[];
+                        vm.count1();
+                        $.ajax({
+                            url: "http://localhost:8080/fy",
+                            type: "post",
+                            data:{
+                                "dprice":$("input[name='pric1']").val(),
+                                "tprice":$("input[name='pric2']").val(),
+                                "dtprice":$("input[name='TEXT']").val(),
+                                "PageNum":vm.pagenum,
+                                "PageSize":vm.pagesize,
+                            },
+                            datatype: "json",
+                            success: function (data) {
+                                $("#J_filter .myBox-li").remove();
+                                for (var i = 0; i < data.length; i++) {
+                                    vm.produces.push({pro_id:data[i].proId,img:data[i].productimg.imgUrl,
+                                        pro_name:data[i].proName,pro_price:data[i].proPrice,pro_detail:data[i].proDetail,
+                                        pro_stock:data[i].proStock});
+                                }
+                            }
+                        })
+                    },count:function () {
+                        //商品条数
+                        vm.produces=[];
+                        $.ajax({
+                            url: "http://localhost:8080/count",
+                            type: "post",
+                            data:{
+                                  "Input":$("input[name='TEXT']").val(),
+                            },
+                            datatype: "json",
+                            success: function (ct) {
+                             vm.Count=ct;
+                             vm.Count1=Math.ceil(ct/vm.pagesize);
+                                vm.pagenum1=vm.pagenum+1;
+                            }
+                        })
+                    },count1:function () {
+                    //商品条数
+                    vm.produces=[];
+                    $.ajax({
+                        url: "http://localhost:8080/count",
+                        type: "post",
+                        data:{
+                            "dprice":$("input[name='pric1']").val(),
+                            "tprice":$("input[name='pric2']").val(),
+                            "dtprice":$("input[name='TEXT']").val(),
+                        },
+                        datatype: "json",
+                        success: function (ct) {
+                            vm.Count=ct;
+                            vm.Count1=Math.ceil(ct/vm.pagesize);
+                            vm.pagenum1=vm.pagenum+1;
+                        }
+                    })
+                },count2:function () {
+                    //商品条数
+                    vm.produces=[];
+                    $.ajax({
+                        url: "http://localhost:8080/count",
+                        type: "post",
+                        data:{
+                            "PX":$("input[name='TEXT']").val(),
+                        },
+                        datatype: "json",
+                        success: function (ct) {
+                            vm.Count=ct;
+                            vm.Count1=Math.ceil(ct/vm.pagesize);
+                            vm.pagenum1=vm.pagenum+1;
+                        }
+                    })
+                },pagedown: function () {
+                        if(vm.pagenum<Math.floor(vm.Count/vm.pagesize)){
+                        $("#J_filter .myBox-li").remove();
+                        vm.pagenum++;
+                        vm.toSubmit();}else{
+                            alert("最后一页")
+                        }
+                    },
+                    pageup: function () {
+                        if(vm.pagenum>0){
+                            $("#J_filter .myBox-li").remove();
+                            vm.pagenum--;
+                            vm.toSubmit();
+                        }
+                        else{
+                            alert("已经到达第一页");
+                        }
+
+
+                    },
+
+
+                }
+
+
+            });
+        });
+
+
+    </script>
+</head>
+<body id="kkk">
+<div id="shuotcut">
+    <div class="w">
+     <ul class="f1">
+     <li class="f1-1">
+         <i class="iconfont"></i>
+         <a href="#">京东首页</a>
+     </li>
+         <li class="f1-2">
+             <div>
+             <i class="iconfont"></i>
+             <span class="fs-1" >厦门</span>
+     </div>
+         </li>
+     </ul>
+        <ul class="fs">
+            <li class="fore1">
+                <a href="#">你好！请登录</a>
+                <a href="#">免费注册</a>
+            </li>
+            <li class="spacer"></li>
+            <li class="fore2">
+            <div><a href="#">我的订单</a></div></li>
+            <li class="spacer"></li>
+            <li class="fore3">
+            <div>
+                <a href="#">我的京东</a>
+                <i class="iconfont"></i>
+            </div></li>
+            <li class="spacer"></li>
+            <li class="fore4">
+                <a href="#">京东会员</a>
+                </li>
+            <li class="spacer"></li>
+            <li class="fore5">
+                <div>
+                    <a href="#"> 企业采购</a>
+                    <i class="iconfont"></i>
+                </div>
+                </li>
+            <li class="spacer"></li>
+            <li class="fore6">
+                <div>
+                    <a href="#"> 客服服务</a>
+                    <i class="iconfont"></i>
+                </div></li>
+            <li class="spacer"></li>
+            <li class="fore7">
+                <div>
+                    <a href="#">网站导航</a>
+                    <i class="iconfont"></i>
+                </div>
+            </li>
+            <li class="spacer"></li>
+            <li class="fore8">
+                <a href="#">手机京东</a>
+            </li>
+            <li class="spacer"></li>
+        </ul>
+    </div>
+</div>
+<div id="BOX">
+<div class="www">
+    <div id="logo">
+        <a href="#"><img src="images1/jdlogo.png" ></a>
+    </div>
+    <div id="search">
+        <div class="from">
+            <input type="text" class="text" name="TEXT">
+            <span></span>
+            <button class="button" @click="toSubmit"><i>搜索</i></button>
+
+        </div>
+    </div>
+    <div id="settleup">
+        <div>
+
+            <i class="ci-count" id="shopping-amount">0</i>
+            <a target="_blank" href="#">我的购物车</a>
+            <i class="iconfont"></i>
+        </div>
+    </div>
+    <div id="hotwords">
+
+        <a href="#" class="abcss" >嘉实多</a>
+        <b class="abcss">|</b>
+        <a href="#" class="abcss">美孚1号 5w30</a>
+        <b class="abcss">|</b>
+        <a href="#" class="abcss">机油</a>
+        <b class="abcss">|</b>
+        <a class="abcss" href="#">壳牌</a>
+        <b class="abcss">|</b>
+        <a class="abcss" href="#">美孚</a>
+        <b class="abcss">|</b>
+        <a class="abcss" href="#">美孚1号0w-20</a>
+        <b class="abcss">|</b>
+        <a class="abcss" href="#">美孚1号 0w-40</a>
+        <b class="abcss">|</b>
+        <a class="abcss" href="#">嘉实多极护</a>
+        <b class="abcss">|</b>
+        <a class="abcss" href="#">美孚速霸</a>
+        <b class="abcss">|</b>
+
+    </div>
+    <div id="nav-2014">
+        <div class="nav1">
+            <div id="categorys-2014">
+                <div class="dt">
+                    <a href="#">全部商品分类</a>
+                </div>
+            </div>
+            <div id="navitems-2014">
+                <ul class="navitems-group1">
+                    <li><a href="#">京东时尚</a></li>
+                    <li><a href="#">美妆馆</a></li>
+                    <li><a href="#">超市</a></li>
+                    <li><a href="#">生鲜</a></li>
+                    <li><a href="#">海囤全球</a></li>
+                    <li><a href="#">闪购</a></li>
+                    <li><a href="#">拍卖</a></li>
+                    <li><a href="#">金融</a></li>
+
+                </ul>
+            </div>
+            <span class="clr"></span>
+        </div>
+    </div>
+
+
+</div>
+<div id="J_searchWrap">
+    <div id="J_crumbsBar">
+
+        <div class="crumbs-nav-item">
+            <a href="#">全部结果</a>
+        </div>
+        <i class="crumbs-arrow">&gt;</i>
+
+        <div class="crumbs-nav-item1">
+            <div>美孚1号</div>
+        </div>
+    </div>
+    <div id="J_container">
+        <div id="J_selector">
+            <div class="J_selectorLine1">
+                <div class="sl-wrap">
+
+                    <div class="J_s1">
+
+                        <strong>品牌：</strong>
+                    </div>
+                    <div class="J_s2">
+                        <ul class="J_valueList">
+                        <li >
+                            <a href="#"title="美孚（Mobil）"><i></i>美孚（Mobil）</a>
+                        </li>
+                        <li >
+                            <a href="#"title="别克（Buick）"><i></i>别克（Buick）</a>
+                        </li>
+                        <li >
+                            <a href="#" title="雪佛兰（CHEVROLET）"><i></i>雪佛兰（CHEVROLET）	</a>
+                        </li>
+                    </ul></div>
+                    <div class="J_s3">
+                        <a  href="javascript:;" >更多<i></i></a>
+                        <a href="javascript:;">多选<i></i></a>
+                </div>
+
+
+                </div>
+                <div class="sl-wrap">
+
+                    <div class="J_s1">
+                        <strong>维修保养：</strong>
+                    </div>
+                    <div class="J_s2">
+                        <ul class="J_valueList">
+                            <li >
+                                <a href="#"><i></i>气机油</a>
+                            </li>
+                            <li >
+                                <a href="#"><i></i>摩托车机油</a>
+                            </li>
+                            <li >
+                                <a href="#" ><i></i>柴机油	</a>
+                            </li>
+                            <li >
+                                <a href="#" ><i></i>机油滤清器	</a>
+                            </li>
+                        </ul></div>
+                    <div class="J_s3">
+                        <a  href="javascript:;" >更多<i></i></a>
+                        <a href="javascript:;">多选<i></i></a>
+                    </div>
+
+
+                </div>
+                <div class="sl-wrap">
+
+                    <div class="J_s1">
+                        <strong>类别：</strong>
+                    </div>
+                    <div class="J_s2">
+                        <ul class="J_valueList">
+                            <li >
+                                <a href="#"><i></i>进口机油</a>
+                            </li>
+                            <li >
+                                <a href="#"><i></i>原厂机油</a>
+                            </li>
+                            <li >
+                                <a href="#" ><i></i>摩托车机油	</a>
+                            </li>
+                            <li >
+                                <a href="#" ><i></i>柴机油	</a>
+                            </li>
+                            <li >
+                                <a href="#" ><i></i>气机油	</a>
+                            </li>
+                        </ul></div>
+                    <div class="J_s3">
+                        <a  href="javascript:;" >更多<i></i></a>
+                        <a href="javascript:;">多选<i></i></a>
+                    </div>
+
+
+                </div>
+                <div class="sl-wrap">
+
+                    <div class="J_s1">
+                        <strong>分类：</strong>
+                    </div>
+                    <div class="J_s2">
+                        <ul class="J_valueList">
+                            <li >
+                                <a href="#"><i></i>合成技术</a>
+                            </li>
+                            <li >
+                                <a href="#"><i></i>全合成机油</a>
+                            </li>
+                        </ul></div>
+                    <div class="J_s3">
+                        <a  href="javascript:;" >更多<i></i></a>
+                        <a href="javascript:;">多选<i></i></a>
+                    </div>
+
+
+                </div>
+                <div class="sl-wrap">
+
+                    <div class="J_s1">
+
+                        <strong>品牌：</strong>
+                    </div>
+                    <div class="J_s2">
+                           <div class="J_s2s">
+                            <a  href="#;"><span >粘度</span><i ></i></a>
+                            <a  href="#;"><span >机油等级</span><i ></i></a>
+                            <a  href="#;"><span >容量</span><i ></i></a>
+                            <a  href="#;"><span >特殊属性</span><i c></i></a>
+                            <a  href="#;"><span >保质期</span><i ></i></a>
+                            <a  href="#;"><span >其他分类</span><i ></i></a>
+                    </div>
+<!--                    <div class="J_s3">-->
+<!--                        <a  href="javascript:;" >更多<i></i></a>-->
+<!--                        <a href="javascript:;">多选<i></i></a>-->
+<!--                    </div>-->
+
+
+                </div>
+
+
+
+
+            </div>
+            <div class="J_selectorLine2">
+
+            </div>
+            <div class="J_selectorLine3"></div>
+            <div class="J_selectorLine4"></div>
+            <div class="J_selectorLine5"></div>
+        </div>
+    </div>
+        <div id="J_main">
+            <div class="m-aside">
+                <a href="#"><img src="images1/TU.png" width="180px" height="350px" ></a>
+                <a href="#"><img src="images1/TU.png" width="180px" height="350px" ></a>
+                <a href="#"><img src="images1/TU.png" width="180px" height="350px" ></a>
+                <a href="#"><img src="images1/TU.png" width="180px" height="350px" ></a>
+                <a href="#"><img src="images1/TU.png" width="180px" height="350px" ></a>
+                <a href="#"><img src="images1/TU.png" width="180px" height="350px" ></a>
+
+
+            </div>
+            <div class="ml-wrap">
+                <div id="J_filter">
+                    <div class="f-line-top">
+                        <div class="f-sort">
+                            <a href="#" id="zonghe" ><span >综合</span><em class="fs-down"><i class="arrow arrow1"></i></em></a>
+                            <a href="#"  ><span >销量</span><em class="fs-down"><i class="arrow"><img src="images1/jiantou.png" width="7px" height="13px"></i></em></a>
+                            <a href="#" ><span >评论数</span><em class="fs-down"><i class="arrow"><img src="images1/jiantou.png" width="7px" height="13px"></i></em></a>
+                            <a href="#"  ><span >新品</span><em class="fs-down"><i class="arrow"><img src="images1/jiantou.png" width="7px" height="13px"></i></em></a>
+                            <a href="#" @click="paixu" ><span >价格</span><em class="fs-up"><i class="arrow"><img src="images1/jiantou.png" width="7px" height="13px"></i>
+                             <i class="arrow-bottom"></i></em></a>
+                        </div>
+                         <div class="f-price-set">
+                                <div class="fl"><input type="text" class="input-txt" autocomplete="off" style="color:#ccc"  name="pric1" @blur="ss"></div>
+                                <em>-</em>
+                                <div class="fl"><input type="text" class="input-txt" autocomplete="off" style="color:#ccc"  name="pric2" @blur="ss"></div>
+<!--                             value="¥"-->
+                            </div>
+                        <div id="J_topPage">
+                            <span class="fp-text"><b>{{pagenum1}}</b><em>/</em><i>{{Count1}}</i></span>
+
+                            <a class="fp-prev" href="#"   @click="pagedown">&gt;</a>
+                            <a class="fp-next"  href="#"  @click="pageup">&lt;</a></div>
+                        <div class="f-result-sum">共
+                        <span id="J_resCount" class="num">1100+</span>件商品</div>
+                        <span class="clr"></span>
+
+
+                    </div>
+                    <div class="f-line"></div>
+
+<!------------dddddd------------------------------------------------------------------------------------->
+                    <div class="myBox">
+                        <ul class="myBox-content" >
+                            <li class="myBox-li" v-for="(produce,index) in produces">
+                                <div class="myBox-product" >
+                                    <div class="myBox-img">
+                                        <a href="">
+                                            <img :src="produce.img">
+                                        </a>
+                                    </div>
+                                    <div class="myBox-price">
+                                        <strong>
+                                            <em>￥</em>
+                                            <i>{{produce.pro_price}}</i>
+                                        </strong>
+
+                                    </div>
+                                    <div class="myBox-discuss">
+                                        <a href="">{{produce.pro_detail}}</a>
+                                    </div>
+                                    <div class="myBox-commit">
+                                        <strong>
+                                            <a href="">82万+条评价</a>
+                                            {{produce.pro_name}}
+                                        </strong>
+                                    </div>
+                                    <div class="myBox-shop">
+                                        <span>
+                                            <a href="">{{produce.pro_stock}}</a>
+                                            <b></b>
+                                        </span>
+                                    </div>
+                                    <div class="myBox-icons">
+                                        <i>自营</i>
+                                    </div>
+                                    <div class="myBox-operate">
+                                        <a href="" class="b"><i></i>对比&nbsp;</a>
+                                        <a href="" class="b1"><i ></i>关注&nbsp;&nbsp;</a>
+                                        <a href="" class="b2"><i ></i>&nbsp;加入购物车&nbsp;</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+
+                    </div>
+
+
+
+                </div>
+                <div class="clearfix">
+                    <div id="J_bottomPage" class="p-wrap">
+                        <span class="p-num"><a class="pn-prev disabled"  href="#" @click="pageup">
+                            <i>&lt;</i><em>上一页</em></a>
+                            <a href="#" class="curr">1</a>
+                            <a href="#">2</a>
+                            <a  href="#">3</a>
+                            <a  href="#">4</a>
+                            <a  href="#">5</a>
+                            <a  href="#">6</a>
+                            <a  href="#">7</a>
+                            <b class="pn-break">...</b>
+                            <a class="pn-next" href="#" @click="pagedown">
+                            <em>下一页</em><i>&gt;</i></a>
+                         </span>
+                        <span class="p-skip"><em>共<b>19</b>页&nbsp;&nbsp;到第</em>
+                            <input class="input-txt" type="text" value="1">
+                            <em>页</em><a class="btn-default"  href="#">确定</a></span>
+                    </div></div>
+            </div>
+
+        </div>
+
+</div>
+</div>
+<div id="footer">
+    <div id="service-2014">
+        <div class="slogan">
+            <img src="images/service_items_1.png">
+            <img src="images/service_items_2.png">
+            <img src="images/service_items_3.png">
+            <img src="images/service_items_4.png">
+        </div>
+        <div class="ww">
+            <dl class="fore1">
+                <dt>购物指南</dt>
+                <dd>
+                    <div><a>购物流程</a>
+                    </div>
+                    <div><a>会员介绍</a>
+                    </div>
+                    <div><a>生活旅行/团购</a>
+                    </div>
+                    <div><a>常见问题</a></div>
+                    <div><a>大家电</a>
+                    </div>
+                    <div><a>联系客服</a></div>
+                </dd>
+            </dl>
+            <dl class="fore2">
+                <dt>配送方式</dt>
+                <dd>
+                    <div><a>上门自提</a>
+                    </div>
+                    <div><a>211限时达</a>
+                    </div>
+                    <div><a>配送服务查询</a>
+                    </div>
+                    <div><a>配送费收取标准</a>
+                    </div>
+                    <div><a>海外配送</a></div>
+                </dd>
+            </dl>
+            <dl class="fore3">
+                <dt>支付方式</dt>
+                <dd>
+                    <div><a>货到付款</a>
+                    </div>
+                    <div><a>在线支付</a>
+                    </div>
+                    <div><a>分期付款</a>
+                    </div>
+                    <div><a>邮局汇款</a>
+                    </div>
+                    <div><a>公司转账</a>
+                    </div>
+                </dd>
+            </dl>
+            <dl class="fore4">
+                <dt>售后服务</dt>
+                <dd>
+                    <div><a>售后政策</a>
+                    </div>
+                    <div><a>价格保护</a>
+                    </div>
+                    <div><a>退款说明</a>
+                    </div>
+                    <div><a>返修/退换货</a>
+                    </div>
+                    <div><a>取消订单</a>
+                    </div>
+                </dd>
+            </dl>
+            <dl class="fore5">
+                <dt>特色服务</dt>
+                <dd>
+                    <div><a >夺宝岛</a></div>
+                    <div><a >DIY装机</a></div>
+                    <div><a >延保服务</a></div>
+                    <div><a >京东E卡</a></div>
+                    <div><a >京东通信</a></div>
+                    <div><a >京东JD+</a></div>
+                </dd>
+            </dl>
+            <div id="coverage">
+                <div class="dt">
+                    京东自营覆盖区县
+                </div>
+                <div class="dd">
+                    <p>京东已向全国2649个区县提供自营配送服务，支持货到付款、POS机刷卡和售后上门服务。</p>
+                    <p class="ar"><a>查看详情&nbsp;&gt;</a>
+                    </p>
+                </div>
+            </div>
+            <span class="clr"></span>
+        </div>
+    </div>
+    <div class="copyright">
+        <a target="_blank" href=""><img src="../../蓝桥/蓝桥/jdsc/images/ga.png"> 京公网安备11000002000088号</a>&nbsp;&nbsp;|&nbsp;&nbsp;京ICP证070359号&nbsp;&nbsp;|&nbsp;&nbsp;
+        <a target="_blank" href="">互联网药品信息服务资格证编号(京)-经营性-2014-0008</a>&nbsp;&nbsp;|&nbsp;&nbsp;新出发京零&nbsp;字第大120007号<br>互联网出版许可证编号新出网证(京)字150号&nbsp;&nbsp;|&nbsp;&nbsp;
+        <a href="" target="_blank">出版物经营许可证</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="" target="_blank">网络文化经营许可证京网文[2014]2148-348号</a>&nbsp;&nbsp;|&nbsp;&nbsp;违法和不良信息举报电话：4006561155<br>Copyright&nbsp;©&nbsp;2004&nbsp;-&nbsp;2016&nbsp;&nbsp;京东JD.com&nbsp;版权所有&nbsp;&nbsp;|&nbsp;&nbsp;消费者维权热线：4006067733<br>京东旗下网站：<a href="" target="_blank">京东钱包</a>
+    </div>
+</div>
+</div>
+
+</body>
+</html>

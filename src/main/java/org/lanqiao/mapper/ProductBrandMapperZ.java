@@ -17,9 +17,11 @@ public interface ProductBrandMapperZ {
 
     ProductBrand selectByPrimaryKey(Integer brandId);
 
-    List<ProductBrand> showProBrandList();
+    List<ProductBrand> showProBrandList(int pageNum,int pageSize);
 
     int updateByPrimaryKeySelective(ProductBrand record);
 
     int updateByPrimaryKey(ProductBrand record);
+
+    List<ProductBrand> sort3PageCount();
 }

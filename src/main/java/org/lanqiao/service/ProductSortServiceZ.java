@@ -17,7 +17,7 @@ public interface ProductSortServiceZ {
     public int  SortNameisExist(String SortName);
 
     //查询所有的商品种类
-    public List<ProductSort> showAllProSort();
+    public List<ProductSort> showAllProSort(int pageNum,int pageSize);
 
     //删除商品某种类
     public int delSort(Integer sortId);
@@ -25,6 +25,6 @@ public interface ProductSortServiceZ {
     //更新商品某种类
     public int updateSort(ProductSort productSort);
 
-    //根据种类名称找记录
-    public ProductSort searchSort(String sortName);
+    //获取种类数目
+     public int sort2PageCount();
 }
