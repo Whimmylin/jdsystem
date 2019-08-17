@@ -88,7 +88,6 @@
         //点击购物车按钮
         $("#InitCartUrl").click(function () {
             var amount= $(".buy-num").val();
-            alert(amount)
             $.ajax({
                 url: "http://localhost:8080/sendToCart",
                 type: "post",
@@ -99,8 +98,8 @@
                 },
                 datatype: "text",
                 success:function (data) {
-                 alert("success to sendToCart");
-                 window.location.href='localhost：8080/login.html';
+                // 跳转到购物车界面
+                 window.location.href='Cart.html';
                 }
             });
         });
@@ -124,6 +123,7 @@
             $(".w .pro_height .product-intro .itemInfo-wrap").find("div[class='p-choose-img']").find("span[class='statenotice']").text("该商品已下架");
         }
     }
+
     function isImgMain(imgs) {
         var flag=-1;
         for (var i=0;i<imgs.length;i++){
@@ -520,7 +520,7 @@
 <!--商品选择-图片和购物车-->
             <div class="summary p-choose-warp">
                 <div class="p-choose-img">
-                     <img src="imagesLL/jietu.png" width="738px" height="500px">
+                     <img src="images/tubiao/jietu.png" width="738px" height="500px">
                     <span class="statenotice" style="margin: 58px 10px 143px 10px;font-size: 27px"></span>
                 </div>
 <!--                购物车加减按钮-->
@@ -549,10 +549,10 @@
 <div id="footer">
     <div id="service-2014">
         <div class="slogan">
-            <img src="imagesLL/service_items_1.png">
-            <img src="imagesLL/service_items_2.png">
-            <img src="imagesLL/service_items_3.png">
-            <img src="imagesLL/service_items_4.png">
+            <img src="images/tubiao/service_items_1.png">
+            <img src="images/tubiao/service_items_2.png">
+            <img src="images/tubiao/service_items_3.png">
+            <img src="images/tubiao/service_items_4.png">
         </div>
         <div class="w">
             <dl class="fore1">
@@ -639,7 +639,7 @@
         </div>
     </div>
     <div class="copyright">
-        <a target="_blank" href=""><img src="imagesLL/ga.png"> 京公网安备11000002000088号</a>&nbsp;&nbsp;|&nbsp;&nbsp;京ICP证070359号&nbsp;&nbsp;|&nbsp;&nbsp;
+        <a target="_blank" href=""><img src="images/tubiao/ga.png"> 京公网安备11000002000088号</a>&nbsp;&nbsp;|&nbsp;&nbsp;京ICP证070359号&nbsp;&nbsp;|&nbsp;&nbsp;
         <a target="_blank" href="">互联网药品信息服务资格证编号(京)-经营性-2014-0008</a>&nbsp;&nbsp;|&nbsp;&nbsp;新出发京零&nbsp;字第大120007号<br>互联网出版许可证编号新出网证(京)字150号&nbsp;&nbsp;|&nbsp;&nbsp;
         <a href="" target="_blank">出版物经营许可证</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="" target="_blank">网络文化经营许可证京网文[2014]2148-348号</a>&nbsp;&nbsp;|&nbsp;&nbsp;违法和不良信息举报电话：4006561155<br>Copyright&nbsp;©&nbsp;2004&nbsp;-&nbsp;2016&nbsp;&nbsp;京东JD.com&nbsp;版权所有&nbsp;&nbsp;|&nbsp;&nbsp;消费者维权热线：4006067733<br>京东旗下网站：<a href="" target="_blank">京东钱包</a>
     </div>
