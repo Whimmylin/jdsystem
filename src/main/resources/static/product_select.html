@@ -75,7 +75,7 @@
                     },
                     methods:{
                         change:function (index) {
-                            alert(this.products[index].pro_id);
+                            // alert(this.products[index].pro_id);
                             var indexId = this.products[index].pro_id.toString()
                             sessionStorage.setItem("proId", indexId);
                             location.href="product_change.html"

@@ -148,31 +148,9 @@
                                 location.href="http://localhost:8080/sort3.html";
                             }
                         });
-                    },
-                    pageUp:function () {
-                        if(pageNum>1){
-                            pageNum--;
-                            $("#tree").remove();
-                            vm.sortList = [];
-                            ajax();
-                        }
-                        else{
-                            alert("没有上一页啦！")
-                        }
-                    },
-                    pageDown:function () {
-                        if(pageNum<pageMax){
-                            pageNum++;
-                            $("#tree").remove();
-                            vm.sortList = [];
-                            ajax();
-                        } else{
-                            alert("已经事最后一页了")
-                        }
                     }
                 }
             });
-
         })
     </script>
 </head>
