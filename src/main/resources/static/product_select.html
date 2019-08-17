@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--京东商城后台管理系统-->
+<head>
+    <meta charset="UTF-8">
+    <title>查询商品</title>
+    <link rel="stylesheet" href="js/bootstrap.min.css">
+    <!--<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>-->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/vue.min.js"></script>
+    <script>
+        $(function (){
+            var pageNum = 1;
+            var pageMax = null;
+            var pageSize = 7;
+            //获取count
+            $.ajax({
+                url :"http://localhost:8080/productPageCount",
+                type:"post",
+                dataType:"text",
+                success : function (count){
+                    if(parseInt(count)>7)
+                    {
+                        pageMax= Math.ceil(parseInt(count)/7)
+                        // alert(pageMax);
+                    }
+                }
+            });
+            //分页实现
+            //1. 默认页面
+            ajax();
+            // 2.上一页
+            $("#pageUp").click(function () {
+               if(pageNum>1){
+                   pageNum--;
+                   ajax();
+               }
+               else{
+                   alert("没有上一页啦！")
+               }
+            });
+            // 3.下一页
+            $("#pageDown").click(function () {
+               if(pageNum<pageMax){
+                   pageNum++;
+                   ajax();
+               } else{
+                   alert("已经事最后一页了")
+               }
+            });
+
+            //vue绑定数据展示
+                var vm = new Vue({
+                    el: '#tree',
+                    data: {
+                        products: []
+                    }
+                });
+                //ajax封装函数
+                function ajax(){
+                    $.ajax({
+                        url: "http://localhost:8080/selectProduct",
+                        type: "post",
+                        data: {"pageNum": pageNum, "pageSize": pageSize},
+                        dataType: "json",
+                        success: function (data) {
+                            $("#tree").children().remove();
+                            for (var i = 0; i < data.length; i++) {
+                                vm.products.push({
+                                    pro_id: data[i].proId,
+                                    pro_name: data[i].proName,
+                                    sort_id: data[i].sortId,
+                                    sort_name: data[i].productSort.sortName,
+                                    brand_name: data[i].productBrand.brandName,
+                                    pro_price: data[i].proPrice,
+                                    pro_out: data[i].proOut,
+                                    pro_detail: data[i].proDetail
+                                })
+                            }
+                        }
+                    });
+                }
+
+        })
+    </script>
+</head>
+<body >
+<div class="row">
+    <div class="col-md-2">
+        <img src="images/logo-201305-b.png" >
+    </div>
+    <div class="col-md-10">
+        <h2 class="text-primary text-center">京东商城后台管理系统</h2>
+    </div>
+</div>
+
+<div class="row"  style="background-color:#F5F5F5;">
+    <!--侧边菜单-->
+    <div class="col-md-2 text-center"  >
+        <a href="#" class="list-group-item active">商品种类管理</a>
+        <a href="sort1.html" class="list-group-item">添加商品种类</a>
+        <a href="sort2.html" class="list-group-item">管理商品种类</a>
+        <a href="sort3.html" class="list-group-item">商品品牌管理</a>
+        <a href="sort4.html" class="list-group-item">商品品牌查询</a>
+        <a href="#" class="list-group-item active">商品管理</a>
+        <a href="product_add.html" class="list-group-item">商品添加</a>
+        <a href="product_delete.html" class="list-group-item">商品删除</a>
+        <a href="product_change.html" class="list-group-item">商品修改</a>
+        <a href="product_select.html" class="list-group-item  color">商品查询</a>
+        <a href="#" class="list-group-item active">订单管理</a>
+        <a href="orders_select.html" class="list-group-item">查看订单</a>
+        <a href="orders_change.html" class="list-group-item">修改订单</a>
+        <a href="#" class="list-group-item active">用户管理</a>
+    </div>
+    <div class="col-md-10">
+        <!--面包屑导航-->
+        <ol class="breadcrumb">
+            <li><a href="#">首页</a></li>
+            <li><a href="#">商品管理</a></li>
+            <li><a href="#">查询商品信息</a></li>
+            <!--<li class="active">十一月</li>-->
+        </ol>
+        <div  id="textChange"  style="margin-top: 20px;margin-right: 20px">
+            <table class="table table-striped table-bordered text-center">
+                <thead >
+                <tr >
+                    <th class="bg-primary text-center" width="8%">商品编号</th>
+                    <th class="bg-primary text-center" width="12%">商品名称</th>
+                    <th class="bg-primary text-center" width="12%">商品种类编号</th>
+                    <th class="bg-primary text-center" width="12%">商品种类名称</th>
+                    <th class="bg-primary text-center" width="12%">商品品牌</th>
+                    <th class="bg-primary text-center" width="8%">商品价格</th>
+                    <th class="bg-primary text-center" width="15%">商品过期时间</th>
+                    <th class="bg-primary text-center">商品种类描述</th>
+                    <th class="bg-primary text-center" width="7%">操作</th>
+                </tr>
+                </thead>
+                <tbody id="tree">
+                <tr v-for="productY in products">
+                    <td style="vertical-align:middle;">{{productY.pro_id}}</td>
+                    <td style="vertical-align:middle;">{{productY.pro_name}}</td>
+                    <td style="vertical-align:middle;">{{productY.sort_id}}</td>
+                    <td style="vertical-align:middle;">{{productY.sort_name}}</td>
+                    <td style="vertical-align:middle;">{{productY.brand_name}}</td>
+                    <td style="vertical-align:middle;">{{productY.pro_price}}</td>
+                    <td style="vertical-align:middle;">{{productY.pro_out}}</td>
+                    <td style="vertical-align:middle;">{{productY.pro_detail}}</td>
+                    <td><button type="button" class="btn btn-danger"><a href="product_change.html" style="text-decoration:none;color:white;">修改</a></button></td>
+                </tr>
+                </tbody>
+            </table>
+            <ul class="pagination">
+                <li id="pageUp"><a href="javascript:void(0)">&laquo;</a></li>
+                <li class="active" id="page1"><a href="#">1</a></li>
+                <li id="page2"><a href="#">2</a></li>
+                <li id="page3"><a href="#">3</a></li>
+                <li id="page4"><a href="#">4</a></li>
+                <li id="page5"><a href="#">5</a></li>
+                <li id="pageDown"><a href="javascript:void(0)">&raquo;</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+
+
+</div>
+
+
+
+
+</body>
+</html>

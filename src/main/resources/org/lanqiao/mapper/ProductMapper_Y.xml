@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.lanqiao.mapper.ProductMapper_Y" >
+  <resultMap id="ProductResultMap" type="org.lanqiao.entity.Product_Y" >
+    <id column="pro_id" property="proId" jdbcType="INTEGER" />
+    <result column="brand_id" property="brandId" jdbcType="INTEGER" />
+    <result column="sort_id" property="sortId" jdbcType="INTEGER" />
+    <result column="pro_name" property="proName" jdbcType="VARCHAR" />
+    <result column="pro_price" property="proPrice" jdbcType="INTEGER" />
+    <result column="pro_stock" property="proStock" jdbcType="INTEGER" />
+    <result column="pro_out" property="proOut" jdbcType="VARCHAR" />
+    <result column="pro_state" property="proState" jdbcType="VARCHAR" />
+    <result column="pro_detail" property="proDetail" jdbcType="VARCHAR" />
+    <association property="productBrand" resultMap="BrandResultMap"></association>
+    <association property="productSort" resultMap="SortResultMap"></association>
+  </resultMap>
+
+  <resultMap id="SortResultMap" type="org.lanqiao.entity.ProductSort" >
+    <id column="sort_id" property="sortId" jdbcType="INTEGER" />
+    <result column="sort_name" property="sortName" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <resultMap id="BrandResultMap" type="org.lanqiao.entity.ProductBrand" >
+    <id column="brand_id" property="brandId" jdbcType="INTEGER" />
+    <result column="brand_name" property="brandName" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <select id="selectByPrimaryKey" resultMap="ProductResultMap">
+    select p.pro_id,p.pro_name,p.sort_id,s.sort_name,b.brand_name,p.pro_price,p.pro_out,p.pro_detail
+    from product p,productbrand b,productsort s
+    where  p.brand_id = b.brand_id and p.sort_id = s.sort_id order by p.pro_id limit #{param1,jdbcType=INTEGER},#{param2,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectProductOne" resultMap="ProductResultMap">
+    select p.pro_id,p.pro_name,p.sort_id,p.pro_stock,pro_price,p.pro_out,p.pro_detail,b.brand_id,p.pro_state
+    from product p,productbrand b,productsort s
+    where  p.brand_id = b.brand_id and p.sort_id = s.sort_id and p.pro_id =#{param1,jdbcType=INTEGER}
+  </select>
+
+  <select id="count" resultMap="ProductResultMap">
+    select p.pro_id,p.pro_name,p.sort_id,s.sort_name,b.brand_name,p.pro_price,p.pro_out,p.pro_detail
+    from product p,productbrand b,productsort s
+    where  p.brand_id = b.brand_id and p.sort_id = s.sort_id
+  </select>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from product
+    where pro_id = #{param1,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.lanqiao.entity.Product_Y" >
+    insert into product (brand_id, sort_id,
+      pro_name, pro_price, pro_stock, 
+      pro_out, pro_state, pro_detail
+      )
+    values (#{brandId,jdbcType=INTEGER}, #{sortId,jdbcType=INTEGER},
+      #{proName,jdbcType=VARCHAR}, #{proPrice,jdbcType=INTEGER}, #{proStock,jdbcType=INTEGER}, 
+      #{proOut,jdbcType=VARCHAR}, #{proState,jdbcType=VARCHAR}, #{proDetail,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.lanqiao.entity.Product_Y" >
+    insert into product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="proId != null" >
+        pro_id,
+      </if>
+      <if test="brandId != null" >
+        brand_id,
+      </if>
+      <if test="sortId != null" >
+        sort_id,
+      </if>
+      <if test="proName != null" >
+        pro_name,
+      </if>
+      <if test="proPrice != null" >
+        pro_price,
+      </if>
+      <if test="proStock != null" >
+        pro_stock,
+      </if>
+      <if test="proOut != null" >
+        pro_out,
+      </if>
+      <if test="proState != null" >
+        pro_state,
+      </if>
+      <if test="proDetail != null" >
+        pro_detail,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="proId != null" >
+        #{proId,jdbcType=INTEGER},
+      </if>
+      <if test="brandId != null" >
+        #{brandId,jdbcType=INTEGER},
+      </if>
+      <if test="sortId != null" >
+        #{sortId,jdbcType=INTEGER},
+      </if>
+      <if test="proName != null" >
+        #{proName,jdbcType=VARCHAR},
+      </if>
+      <if test="proPrice != null" >
+        #{proPrice,jdbcType=INTEGER},
+      </if>
+      <if test="proStock != null" >
+        #{proStock,jdbcType=INTEGER},
+      </if>
+      <if test="proOut != null" >
+        #{proOut,jdbcType=VARCHAR},
+      </if>
+      <if test="proState != null" >
+        #{proState,jdbcType=VARCHAR},
+      </if>
+      <if test="proDetail != null" >
+        #{proDetail,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.lanqiao.entity.Product_Y" >
+    update product
+    <set >
+      <if test="brandId != null">
+        brand_id = #{brandId,jdbcType=INTEGER},
+      </if>
+      <if test="sortId != null" >
+        sort_id = #{sortId,jdbcType=INTEGER},
+      </if>
+      <if test="proName != ''" >
+        pro_name = #{proName,jdbcType=VARCHAR},
+      </if>
+      <if test="proPrice != null">
+        pro_price = #{proPrice,jdbcType=INTEGER},
+      </if>
+      <if test="proStock != null">
+        pro_stock = #{proStock,jdbcType=INTEGER},
+      </if>
+      <if test="proOut != ''" >
+        pro_out = #{proOut,jdbcType=VARCHAR},
+      </if>
+      <if test="proState != ''" >
+        pro_state = #{proState,jdbcType=VARCHAR},
+      </if>
+      <if test="proDetail != ''" >
+        pro_detail = #{proDetail,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where pro_id = #{proId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.lanqiao.entity.Product_Y" >
+    update product
+    set brand_id = #{brandId,jdbcType=INTEGER},
+      sort_id = #{sortId,jdbcType=INTEGER},
+      pro_name = #{proName,jdbcType=VARCHAR},
+      pro_price = #{proPrice,jdbcType=INTEGER},
+      pro_stock = #{proStock,jdbcType=INTEGER},
+      pro_out = #{proOut,jdbcType=VARCHAR},
+      pro_state = #{proState,jdbcType=VARCHAR},
+      pro_detail = #{proDetail,jdbcType=VARCHAR}
+    where pro_id = #{proId,jdbcType=INTEGER}
+  </update>
+</mapper>
