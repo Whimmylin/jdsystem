@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.lanqiao.mapper.CartMapper_G" >
+  <resultMap id="CartBaseMapper" type="org.lanqiao.entity.Cart_G" >
+    <id column="cart_id" property="cartId" jdbcType="INTEGER" />
+    <result column="pro_num" property="proNum" jdbcType="INTEGER" />
+    <association property="users" resultMap="UsersBaseMapper"></association>
+    <collection property="productG" resultMap="ProductBaseMappper"></collection>
+  </resultMap>
+
+  <resultMap id="UsersBaseMapper" type="org.lanqiao.entity.Users" >
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="IDcard" property="idcard" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="zip_code" property="zipCode" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="DATE" />
+    <result column="is_VIP" property="isVip" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <resultMap id="ProductBaseMappper" type="org.lanqiao.entity.Product_G" >
+    <id column="pro_id" property="proId" jdbcType="INTEGER" />
+    <result column="brand_id" property="brandId" jdbcType="INTEGER" />
+    <result column="sort_id" property="sortId" jdbcType="INTEGER" />
+    <result column="pro_name" property="proName" jdbcType="VARCHAR" />
+    <result column="pro_price" property="proPrice" jdbcType="INTEGER" />
+    <result column="pro_stock" property="proStock" jdbcType="INTEGER" />
+    <result column="pro_out" property="proOut" jdbcType="DATE" />
+    <result column="pro_state" property="proState" jdbcType="VARCHAR" />
+    <result column="pro_detail" property="proDetail" jdbcType="VARCHAR" />
+    <collection property="productimgs" resultMap="ProductimgBaseMapper"></collection>
+  </resultMap>
+  <resultMap id="ProductimgBaseMapper" type="org.lanqiao.entity.Productimg" >
+    <id column="img_id" property="imgId" jdbcType="INTEGER" />
+    <result column="pro_id" property="proId" jdbcType="INTEGER" />
+    <result column="img_detail" property="imgDetail" jdbcType="VARCHAR" />
+    <result column="img_URL" property="imgUrl" jdbcType="VARCHAR" />
+    <result column="is_img_main" property="isImgMain" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <resultMap id="orderdetailBaseMapper" type="org.lanqiao.entity.Orderdetail_G" >
+    <id column="order_item_id" property="orderItemId" jdbcType="INTEGER" />
+    <result column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="pro_id" property="proId" jdbcType="INTEGER" />
+    <result column="pro_num" property="proNum" jdbcType="INTEGER" />
+    <result column="pro_name" property="proName" jdbcType="VARCHAR" />
+  </resultMap>
+
+    <resultMap id="OrdersBaseMapper" type="org.lanqiao.entity.Orders" >
+        <id column="order_id" property="orderId" jdbcType="INTEGER" />
+        <result column="user_id" property="userId" jdbcType="INTEGER" />
+        <result column="order_money" property="orderMoney" jdbcType="INTEGER" />
+        <result column="pay_way" property="payWay" jdbcType="VARCHAR" />
+        <result column="order_time" property="orderTime" jdbcType="DATE" />
+        <result column="order_sum" property="orderSum" jdbcType="INTEGER" />
+        <result column="rec_name" property="recName" jdbcType="VARCHAR" />
+        <result column="rec_phone" property="recPhone" jdbcType="VARCHAR" />
+        <result column="rec_address" property="recAddress" jdbcType="VARCHAR" />
+    </resultMap>
+  <select id="selectAllCartGoods" resultMap="CartBaseMapper">
+    select *  from cart c,product p,productimg pi where c.pro_id=p.pro_id and p.pro_id=pi.pro_id and pi.is_img_main='yes';
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from cart where cart_id=#{cartId,jdbcType=INTEGER}
+  </delete>
+  <update id="updateByPrimaryKey" parameterType="org.lanqiao.entity.Cart_G">
+    update cart set pro_num = #{proNum} where cart_id = #{cartId}
+  </update>
+  <insert id="insertIntoOrderDetail" parameterType="org.lanqiao.entity.Orderdetail_G">
+    insert into orderdetailG(order_id,pro_id,pro_num,pro_name) values (#{orderId},#{proId},#{proNum},#{proName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertIntoOrder" parameterType="org.lanqiao.entity.Orders">
+    insert into orders (user_id) values (#{userId})
+  </insert>
+  <select id="show" resultMap="orderdetailBaseMapper">
+    select * from orderdetailG
+  </select>
+    <select id="selectOrderId" resultMap="OrdersBaseMapper" parameterType="java.lang.Integer">
+        select order_id from orders where user_id = #{userId} and order_money is null limit 1
+    </select>
+<!--  <sql id="Base_Column_List" >-->
+<!--    cart_id, user_id-->
+<!--  </sql>-->
+<!--  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >-->
+<!--    select -->
+<!--    <include refid="Base_Column_List" />-->
+<!--    from cart-->
+<!--    where cart_id = #{cartId,jdbcType=INTEGER}-->
+<!--  </select>-->
+<!--  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >-->
+<!--    delete from cart-->
+<!--    where cart_id = #{cartId,jdbcType=INTEGER}-->
+<!--  </delete>-->
+<!--  <insert id="insert" parameterType="org.lanqiao.entity.Cart_G_G" >-->
+<!--    insert into cart (cart_id, user_id)-->
+<!--    values (#{cartId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER})-->
+<!--  </insert>-->
+<!--  <insert id="insertSelective" parameterType="org.lanqiao.entity.Cart_G_G" >-->
+<!--    insert into cart-->
+<!--    <trim prefix="(" suffix=")" suffixOverrides="," >-->
+<!--      <if test="cartId != null" >-->
+<!--        cart_id,-->
+<!--      </if>-->
+<!--      <if test="userId != null" >-->
+<!--        user_id,-->
+<!--      </if>-->
+<!--    </trim>-->
+<!--    <trim prefix="values (" suffix=")" suffixOverrides="," >-->
+<!--      <if test="cartId != null" >-->
+<!--        #{cartId,jdbcType=INTEGER},-->
+<!--      </if>-->
+<!--      <if test="userId != null" >-->
+<!--        #{userId,jdbcType=INTEGER},-->
+<!--      </if>-->
+<!--    </trim>-->
+<!--  </insert>-->
+<!--  <update id="updateByPrimaryKeySelective" parameterType="org.lanqiao.entity.Cart_G_G" >-->
+<!--    update cart-->
+<!--    <set >-->
+<!--      <if test="userId != null" >-->
+<!--        user_id = #{userId,jdbcType=INTEGER},-->
+<!--      </if>-->
+<!--    </set>-->
+<!--    where cart_id = #{cartId,jdbcType=INTEGER}-->
+<!--  </update>-->
+<!--  <update id="updateByPrimaryKey" parameterType="org.lanqiao.entity.Cart_G_G" >-->
+<!--    update cart-->
+<!--    set user_id = #{userId,jdbcType=INTEGER}-->
+<!--    where cart_id = #{cartId,jdbcType=INTEGER}-->
+<!--  </update>-->
+</mapper>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.lanqiao.mapper.OrderdetailMapper" >
+  <resultMap id="BaseResultMap" type="org.lanqiao.entity.Orderdetail_G" >
+    <id column="order_item_id" property="orderItemId" jdbcType="INTEGER" />
+    <result column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="pro_id" property="proId" jdbcType="INTEGER" />
+    <result column="pro_num" property="proNum" jdbcType="INTEGER" />
+    <result column="pro_name" property="proName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    order_item_id, order_id, pro_id, pro_num, pro_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from orderdetailG
+    where order_item_id = #{orderItemId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from orderdetailG
+    where order_item_id = #{orderItemId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.lanqiao.entity.Orderdetail_G" >
+    insert into orderdetailG (order_item_id, order_id, pro_id,
+      pro_num, pro_name)
+    values (#{orderItemId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{proId,jdbcType=INTEGER}, 
+      #{proNum,jdbcType=INTEGER}, #{proName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.lanqiao.entity.Orderdetail_G" >
+    insert into orderdetailG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderItemId != null" >
+        order_item_id,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="proId != null" >
+        pro_id,
+      </if>
+      <if test="proNum != null" >
+        pro_num,
+      </if>
+      <if test="proName != null" >
+        pro_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderItemId != null" >
+        #{orderItemId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="proId != null" >
+        #{proId,jdbcType=INTEGER},
+      </if>
+      <if test="proNum != null" >
+        #{proNum,jdbcType=INTEGER},
+      </if>
+      <if test="proName != null" >
+        #{proName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.lanqiao.entity.Orderdetail_G" >
+    update orderdetailG
+    <set >
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="proId != null" >
+        pro_id = #{proId,jdbcType=INTEGER},
+      </if>
+      <if test="proNum != null" >
+        pro_num = #{proNum,jdbcType=INTEGER},
+      </if>
+      <if test="proName != null" >
+        pro_name = #{proName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where order_item_id = #{orderItemId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.lanqiao.entity.Orderdetail_G" >
+    update orderdetailG
+    set order_id = #{orderId,jdbcType=INTEGER},
+      pro_id = #{proId,jdbcType=INTEGER},
+      pro_num = #{proNum,jdbcType=INTEGER},
+      pro_name = #{proName,jdbcType=VARCHAR}
+    where order_item_id = #{orderItemId,jdbcType=INTEGER}
+  </update>
+</mapper>

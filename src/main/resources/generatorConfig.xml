@@ -60,14 +60,50 @@
 			<!--enableSelectByExample="false" enableUpdateByExample="false">-->
 			<!--<property name="useActualColumnNames" value="false" />-->
 		<!--</table>-->
-		<!--<table tableName="orderItem" domainObjectName="OrderItem"-->
-			<!--enableCountByExample="false" enableDeleteByExample="false"-->
-			<!--enableSelectByExample="false" enableUpdateByExample="false">-->
-			<!--<property name="useActualColumnNames" value="false" />-->
-			<!--&lt;!&ndash;value为true时，保留_,value为false为取消_ （驼峰命名法）&ndash;&gt;-->
-		<!--</table>-->
+<!--		<table tableName="orderItem" domainObjectName="OrderItem"-->
+<!--			enableCountByExample="false" enableDeleteByExample="false"-->
+<!--			enableSelectByExample="false" enableUpdateByExample="false">-->
+<!--			<property name="useActualColumnNames" value="false" />-->
+<!--			&lt;!&ndash;value为true时，保留_,value为false为取消_ （驼峰命名法）&ndash;&gt;-->
+<!--		</table>-->
+		<!--购物车-->
+<!--		<table tableName="cart" domainObjectName="Cart_G"-->
+<!--			enableCountByExample="false" enableDeleteByExample="false"-->
+<!--			enableSelectByExample="false" enableUpdateByExample="false">-->
+<!--			<property name="useActualColumnNames" value="false" />-->
+<!--			&lt;!&ndash;value为true时，保留_,value为false为取消_ （驼峰命名法）&ndash;&gt;-->
+<!--		</table>-->
+<!--		<table tableName="users" domainObjectName="Users"-->
+<!--			   enableCountByExample="false" enableDeleteByExample="false"-->
+<!--			   enableSelectByExample="false" enableUpdateByExample="false">-->
+<!--			<property name="useActualColumnNames" value="false" />-->
+<!--			&lt;!&ndash;value为true时，保留_,value为false为取消_ （驼峰命名法）&ndash;&gt;-->
+<!--		</table>-->
+<!--		<table tableName="productG" domainObjectName="Product_G"-->
+<!--			   enableCountByExample="false" enableDeleteByExample="false"-->
+<!--			   enableSelectByExample="false" enableUpdateByExample="false">-->
+<!--			<property name="useActualColumnNames" value="false" />-->
+<!--			&lt;!&ndash;value为true时，保留_,value为false为取消_ （驼峰命名法）&ndash;&gt;-->
+<!--		</table>-->
+<!--				<table tableName="productimg" domainObjectName="productimg"-->
+<!--					enableCountByExample="false" enableDeleteByExample="false"-->
+<!--					enableSelectByExample="false" enableUpdateByExample="false">-->
+<!--					<property name="useActualColumnNames" value="false" />-->
+<!--					&lt;!&ndash;value为true时，保留_,value为false为取消_ （驼峰命名法）&ndash;&gt;-->
+<!--				</table>-->
+<!--				<table tableName="orderdetailG" domainObjectName="orderdetailG"-->
+<!--					   enableCountByExample="false" enableDeleteByExample="false"-->
+<!--					   enableSelectByExample="false" enableUpdateByExample="false">-->
+<!--					<property name="useActualColumnNames" value="false" />-->
+<!--					&lt;!&ndash;value为true时，保留_,value为false为取消_ （驼峰命名法）&ndash;&gt;-->
+<!--				</table>-->
 
-
+						<table tableName="orders" domainObjectName="Orders"
+							   enableCountByExample="false" enableDeleteByExample="false"
+							   enableSelectByExample="false" enableUpdateByExample="false">
+							<property name="useActualColumnNames" value="false" />
+							<!--value为true时，保留_,value为false为取消_ （驼峰命名法）-->
+						</table>
 
 	</context>
 </generatorConfiguration>
