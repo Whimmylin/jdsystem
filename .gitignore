@@ -19,8 +19,8 @@ target/
 *.iml
 *.ipr
 .mvn
-.yml
-.properties
+*.yml
+*.properties
 
 
 

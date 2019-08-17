@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style class="vjs-styles-defaults">
+        .video-js {
+            width: 300px;
+            height: 150px;
+        }
+
+        .vjs-fluid {
+            padding-top: 56.25%
+        }
+    </style>
+
+    <style class="vjs-styles-dimensions">
+        .detail-video-player-dimensions {
+            width: 750px;
+            height: 422px;
+        }
+
+        .detail-video-player-dimensions.vjs-fluid {
+            padding-top: 56.25%;
+        }
+    </style>
+    <link  rel="stylesheet" href="css/goods.css">
+    <link  rel="stylesheet" href="css/footer.css">
+    <script src="js/jquery.min.js" type="application/javascript"></script>
+    <script src="js/jquery.validate.js" type="application/javascript"></script>
+    <script src="js/jquery.validate.regex.js" type="application/javascript"></script>
+    <script src="js/vue.min.js"></script>
+<script>
+    $(function () {
+        $.ajax({
+            url: "http://localhost:8080/getproduct",
+            type: "post",
+            data:{
+                "proId":2
+            },
+            datatype: "json",
+            success:function (data) {
+                $(".w .pro_height .product-intro .itemInfo-wrap .sku-name").text(data.proName);
+                $(".w .pro_height .product-intro .itemInfo-wrap").find("span[class='price J-p-100006745172']").text(data.proPrice);
+                $(".w .pro_height .product-intro .itemInfo-wrap .news").find("div[id='p-ad']").text(data.proDetail);
+                $("#crumb-wrap .w .crumb .item ").find("a").text(data.productSort.sortName);
+                $("#crumb-wrap .w .crumb .ellipsis").text(data.productBrand.brandName);
+                $("#crumb-wrap .w .contact.fr.clearfix .J-hove-wrap.EDropdown.fr .item .name").find("a").text(data.productBrand.brandName+"京东自营旗舰店");
+                //插入图片
+                isImgMain(data.productImgs);
+                //库存
+                stock=data.proStock;
+                isMoreStock(stock);
+                //上下架
+                state=data.proState;
+                judgeProState(state);
+            }
+        });
+        $.ajax({
+            url: "http://localhost:8080/getCartCount",
+            type: "post",
+            data:{
+                "userId":1
+            },
+            datatype: "json",
+            success:function (data) {
+                $("#shopping-amount").text(data);
+            }
+        });
+        // 添加商品数量
+        $("a[class='btn-add']").click(function () {
+            var amount= $(".buy-num").val();
+            if(amount==1){
+                $("a[class='btn-reduce']").addClass("disabled");
+            }
+            $(".buy-num").val(parseInt(amount)+1);
+            $("input[class='text buy-num']").trigger("input");
+        });
+        // 减少商品数量
+        $("a[class='btn-reduce']").click(function () {
+            var amount= $(".buy-num").val();
+            if(amount>1){
+                $(this).removeClass("disabled")
+                $(".buy-num").val(parseInt(amount)-1);
+                $("input[class='text buy-num']").trigger("input");
+            }
+        });
+        //点击购物车按钮
+        $("#InitCartUrl").click(function () {
+            var amount= $(".buy-num").val();
+            alert(amount)
+            $.ajax({
+                url: "http://localhost:8080/sendToCart",
+                type: "post",
+                data:{
+                    "userId":1,
+                    "proId":2,
+                    "proNum":amount
+                },
+                datatype: "text",
+                success:function (data) {
+                 alert("success to sendToCart");
+                 window.location.href='localhost：8080/login.html';
+                }
+            });
+        });
+        //图片切换
+        $("#spec-list ul").click(function () {
+           var lis=$(this).children();
+           for(var i=0;i<lis.length;i++){
+               lis[i].onmousemove=function () {
+                  var newsrc=$(this).find("img").attr("src");
+                   $("#spec-n1 #spec-img").attr('src',newsrc);
+               }
+           }
+        });
+
+    });
+
+    //判断商品是否下架
+    function judgeProState(state) {
+        if(state.match("下架")) {
+            $(".w .pro_height .product-intro .itemInfo-wrap").find("div[class='p-choose-img']").children().eq(0).detach();
+            $(".w .pro_height .product-intro .itemInfo-wrap").find("div[class='p-choose-img']").find("span[class='statenotice']").text("该商品已下架");
+        }
+    }
+    function isImgMain(imgs) {
+        var flag=-1;
+        for (var i=0;i<imgs.length;i++){
+            if(imgs[i].isImgMain.match("yes")) {
+                flag = i;
+                break;
+            }
+        }
+        if(flag>-1){
+            $("#spec-n1 #spec-img").attr('src',imgs[flag].imgUrl);
+        }
+        for (var i=0;i<imgs.length;i++){
+            $("#spec-list .lh").children().eq(i).find("img").attr('src',imgs[i].imgUrl);
+        }
+    }
+    function isMoreStock(stock) {
+        var amount= $(".buy-num").val();
+        if(amount>stock){
+            alert("您所选数量超过了库存量")
+        }
+    }
+</script>
+</head>
+<body>
+<!--shortcut开始-->
+<div id="shortcut">
+    <div class="w">
+        <ul class="fl">
+            <li id="ttbar-home">
+                <i class="iconfont"></i>
+                <a href="#">京东首页</a>
+            </li>
+            <li class="dropdown" id="ttbar-mycity">
+                <div class="dt cw-icon">
+                    <i class="iconfont"></i>
+                    <span>福建</span>
+                </div>
+            <!--<div class="dd dorpdown-layer">-->
+        </ul>
+        <ul class="fr">
+            <li id="ttbar-login">
+                <a href="#" class="link-login">你好，请登录</a>
+                &nbsp;&nbsp;
+                <a href="#" class="style-red">免费注册</a>
+            </li>
+            <li class="spacer"></li>
+            <li>
+                <div class="dt">
+                    <a href="#">我的订单</a>
+                </div>
+            </li>
+            <li class="spacer"></li>
+            <li class="dropdown" id="ttbar-myjd">
+                <div class="dt cw-icon">
+                    <a href="#">我的京东</a>
+                    <i class="iconfont"></i>
+                </div>
+            <!--<div class="dd dropdown-layer"></div>-->
+            </li>
+            <li class="spacer"></li>
+            <li id="ttbar-menber">
+                <div class="dt">
+                    <a href="#">京东会员</a>
+                </div>
+            </li>
+            <li class="spacer"></li>
+            <li  class="dropdown" id="ttbar-ent">
+                <div class="dt cw-icon">
+                    <a href="#">企业采购</a>
+                    <i class="iconfont"></i>
+                </div>
+            </li>
+            <li class="spacer"></li>
+            <li class="dropdown" id="ttbar-serv">
+                客户服务
+                <i class="iconfont"></i>
+            </li>
+            <li class="spacer"></li>
+            <li class="dropdown" id="ttbar-navs">
+                <div class="dt cw-icon">
+                    网站导航
+<!--                    <i class="iconfont"></i>-->
+                </div>
+                <i class="iconfont"></i>
+            </li>
+            <li class="spacer"></li>
+            <li class="dropdown" id="ttbar-apps">
+                <div class="dt cw-icon">
+                    <a href="#">手机京东</a>
+                </div>
+            </li>
+        </ul>
+        <span class="clr"></span>
+    </div>
+</div>
+<div id="o-header-2013">
+    <div id="header-2013" style="display: none"></div>
+</div>
+<!--shortcut结束-->
+<style type="text/css">
+    #search-2014 .button {
+        width: auto;
+        padding: 0 8px;
+        font:12px simsun;
+        overflow:visible;
+    }
+    #search-2014 .button01 {
+        background: #474e5c;
+    }
+    #search-2014 .text {
+        width: 340px;
+    }
+    #search-2014 .form {
+        width: 480px;
+    }
+    #shelper {
+        width: 349px;
+    }
+    .root61 #search-2014, .root61 #search-2014 .form {
+        _width: 560px;
+    }
+</style>
+<!--中间头部分w开始-->
+<div class="w">
+    <!--    logo和分类部分开始-->
+    <div id="logo-2014">
+        <a href="#" class="logo">京东</a>
+        <div class="extra">
+            <div id="channel"></div>
+            <div id="categorys-mini">
+                <div class="cw-icon">
+                    <h2>
+                        <a href="#">
+                            全部分类
+                            <i class="ci-right">
+                                <s>◇</s>
+                            </i>
+                        </a>
+                    </h2>
+                </div>
+                <div id="categorys-mini-main" class="hover" style="display: none;">
+                    <div class="dd-inner">
+                        <div class="item fore1" data-index="1" clstag="h|keycount|2015|0501a">
+                            <h3><a href="//jiadian.jd.com" target="_blank">家用电器</a></h3>
+                        </div>
+                        <div class="item fore2" data-index="2" clstag="h|keycount|2015|0502a">
+                            <h3><a href="//shouji.jd.com/" target="_blank">手机</a>、
+                                <a href="//wt.jd.com" target="_blank">运营商</a>、
+                                <a href="//shuma.jd.com/" target="_blank">数码</a>
+                            </h3>
+                        </div>
+                        <div class="item fore3" data-index="3" clstag="h|keycount|2015|0503a">
+                            <h3><a href="//diannao.jd.com/" target="_blank">电脑</a>、
+                                <a href="//bg.jd.com" target="_blank">办公</a>
+                            </h3>
+                        </div>
+                        <div class="item fore4" data-index="4" clstag="h|keycount|2015|0504a">
+                            <h3><a href="//channel.jd.com/home.html" target="_blank">家居</a>、
+                                <a href="//channel.jd.com/furniture.html" target="_blank">家具</a>、
+                                <a href="//jzjc.jd.com/" target="_blank">家装</a>、
+                                <a href="//channel.jd.com/kitchenware.html" target="_blank">厨具</a>
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--    logo和分类部分结束-->
+    <!--    搜索栏开始-->
+    <div id="search-2014">
+        <ul id="shelper" class="hide" style="display: none">
+        </ul>
+        <div class="form">
+            <input type="text" id="key" class="text" >
+            <button class="button cw-icon">搜全站</button>
+            <button class="button button01">搜本店</button>
+        </div>
+    </div>
+    <!--    搜索栏结束-->
+    <!--    右部购物车开始-->
+    <div id="settleup-2014" class="dropdown">
+        <div class="cw-icon">
+            <i class="ci-left"></i>
+            <i class="ci-right">></i>
+            <i class="ci-count" id="shopping-amount">0</i>
+            <a href="#">我的购物车</a>
+        </div>
+<!--        <div class="dropdown-layer">-->
+<!--            <div class="spacer"></div>-->
+<!--            <div id="settleup-content">-->
+<!--                <span class="loading"></span>-->
+<!--            </div>-->
+<!--        </div>-->
+    </div>
+    <!--    右部购物车结束-->
+    <!--    热搜词开始-->
+    <div id="hotwords">
+        <a href="#">台式电脑</a>
+        <a href="#">thinkpad</a>
+        <a href="#">空调</a>
+        <a href="#">电视</a>
+        <a href="#">hdmi线</a>
+        <a href="#">扩展坞</a>
+        <a href="#">插座</a>
+    </div>
+    <span class="clr"></span>
+    <!--    热搜词结束-->
+<!--点击搜全站或搜本店按钮触发的处理    <script></script>-->
+</div>
+<!--中间头部分w结束-->
+<!--商店头结束-->
+<!--商品类别部分开始-->
+<div class="crumb-wrap" id="crumb-wrap">
+    <div class="w">
+        <div class="crumb fl clearfix">
+            <div class="item">
+                <a href="#">电脑、办公</a>
+            </div>
+            <div class="item sep">></div>
+            <div class="item ellipsis">
+                华为荣耀MagicBok Pro
+            </div>
+        </div>
+        <!--crumb结束-->
+        <div class="contact fr clearfix">
+            <div class="name goodshop EDropdown">
+                <em class="u-jd">自营</em>
+            </div>
+            <div class="J-hove-wrap EDropdown fr">
+                <div class="item">
+                    <div class="name">
+                        <a href="#">荣耀京东自营旗舰店</a>
+                    </div>
+                </div>
+                <div class="item hide J-im-item" style="display: block">
+                    <div class="J-im-btn">
+                        <div class="im customer-service">
+                            <i class="sprite-im"></i>
+                            联系客服
+                        </div>
+                    </div>
+                </div>
+              <div class="item">
+                    <div class="follow J-follow-shop">
+                        <i class="sprite-follow"></i>
+                        <span>关注店铺</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clr"></div>
+    </div>
+</div>
+<!--商品类别部分结束-->
+<!--商品详情开始-->
+<div class="w">
+    <div class="pro_height">
+    <div class="product-intro clearfix">
+        <div class="preview-wrap">
+            <div class="preview" id="preview">
+                <div id="spec-n1" class="jqzoom main-img">
+                    <ul class="preview-btn J-preview-btn">
+                        <li>
+                        </li>
+                    </ul>
+<!--主图-->
+                    <img id="spec-img"  width="450" src="//img12.360buyimg.com/n1/s450x450_jfs/t1/49259/35/4834/243670/5d280111E19cbe7cb/9c2d3dff5a821433.jpg">
+                    <i></i>
+                    <div id="belt"></div>
+                </div>
+
+<!--左右箭头图标-->
+                <div class="spec-list">
+                    <a id="spec-forward" href="#" class="arrow-prev disabled">
+                        <i class="sprite-arrow-prev"></i>
+                    </a>
+                    <a id="spec-backward" href="#" class="arrow-next">
+                        <i class="sprite-arrow-next"></i>
+                    </a>
+<!--                    商品图片展示-->
+                    <div id="spec-list" class="spec-items" style="position: relative;width: 380px;height: 58px;overflow: hidden">
+                        <ul class="lh" style="position: absolute;width: 684px;height: 58px;top: 0px;left: 0px;">
+                            <li ><img src="//img12.360buyimg.com/n5/s54x54_jfs/t1/49259/35/4834/243670/5d280111E19cbe7cb/9c2d3dff5a821433.jpg"  data-img="1" width="54" height="54"></li>
+                            <li ><img src="//img12.360buyimg.com/n5/s54x54_jfs/t1/72392/17/4335/336754/5d28011aE68df7ad5/41ec43af081e22a4.jpg"  data-img="1" width="54" height="54"></li>
+                            <li ><img src="//img12.360buyimg.com/n5/s54x54_jfs/t1/59438/25/5227/131431/5d35b702E75be0a4c/429c8fe3287446ee.jpg"  data-img="1" width="54" height="54"></li>
+                            <li ><img src="//img12.360buyimg.com/n5/s54x54_jfs/t1/56745/28/5719/203921/5d35b702E291a4347/5149b435fb077afb.jpg" data-img="1" width="54" height="54"></li>
+                            <li><img  src="//img12.360buyimg.com/n5/s54x54_jfs/t1/54786/1/5591/137048/5d35b702Eef770a9c/a3e5cdb56337eee8.jpg"  data-img="1" width="54" height="54"></li>
+                        </ul>
+                    </div>
+                </div>
+<!--图片展示下方的关注和分享小图标-->
+                <div class="preview-info">
+                    <div class="left-btns">
+                        <a class="follow J-follow">
+                            <i class="sprite-follow-sku"></i>
+                            <em>关注</em>
+                        </a>
+                        <a class="share J-share" href="#none" >
+                            <i class="sprite-share"></i><em>分享</em>
+                        </a>
+                        <a class="compare J-compare J_contrast" id="comp_100006745172" data-sku="100006745172" href="#none" clstag="shangpin|keycount|product|jiaruduibi">
+                            <i class="sprite-compare"></i><em>对比</em>
+                        </a>
+                    </div>
+                    <div class="right-btns">
+                        <a class="report-btn" href="#">举报</a>
+                    </div>
+                </div>
+                <div class="purchase-op">
+                    <a href="#" class="volume-purchase">企业购更优惠</a>
+                </div>
+            </div>
+        </div>
+        <div class="itemInfo-wrap">
+<!--商品名-->
+            <div class="sku-name">荣耀MagicBook Pro 16.1英寸全面屏轻薄性能笔记本电脑（酷睿i5 8G 512G MX250 IPS FHD 指纹解锁）冰河银</div>
+            <div class="news">
+                <div class="item hide" id="p-ad" data-hook="hide" style="display:block;">
+                    16.1英寸无界全面屏金属轻薄本，100%sRGB色域，14小时长续航，指纹一健开机登录，魔法一碰传高速传输
+                    <a href="#">详情点击</a>
+                </div>
+            </div>
+            <div class="summary summary-first">
+                <div class="summary-price-wrap">
+                    <div class="summary-price J-summary-price">
+                        <div class="dt">京东价</div>
+                        <div class="dd">
+                            <span class="p-price"><span>￥</span><span class="price J-p-100006745172">5499.00</span></span>
+                            <a class="notice J-notify-sale" data-type="1" data-sku="100006745172" href="#none" clstag="shangpin|keycount|product|jiangjia_1">降价通知</a>
+                            <div class="fans-price J-fans-price hide" style="display: none;">
+                                <span class="p-price-fans">
+                                    <span class="price J-p-f-100006745172"></span>
+                                </span>
+                                <img src="//img30.360buyimg.com/devfe/jfs/t17683/96/2616723497/1348/5d49daba/5afe6d90Nc2d9965a.png" alt="fans" class="fans-icon">
+                                <span class="text"></span>
+                            </div>
+                            <span class="J-xsth-sale" style="display: none;">
+                                    <a href="#" class="J-xsth-panel" clstag="shangpin|keycount|product|xianshitehui">
+                                        限时特惠
+                                        <s class="s-arrow">&gt;</s>
+                                    </a>
+                                    <i class="sprite-question"></i>
+                                </span>
+                            <div class="plus-price J-plus-price hide" style="display: none;">
+                                <span class="p-price-plus">
+                                    <span class="price"></span>
+                                    <a class="plus-icon-linkwrap">
+                                        <img src="//img10.360buyimg.com/da/jfs/t5731/317/890792506/848/391b9a15/59224a28N48552ed2.png" alt="plus" class="plus-icon">
+                                    </a>
+                                    <span class="text">
+                                        <strong>PLUS会员</strong>
+                                        专享价
+                                    </span>
+                                    <a clstag="shangpin|keycount|product|whatisplus" href="//plus.jd.com/index" target="_blank">现在开通PLUS会员享限时特惠>></a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="summary-info J-summary-info clearfix">
+                        <div id="comment-count" class="comment-count item fl">
+                            <p class="comment">累计评价</p>
+                            <a class="count J-comm-100006745172" href="#none">39万+</a>
+                        </div>
+                    </div>
+                    <div id="summary-quan" class="li p-choose hide"></div>
+                    <div id="j-summary-top" class="summary-top">
+                        <div id="summary-promotion" class="summary-promotion" style="display: none;">
+                            <div class="dt">促销</div>
+                            <div class="dd J-prom-wrap p-promotions-wrap">
+                                <div class="p-promotions">
+                                    <ins id="prom-mbuy" data-url="https://cd.jd.com/qrcode?skuId=100006745172&amp;location=3&amp;isWeChatStock=2"></ins>
+                                    <ins id="prom-car-gift"></ins>
+                                    <ins id="prom-gift" clstag="shangpin|keycount|product|zengpin_1" style="display: none;"></ins>
+                                    <ins id="prom-fujian" clstag="shangpin|keycount|product|fujian_1"></ins>
+                                    <ins id="prom"></ins>
+                                    <ins id="prom-one"></ins>
+                                    <ins id="prom-phone"></ins>
+                                    <ins id="prom-phone-jjg"></ins>
+                                    <ins id="prom-tips"></ins>
+                                    <ins id="prom-quan"></ins>
+                                    <div class="J-prom-more view-all-promotions" style="visibility: hidden;">
+                                        <span class="prom-sum">展开促销</span>
+                                        <a href="#" class="view-link">
+                                            <i class="sprite-arr-close"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<!--商品选择-图片和购物车-->
+            <div class="summary p-choose-warp">
+                <div class="p-choose-img">
+                     <img src="imagesLL/jietu.png" width="738px" height="500px">
+                    <span class="statenotice" style="margin: 58px 10px 143px 10px;font-size: 27px"></span>
+                </div>
+<!--                购物车加减按钮-->
+                <div id="choose-attrs">
+                    <div class="summary-line"></div>
+                    <div id="choose-btns" class="choose-btns clearfix" >
+                        <div class="choose-amount" clstag="shangpin|keycount|product|goumaishuliang-1" style="visibility: visible;margin-right: 10px;">
+                            <div class="wrap-input">
+                                <input class="text buy-num" onkeyup="setAmount.modify('#buy-num');" id="buy-num" value="1" data-max="200">
+                                <a class="btn-reduce" onclick="setAmount.reduce('#buy-num')" href="#none" data-disabled="1">-</a>
+                                <a class="btn-add" onclick="setAmount.add('#buy-num')" href="#none" data-disabled="1">+</a>
+                            </div>
+                        </div>
+                        <a href="#" id="InitCartUrl" class="btn-special1 btn-lg">
+                            加入购物车
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+<!--商品详情结束-->
+<!--网页底部开始-->
+<div id="footer">
+    <div id="service-2014">
+        <div class="slogan">
+            <img src="imagesLL/service_items_1.png">
+            <img src="imagesLL/service_items_2.png">
+            <img src="imagesLL/service_items_3.png">
+            <img src="imagesLL/service_items_4.png">
+        </div>
+        <div class="w">
+            <dl class="fore1">
+                <dt>购物指南</dt>
+                <dd>
+                    <div><a>购物流程</a>
+                    </div>
+                    <div><a>会员介绍</a>
+                    </div>
+                    <div><a>生活旅行/团购</a>
+                    </div>
+                    <div><a>常见问题</a></div>
+                    <div><a>大家电</a>
+                    </div>
+                    <div><a>联系客服</a></div>
+                </dd>
+            </dl>
+            <dl class="fore2">
+                <dt>配送方式</dt>
+                <dd>
+                    <div><a>上门自提</a>
+                    </div>
+                    <div><a>211限时达</a>
+                    </div>
+                    <div><a>配送服务查询</a>
+                    </div>
+                    <div><a>配送费收取标准</a>
+                    </div>
+                    <div><a>海外配送</a></div>
+                </dd>
+            </dl>
+            <dl class="fore3">
+                <dt>支付方式</dt>
+                <dd>
+                    <div><a>货到付款</a>
+                    </div>
+                    <div><a>在线支付</a>
+                    </div>
+                    <div><a>分期付款</a>
+                    </div>
+                    <div><a>邮局汇款</a>
+                    </div>
+                    <div><a>公司转账</a>
+                    </div>
+                </dd>
+            </dl>
+            <dl class="fore4">
+                <dt>售后服务</dt>
+                <dd>
+                    <div><a>售后政策</a>
+                    </div>
+                    <div><a>价格保护</a>
+                    </div>
+                    <div><a>退款说明</a>
+                    </div>
+                    <div><a>返修/退换货</a>
+                    </div>
+                    <div><a>取消订单</a>
+                    </div>
+                </dd>
+            </dl>
+            <dl class="fore5">
+                <dt>特色服务</dt>
+                <dd>
+                    <div><a >夺宝岛</a></div>
+                    <div><a >DIY装机</a></div>
+                    <div><a >延保服务</a></div>
+                    <div><a >京东E卡</a></div>
+                    <div><a >京东通信</a></div>
+                    <div><a >京东JD+</a></div>
+                </dd>
+            </dl>
+            <div id="coverage">
+                <div class="dt">
+                    京东自营覆盖区县
+                </div>
+                <div class="dd">
+                    <p>京东已向全国2649个区县提供自营配送服务，支持货到付款、POS机刷卡和售后上门服务。</p>
+                    <p class="ar"><a>查看详情&nbsp;&gt;</a>
+                    </p>
+                </div>
+            </div>
+            <span class="clr"></span>
+        </div>
+    </div>
+    <div class="copyright">
+        <a target="_blank" href=""><img src="imagesLL/ga.png"> 京公网安备11000002000088号</a>&nbsp;&nbsp;|&nbsp;&nbsp;京ICP证070359号&nbsp;&nbsp;|&nbsp;&nbsp;
+        <a target="_blank" href="">互联网药品信息服务资格证编号(京)-经营性-2014-0008</a>&nbsp;&nbsp;|&nbsp;&nbsp;新出发京零&nbsp;字第大120007号<br>互联网出版许可证编号新出网证(京)字150号&nbsp;&nbsp;|&nbsp;&nbsp;
+        <a href="" target="_blank">出版物经营许可证</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="" target="_blank">网络文化经营许可证京网文[2014]2148-348号</a>&nbsp;&nbsp;|&nbsp;&nbsp;违法和不良信息举报电话：4006561155<br>Copyright&nbsp;©&nbsp;2004&nbsp;-&nbsp;2016&nbsp;&nbsp;京东JD.com&nbsp;版权所有&nbsp;&nbsp;|&nbsp;&nbsp;消费者维权热线：4006067733<br>京东旗下网站：<a href="" target="_blank">京东钱包</a>
+    </div>
+</div>
+<!--网页底部结束-->
+</body>
+</html>

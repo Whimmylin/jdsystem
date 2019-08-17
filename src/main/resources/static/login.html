@@ -3,8 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="js/jquery.min.js"></script>
+    <script>
+        // $(function () {
+        //     $.ajax({
+        //         url: "http://localhost:8080/getProductImg",
+        //         type: "post",
+        //         data:{
+        //             "imgId":1
+        //         },
+        //         datatype: "json",
+        //         success:function (data) {
+        //             alert(data.imgUrl);
+        //             $("img").attr('src',data.imgUrl);
+        //
+        //         }
+        //     });
+        // });
+        // 轮播图
+        // var scrolldiv=document.getElementsByClassName("scroll_div")[0];
+        // var left=0;
+        // function move() {
+        //     var timer=setInterval(function () {
+        //        left--;
+        //        if(left<=-1600){
+        //            left=0;
+        //        }
+        //        if(left%-400==0){
+        //            clearInterval(timer);
+        //            timer=null;
+        //        }
+        //        scrolldiv.style.marginLeft=left+"px";
+        //     },10);
+        // }
+        // setInterval(function () {
+        //     move();
+        // },5000);
+    </script>
+    <style type="text/css">
+        /*轮播图css*/
+        /*.show_div{*/
+        /*    width: 400px;*/
+        /*    height: 400px;*/
+        /*    margin:  0 auto;*/
+        /*    border: 2px solid block;*/
+        /*    overflow: hidden;*/
+        /*}*/
+        /*.scroll_div{*/
+        /*    width: 2000px;*/
+        /*    height: 400px;*/
+        /*}*/
+        /*.scroll_div img{*/
+        /*    width: 400px;*/
+        /*    height: 400px;*/
+        /*    float: left;*/
+        /*}*/
+    </style>
+    <style>
+        img {
+            border: 0;
+            vertical-align: middle;
+        }
+
+  </style>
+    <script>
+    </script>
 </head>
 <body>
-
+<!--轮播图-->
+<!--<div class="show_div">-->
+<!--    <div class="scroll_div">-->
+<!--        <img src="http://img13.360buyimg.com/n5/s54x54_jfs/t1/65475/22/6689/319339/5d4b8a9dE1ffaa066/cfbb42ed1c6c6f43.jpg">-->
+<!--        <img src="http://img13.360buyimg.com/n5/s54x54_jfs/t1/47193/2/3369/231278/5d11cb39Ef3674059/ba3c0a1d956429e2.jpg">-->
+<!--        <img src="http://img13.360buyimg.com/n5/s54x54_jfs/t1/43166/35/8366/172567/5d1dc223E04a2b030/7ba7e552dfc6bcf3.jpg">-->
+<!--        <img src="http://img13.360buyimg.com/n5/s54x54_jfs/t1/58264/27/2579/380955/5d074d68E6dbce0c3/16371c6f96e2405f.jpg ">-->
+<!--        <img src="http://img13.360buyimg.com/n5/s54x54_jfs/t1/60838/7/2192/143412/5d074d65E15353d21/12dd3bb5a9658f3c.jpg">-->
+<!--    </div>-->
+<!--</div>-->
+<!-- 原始图片区域 -->
+<div id="pic_wrap">
+    <!-- 放大镜所示区域 -->
+    <div id="float_box"></div>
+    <img src="imagesLL/productimgs/cmputer_huawei_1.jpg" alt="">
+</div>
+<div id="show">
+    <!-- 预留的放大后的图片 -->
+    <img src="imagesLL/productimgs/c.jpg" id="big_img">
+</div>
 </body>
 </html>
