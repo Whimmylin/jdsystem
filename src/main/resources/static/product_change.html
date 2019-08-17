@@ -97,58 +97,73 @@
                     products: []
                 }
             });
-
-            $("#souSuo").click(function () {
-            var indexId =  parseInt($("input[name='pro_id']").val());
-            $.ajax({
-                url:"http://localhost:8080/selectProductOne",
-                type:"post",
-                data:{"indexId":indexId},
-                dataType:"json",
-                success:function (data) {
-                    $("#addForm").remove();
-                    if(data.length<1){
-                        alert("该商品编号不存在，请重新输入！")
-                    }else{
-                        for (var i = 0; i < data.length; i++) {
-                            vm.products.push({
-                                pro_id: data[i].proId,
-                                pro_name: data[i].proName,
-                                sort_id: data[i].sortId,
-                                pro_state:data[i].proState,
-                                pro_stock:data[i].proStock,
-                                pro_price: data[i].proPrice,
-                                pro_out: data[i].proOut,
-                                pro_detail: data[i].proDetail,
-                                brand_id:data[i].brandId
-                            })
-                        }
-                    }
-                }
-            })
-            });
-            $("#xiuGai").click(function () {
+            var indexId = sessionStorage.getItem("proId");
+            sessionStorage.removeItem("proId");
+            if(indexId !=null){
+                indexId = parseInt(indexId);
+                ajax();
+            }
+            function ajax(){
                 $.ajax({
-                    url:"http://localhost:8080/updateProduct",
+                    url:"http://localhost:8080/selectProductOne",
                     type:"post",
-                    data:{
-                        "proId": $("input[name='pro_id']").val(),
-                        "proName": $("input[name='pro_name']").val(),
-                        "sortId": $("input[name='sort_id']").val(),
-                        "proState":$("input[name='pro_state']").val(),
-                        "proStock":$("input[name='pro_stock']").val(),
-                        "proPrice": $("input[name='pro_price']").val(),
-                        "proOut": $("input[name='pro_out']").val(),
-                        "proDetail": $("input[name='pro_detail']").val(),
-                        "brandId":$("input[name='brand_id']").val()
-                    },
+                    data:{"indexId":indexId},
                     dataType:"json",
                     success:function (data) {
-                        if(data){
-                            alert("成功修改商品信息！")
+                        $("#addForm").remove();
+                        if(data.length<1){
+                            alert("该商品编号不存在，请重新输入！")
+                        }else{
+                            for (var i = 0; i < data.length; i++) {
+                                vm.products.push({
+                                    pro_id: data[i].proId,
+                                    pro_name: data[i].proName,
+                                    sort_id: data[i].sortId,
+                                    pro_state:data[i].proState,
+                                    pro_stock:data[i].proStock,
+                                    pro_price: data[i].proPrice,
+                                    pro_out: data[i].proOut,
+                                    pro_detail: data[i].proDetail,
+                                    brand_id:data[i].brandId
+                                })
+                            }
                         }
                     }
                 })
+            }
+
+            $("#souSuo").click(function () {
+             indexId =  parseInt($("input[name='pro_id']").val());
+              ajax();
+            });
+
+            $("#xiuGai").click(function (){
+                if(document.getElementById("addForm")){
+                    $.ajax({
+                        url:"http://localhost:8080/updateProduct",
+                        type:"post",
+                        data:{
+                            "proId": $("input[name='pro_id']").val(),
+                            "proName": $("input[name='pro_name']").val(),
+                            "sortId": $("input[name='sort_id']").val(),
+                            "proState":$("input[name='pro_state']").val(),
+                            "proStock":$("input[name='pro_stock']").val(),
+                            "proPrice": $("input[name='pro_price']").val(),
+                            "proOut": $("input[name='pro_out']").val(),
+                            "proDetail": $("input[name='pro_detail']").val(),
+                            "brandId":$("input[name='brand_id']").val()
+                        },
+                        dataType:"json",
+                        success:function (data) {
+                            if(data){
+                                alert("成功修改商品信息！")
+                            }
+                        }
+                    })
+                }else {
+                    alert("请搜索商品编号！")
+                }
+
             })
 
 
@@ -194,7 +209,7 @@
         </ol>
         <div style="padding: 10px 100px 10px;" id="tree">
             <div class="input-group">
-                <button type="button" class="btn" style="float: right;" id="souSuo">搜索</button>
+                <button type="button" class="btn btn-success" style="float: right;" id="souSuo">搜索</button>
                 <span class="input-group-addon">商品编号</span>
                 <input type="text" class="form-control" name="pro_id" placeholder="请输入商品编号">
             </div>

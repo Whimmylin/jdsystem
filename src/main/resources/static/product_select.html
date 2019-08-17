@@ -55,6 +55,14 @@
                     el: '#tree',
                     data: {
                         products: []
+                    },
+                    methods:{
+                        change:function (index) {
+                            alert(this.products[index].pro_id);
+                            var indexId = this.products[index].pro_id.toString()
+                            sessionStorage.setItem("proId", indexId);
+                            location.href="product_change.html"
+                        }
                     }
                 });
                 //ajax封装函数
@@ -137,7 +145,7 @@
                 </tr>
                 </thead>
                 <tbody id="tree">
-                <tr v-for="productY in products">
+                <tr v-for="(productY,index) in products">
                     <td style="vertical-align:middle;">{{productY.pro_id}}</td>
                     <td style="vertical-align:middle;">{{productY.pro_name}}</td>
                     <td style="vertical-align:middle;">{{productY.sort_id}}</td>
@@ -146,7 +154,7 @@
                     <td style="vertical-align:middle;">{{productY.pro_price}}</td>
                     <td style="vertical-align:middle;">{{productY.pro_out}}</td>
                     <td style="vertical-align:middle;">{{productY.pro_detail}}</td>
-                    <td><button type="button" class="btn btn-danger"><a href="product_change.html" style="text-decoration:none;color:white;">修改</a></button></td>
+                    <td><button type="button" class="btn btn-danger" @click="change(index)">修改</button></td>
                 </tr>
                 </tbody>
             </table>
