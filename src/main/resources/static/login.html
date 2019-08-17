@@ -9,6 +9,19 @@
     <script src="js/jquery.validate.regex.js"></script>
     <script>
         $(function () {
+            //cookie判断
+           $ (function(userId){
+                var strcookie = document.cookie;//获取cookie字符串
+                var arrcookie = strcookie.split("; ");//分割
+                //遍历匹配
+                for ( var i = 0; i < arrcookie.length; i++){
+                    var arr = arrcookie[i].split("=");
+                    if (arr[0] == userId){
+                       return location.href="index.html";
+                    }
+                }
+               return alert("请先登录！");
+            });
             // box切换功能
             $("#zhanhao").click(function () {
                 $(".box_login").removeClass("box_login").addClass("visible");
@@ -60,7 +73,7 @@
                         success:function (data){
                             alert(data);
                             if(data){
-                                location.href="http://www.baidu.com";
+                                location.href="index.html";
                             }
                         }
                     })
@@ -141,7 +154,7 @@
                     </div>
                     <div class="m1">
                         <lable class="m2 m3 "></lable>
-                        <input  type="text" class="itxt" name="loginpassword" tabindex="1" autocomplete="off" value="" placeholder="密码">
+                        <input  type="password" class="itxt" name="loginpassword" tabindex="1" autocomplete="off" value="" placeholder="密码">
                     </div>
                     <div class="m4"><a href="">忘记密码</a></div>
                     <div class="login_btn">
