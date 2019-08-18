@@ -1,6 +1,6 @@
 package org.lanqiao.entity;
 
-public class ProductImg {
+public class ProductImg_W {
     private Integer imgId;
 
     private Integer proId;
@@ -10,11 +10,19 @@ public class ProductImg {
     private String imgUrl;
 
     private String isImgMain;
+    private OrderDetail_W orderDetail;
+
+    public OrderDetail_W getOrderDetail() {
+        return orderDetail;
+    }
+
+    public void setOrderDetail(OrderDetail_W orderDetail) {
+        this.orderDetail = orderDetail;
+    }
 
     public Integer getImgId() {
         return imgId;
     }
-
 
     public void setImgId(Integer imgId) {
         this.imgId = imgId;

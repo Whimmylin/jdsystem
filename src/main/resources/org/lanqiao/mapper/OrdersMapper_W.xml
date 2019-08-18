@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.lanqiao.mapper.OrdersMapper_W" >
+  <resultMap id="OrdersResultMap" type="org.lanqiao.entity.Orders_W" >
+    <id column="order_id" property="orderId" jdbcType="INTEGER" />
+<!--    <result column="order_item_id" property="orderItemId" jdbcType="INTEGER" />-->
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="order_money" property="orderMoney" jdbcType="INTEGER" />
+    <result column="pay_way" property="payWay" jdbcType="VARCHAR" />
+    <result column="order_time" property="orderTime" jdbcType="DATE" />
+    <result column="order_sum" property="orderSum" jdbcType="INTEGER" />
+    <result column="rec_name" property="recName" jdbcType="VARCHAR" />
+    <result column="rec_phone" property="recPhone" jdbcType="VARCHAR" />
+    <result column="rec_address" property="recAddress" jdbcType="VARCHAR" />
+    <collection property="orderDetail" resultMap="OrderDetailResultMap"></collection>
+
+  </resultMap>
+
+  <resultMap id="OrderDetailResultMap" type="org.lanqiao.entity.OrderDetail_W" >
+    <id column="order_item_id" property="orderItemId" jdbcType="INTEGER" />
+    <result column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="pro_id" property="proId" jdbcType="INTEGER" />
+    <result column="pro_name" property="proName" jdbcType="VARCHAR" />
+    <result column="pro_num" property="proNum" jdbcType="INTEGER" />
+  </resultMap>
+
+  <select id="getOrderId" resultMap="OrdersResultMap" parameterType="java.lang.Integer" >
+    select order_id from orders
+--     where order_id != null and user_id = null and order_money = null and pay_way = null and order_time = null and order_sum = null and rec_name = null and rec_phone = null and rec_address = null;
+  </select>
+
+
+<!--<update id="updateOrderItem" parameterType="org.lanqiao.entity.Orders_W_W" >-->
+<!--  update orders-->
+<!--    set order_money = #{orderMoney},pay_way=#{payWay},order_sum=#{orderSum},rec_name=#{recName},rec_phone=#{recPhone},rec_address=#{recAddress}-->
+<!--    where order_id = #{orderId}-->
+<!--&#45;&#45;      and user_id = #{userId};-->
+<!--</update>-->
+
+
+  <sql id="Base_Column_List" >
+    order_id, user_id, order_money, pay_way, order_time, order_sum, rec_name,
+    rec_phone, rec_address
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="OrdersResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from orders
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from orders
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </delete>
+
+
+
+
+
+  <insert id="insert" parameterType="org.lanqiao.entity.Orders_W" >
+    insert into orders (order_id, user_id,
+      order_money, pay_way, order_time, 
+      order_sum, rec_name, rec_phone, 
+      rec_address)
+    values (#{orderId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER},
+      #{orderMoney,jdbcType=INTEGER}, #{payWay,jdbcType=VARCHAR}, #{orderTime,jdbcType=DATE}, 
+      #{orderSum,jdbcType=INTEGER}, #{recName,jdbcType=VARCHAR}, #{recPhone,jdbcType=VARCHAR}, 
+      #{recAddress,jdbcType=VARCHAR})
+  </insert>
+
+
+
+
+<!--  <insert id="insertSelective" parameterType="org.lanqiao.entity.Orders_W_W" >-->
+<!--    insert into orders-->
+<!--    <trim prefix="(" suffix=")" suffixOverrides="," >-->
+<!--      <if test="orderId != null" >-->
+<!--        order_id,-->
+<!--      </if>-->
+<!--      <if test="orderItemId != null" >-->
+<!--        order_item_id,-->
+<!--      </if>-->
+<!--      <if test="userId != null" >-->
+<!--        user_id,-->
+<!--      </if>-->
+<!--      <if test="orderMoney != null" >-->
+<!--        order_money,-->
+<!--      </if>-->
+<!--      <if test="payWay != null" >-->
+<!--        pay_way,-->
+<!--      </if>-->
+<!--      <if test="orderTime != null" >-->
+<!--        order_time,-->
+<!--      </if>-->
+<!--      <if test="orderSum != null" >-->
+<!--        order_sum,-->
+<!--      </if>-->
+<!--      <if test="recName != null" >-->
+<!--        rec_name,-->
+<!--      </if>-->
+<!--      <if test="recPhone != null" >-->
+<!--        rec_phone,-->
+<!--      </if>-->
+<!--      <if test="recAddress != null" >-->
+<!--        rec_address,-->
+<!--      </if>-->
+<!--    </trim>-->
+<!--    <trim prefix="values (" suffix=")" suffixOverrides="," >-->
+<!--      <if test="orderId != null" >-->
+<!--        #{orderId,jdbcType=INTEGER},-->
+<!--      </if>-->
+<!--      <if test="orderItemId != null" >-->
+<!--        #{orderItemId,jdbcType=INTEGER},-->
+<!--      </if>-->
+<!--      <if test="userId != null" >-->
+<!--        #{userId,jdbcType=INTEGER},-->
+<!--      </if>-->
+<!--      <if test="orderMoney != null" >-->
+<!--        #{orderMoney,jdbcType=INTEGER},-->
+<!--      </if>-->
+<!--      <if test="payWay != null" >-->
+<!--        #{payWay,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="orderTime != null" >-->
+<!--        #{orderTime,jdbcType=DATE},-->
+<!--      </if>-->
+<!--      <if test="orderSum != null" >-->
+<!--        #{orderSum,jdbcType=INTEGER},-->
+<!--      </if>-->
+<!--      <if test="recName != null" >-->
+<!--        #{recName,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="recPhone != null" >-->
+<!--        #{recPhone,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="recAddress != null" >-->
+<!--        #{recAddress,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--    </trim>-->
+<!--  </insert>-->
+  <update id="updateOrderItem" parameterType="org.lanqiao.entity.Orders_W" >
+    update orders
+    <set >
+<!--      <if test="orderItemId != null" >-->
+<!--        order_item_id = #{orderItemId,jdbcType=INTEGER},-->
+<!--      </if>-->
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="orderMoney != null" >
+        order_money = #{orderMoney,jdbcType=INTEGER},
+      </if>
+      <if test="payWay != null" >
+        pay_way = #{payWay,jdbcType=VARCHAR},
+      </if>
+      <if test="orderTime != null" >
+        order_time = #{orderTime,jdbcType=DATE},
+      </if>
+      <if test="orderSum != null" >
+        order_sum = #{orderSum,jdbcType=INTEGER},
+      </if>
+      <if test="recName != null" >
+        rec_name = #{recName,jdbcType=VARCHAR},
+      </if>
+      <if test="recPhone != null" >
+        rec_phone = #{recPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="recAddress != null" >
+        rec_address = #{recAddress,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+<!--  <update id="updateByPrimaryKey" parameterType="org.lanqiao.entity.Orders_W_W" >-->
+<!--    update orders-->
+<!--    set order_item_id = #{orderItemId,jdbcType=INTEGER},-->
+<!--      user_id = #{userId,jdbcType=INTEGER},-->
+<!--      order_money = #{orderMoney,jdbcType=INTEGER},-->
+<!--      pay_way = #{payWay,jdbcType=VARCHAR},-->
+<!--      order_time = #{orderTime,jdbcType=DATE},-->
+<!--      order_sum = #{orderSum,jdbcType=INTEGER},-->
+<!--      rec_name = #{recName,jdbcType=VARCHAR},-->
+<!--      rec_phone = #{recPhone,jdbcType=VARCHAR},-->
+<!--      rec_address = #{recAddress,jdbcType=VARCHAR}-->
+<!--    where order_id = #{orderId,jdbcType=INTEGER}-->
+<!--  </update>-->
+</mapper>

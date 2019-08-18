@@ -1,9 +1,12 @@
 package org.lanqiao.entity;
 
 import java.util.Date;
+import java.util.Set;
 
-public class Users {
+public class Users_W {
     private Integer userId;
+
+    private Integer cartId;
 
     private String userName;
 
@@ -22,6 +25,24 @@ public class Users {
     private Date birthday;
 
     private String isVip;
+    private Set<Orders_W> orders;
+    private Set<UserGetAddress_W> userGetAddresses;
+
+    public Set<Orders_W> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Orders_W> orders) {
+        this.orders = orders;
+    }
+
+    public Set<UserGetAddress_W> getUserGetAddresses() {
+        return userGetAddresses;
+    }
+
+    public void setUserGetAddresses(Set<UserGetAddress_W> userGetAddresses) {
+        this.userGetAddresses = userGetAddresses;
+    }
 
     public Integer getUserId() {
         return userId;
@@ -31,6 +52,13 @@ public class Users {
         this.userId = userId;
     }
 
+    public Integer getCartId() {
+        return cartId;
+    }
+
+    public void setCartId(Integer cartId) {
+        this.cartId = cartId;
+    }
 
     public String getUserName() {
         return userName;
