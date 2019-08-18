@@ -91,7 +91,7 @@
 <!--					<property name="useActualColumnNames" value="false" />-->
 <!--					&lt;!&ndash;value为true时，保留_,value为false为取消_ （驼峰命名法）&ndash;&gt;-->
 <!--				</table>-->
-<!--				<table tableName="orderdetailG" domainObjectName="orderdetailG"-->
+<!--				<table tableName="orderdetail" domainObjectName="orderdetail"-->
 <!--					   enableCountByExample="false" enableDeleteByExample="false"-->
 <!--					   enableSelectByExample="false" enableUpdateByExample="false">-->
 <!--					<property name="useActualColumnNames" value="false" />-->

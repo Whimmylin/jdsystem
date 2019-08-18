@@ -22,7 +22,7 @@ public class Product_G {
 
     private String proDetail;
 
-    private Set<Productimg> productimgs;
+    private Set<ProductImg> productimgs;
 
     public Integer getProId() {
         return proId;
@@ -96,11 +96,11 @@ public class Product_G {
         this.proDetail = proDetail == null ? null : proDetail.trim();
     }
 
-    public Set<Productimg> getProductimgs() {
+    public Set<ProductImg> getProductimgs() {
         return productimgs;
     }
 
-    public void setProductimgs(Set<Productimg> productimgs) {
+    public void setProductimgs(Set<ProductImg> productimgs) {
         this.productimgs = productimgs;
     }
 }

@@ -1,17 +1,17 @@
 package org.lanqiao.mapper;
 
-import org.lanqiao.entity.Productimg;
+import org.lanqiao.entity.ProductImg;
 
 public interface ProductimgMapper {
     int deleteByPrimaryKey(Integer imgId);
 
-    int insert(Productimg record);
+    int insert(ProductImg record);
 
-    int insertSelective(Productimg record);
+    int insertSelective(ProductImg record);
 
-    Productimg selectByPrimaryKey(Integer imgId);
+    ProductImg selectByPrimaryKey(Integer imgId);
 
-    int updateByPrimaryKeySelective(Productimg record);
+    int updateByPrimaryKeySelective(ProductImg record);
 
-    int updateByPrimaryKey(Productimg record);
+    int updateByPrimaryKey(ProductImg record);
 }

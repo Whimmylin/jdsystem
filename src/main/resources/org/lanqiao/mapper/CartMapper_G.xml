@@ -33,7 +33,7 @@
     <result column="pro_detail" property="proDetail" jdbcType="VARCHAR" />
     <collection property="productimgs" resultMap="ProductimgBaseMapper"></collection>
   </resultMap>
-  <resultMap id="ProductimgBaseMapper" type="org.lanqiao.entity.Productimg" >
+  <resultMap id="ProductimgBaseMapper" type="org.lanqiao.entity.ProductImg" >
     <id column="img_id" property="imgId" jdbcType="INTEGER" />
     <result column="pro_id" property="proId" jdbcType="INTEGER" />
     <result column="img_detail" property="imgDetail" jdbcType="VARCHAR" />
@@ -70,13 +70,13 @@
     update cart set pro_num = #{proNum} where cart_id = #{cartId}
   </update>
   <insert id="insertIntoOrderDetail" parameterType="org.lanqiao.entity.Orderdetail_G">
-    insert into orderdetailG(order_id,pro_id,pro_num,pro_name) values (#{orderId},#{proId},#{proNum},#{proName,jdbcType=VARCHAR})
+    insert into orderdetail(order_id,pro_id,pro_num,pro_name) values (#{orderId},#{proId},#{proNum},#{proName,jdbcType=VARCHAR})
   </insert>
   <insert id="insertIntoOrder" parameterType="org.lanqiao.entity.Orders">
     insert into orders (user_id) values (#{userId})
   </insert>
   <select id="show" resultMap="orderdetailBaseMapper">
-    select * from orderdetailG
+    select * from orderdetail
   </select>
     <select id="selectOrderId" resultMap="OrdersBaseMapper" parameterType="java.lang.Integer">
         select order_id from orders where user_id = #{userId} and order_money is null limit 1

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.lanqiao.mapper.ProductimgMapper" >
-  <resultMap id="BaseResultMap" type="org.lanqiao.entity.Productimg" >
+  <resultMap id="BaseResultMap" type="org.lanqiao.entity.ProductImg" >
     <id column="img_id" property="imgId" jdbcType="INTEGER" />
     <result column="pro_id" property="proId" jdbcType="INTEGER" />
     <result column="img_detail" property="imgDetail" jdbcType="VARCHAR" />
@@ -21,13 +21,13 @@
     delete from productimg
     where img_id = #{imgId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="org.lanqiao.entity.Productimg" >
+  <insert id="insert" parameterType="org.lanqiao.entity.ProductImg" >
     insert into productimg (img_id, pro_id, img_detail, 
       img_URL, is_img_main)
     values (#{imgId,jdbcType=INTEGER}, #{proId,jdbcType=INTEGER}, #{imgDetail,jdbcType=VARCHAR}, 
       #{imgUrl,jdbcType=VARCHAR}, #{isImgMain,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="org.lanqiao.entity.Productimg" >
+  <insert id="insertSelective" parameterType="org.lanqiao.entity.ProductImg" >
     insert into productimg
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="imgId != null" >
@@ -64,7 +64,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="org.lanqiao.entity.Productimg" >
+  <update id="updateByPrimaryKeySelective" parameterType="org.lanqiao.entity.ProductImg" >
     update productimg
     <set >
       <if test="proId != null" >
@@ -82,7 +82,7 @@
     </set>
     where img_id = #{imgId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="org.lanqiao.entity.Productimg" >
+  <update id="updateByPrimaryKey" parameterType="org.lanqiao.entity.ProductImg" >
     update productimg
     set pro_id = #{proId,jdbcType=INTEGER},
       img_detail = #{imgDetail,jdbcType=VARCHAR},
