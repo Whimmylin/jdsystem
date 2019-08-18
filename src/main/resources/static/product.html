@@ -32,6 +32,10 @@
     <script src="js/vue.min.js"></script>
 <script>
     $(function () {
+
+        var  por_id1=sessionStorage.getItem("pro_id1");
+        sessionStorage.removeItem("pro_id1")
+
         $.ajax({
             url: "http://localhost:8080/getproduct",
             type: "post",

@@ -165,6 +165,12 @@
 
 
                     },
+                    Jumpgoods:function (index) {
+                        // var proid=.toString();
+                        alert(this.produces[index].pro_id);
+                        sessionStorage.setItem("pro_id1",this.produces[index].pro_id);
+                        window.location.href="product.html";
+                    }
 
 
                 }
@@ -503,10 +509,10 @@
 <!------------dddddd------------------------------------------------------------------------------------->
                     <div class="myBox">
                         <ul class="myBox-content" >
-                            <li class="myBox-li" v-for="(produce,index) in produces">
+                            <li class="myBox-li" v-for="(produce,index) in produces" >
                                 <div class="myBox-product" >
-                                    <div class="myBox-img">
-                                        <a href="">
+                                    <div class="myBox-img" @click="Jumpgoods(index)">
+                                        <a @click="Jumpgoods(index)">
                                             <img :src="produce.img">
                                         </a>
                                     </div>
@@ -517,8 +523,8 @@
                                         </strong>
 
                                     </div>
-                                    <div class="myBox-discuss">
-                                        <a href="">{{produce.pro_detail}}</a>
+                                    <div class="myBox-discuss" @click="Jumpgoods(index)">
+                                        <a  >{{produce.pro_detail}}</a>
                                     </div>
                                     <div class="myBox-commit">
                                         <strong>

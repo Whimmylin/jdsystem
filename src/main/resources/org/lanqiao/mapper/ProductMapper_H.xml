@@ -68,7 +68,7 @@
     </select>
     <select id="FY" resultMap="ProductResultMap" parameterType="org.lanqiao.entity.Key" >
     select *
-    from ( select p.pro_name,p.pro_price,p.pro_stock,t.img_URL,p.pro_detail
+    from ( select p.pro_name,p.pro_price,p.pro_stock,t.img_URL,p.pro_detail,p.pro_id
         from product p, productbrand b,productsort s ,productimg t
         <where>
             <if test="BrandName !=null" >
