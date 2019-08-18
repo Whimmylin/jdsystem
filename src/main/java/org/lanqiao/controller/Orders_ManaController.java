@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-public class OrdersController_Y {
+public class Orders_ManaController {
     @Autowired
     OrdersService_Y ordersService_y;
 

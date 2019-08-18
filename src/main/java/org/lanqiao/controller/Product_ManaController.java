@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-public class ProductController_Y {
+public class Product_ManaController {
     @Autowired
     ProductService_Y productService_y;
 

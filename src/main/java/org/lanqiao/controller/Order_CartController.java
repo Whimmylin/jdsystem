@@ -1,9 +1,8 @@
 package org.lanqiao.controller;
 
-import org.lanqiao.entity.Cart;
-import org.lanqiao.entity.Orderdetail;
-import org.lanqiao.entity.Orders;
+import org.lanqiao.entity.*;
 import org.lanqiao.service.CartService_G;
+import org.lanqiao.service.OrderService_W;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,9 +10,39 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-public class CartController_G {
+public class Order_CartController {
+    @Autowired
+    OrderService_W orderService;
+
+    @RequestMapping("/getAddresses")
+    public List<UserGetAddress> getAddresses(){
+        return orderService.getAddresses();
+    }
+
+    @RequestMapping("/getOrderItem")
+    public List<Orderdetail> getOrderItem(int id){
+        return orderService.getOrderItem(id);
+    }
+
+    @RequestMapping("/getProductItem")
+    public List<Orderdetail> getProductItem(){
+        return orderService.getProductItem();
+    }
+
+    @RequestMapping("/insertOrder")
+    public int createOrder(Orders orders){
+        return orderService.insertOrders(orders);
+    }
+
+    @RequestMapping("/updateOrder")
+    public int updateOrder(Orders orders){
+        return orderService.updateOrderItem(orders);
+    }
+
+
     @Autowired
     CartService_G cartServiceG;
+
     @RequestMapping("/selectcardgoods")
     List<Cart> selectAllCartGoods(){
         return cartServiceG.selectAllCartGoods();
@@ -26,7 +55,7 @@ public class CartController_G {
     }
     @RequestMapping(value = "/insertIntoOrderDetail")
     int insertIntoOrderDetail(Orderdetail orderdetailG){
-         return cartServiceG.insertIntoOrderDetail(orderdetailG);
+        return cartServiceG.insertIntoOrderDetail(orderdetailG);
     }
     @RequestMapping("/insertIntoOrder")
     int insertIntoOrder(Orders orders){
@@ -40,5 +69,6 @@ public class CartController_G {
     Orders selectOrderId(Integer userId){
         return cartServiceG.selectOrderId(userId);
     }
+
 
 }

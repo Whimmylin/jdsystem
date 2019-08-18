@@ -23,24 +23,6 @@ public class Users {
     private Date birthday;
 
     private String isVip;
-    private Set<Orders> orders;
-    private Set<UserGetAddress> userGetAddresses;
-
-    public Set<Orders> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(Set<Orders> orders) {
-        this.orders = orders;
-    }
-
-    public Set<UserGetAddress> getUserGetAddresses() {
-        return userGetAddresses;
-    }
-
-    public void setUserGetAddresses(Set<UserGetAddress> userGetAddresses) {
-        this.userGetAddresses = userGetAddresses;
-    }
 
     private Set<Orders> orders;
 

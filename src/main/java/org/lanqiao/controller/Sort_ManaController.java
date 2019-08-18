@@ -13,7 +13,7 @@ import java.util.List;
  * Created by zhangyilin on 2019/8/14.
  */
 @RestController
-public class ManaController {
+public class Sort_ManaController {
     @Autowired
     ProductSortServiceZ productSortServiceZ;
 
@@ -69,4 +69,6 @@ public class ManaController {
     public int sort3PageCount(){
         return proBrandServiceZ.sort3PageCount();
     }
+
+
 }
