@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人注册</title>
+    <link rel="stylesheet" href="css/register.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.validate.js"></script>
+    <script src="js/jquery.validate.regex.js"></script>
+    <script>
+        $(function () {
+            $("#register").validate({
+                rules: {
+                    telPhone: {
+                        required: true,
+                        regex: /^1[0-9]{10}$/
+                    },
+                    userName:{
+                        required:true,
+                        regex: /^[a-zA-Z\d\u4e00-\u9fa5]{4,12}$/,
+                        remote: {
+                            type:"post",
+                            url:"http://localhost:8080/check",
+                            data: {
+                                username: function () {
+                                    return $("#userName").val();
+                                }
+                            },
+                            dataType:"text",
+                            dataFilter:function (data,type) {
+                                if (data==="1"){
+                                    return true;
+                                }else
+                                    return false;
+                            }
+                        }
+                    },
+                    password:{
+                        required:true,
+                        regex: /^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$).{8,20}$/
+                        // 不能为纯数字，不能为纯小写字母，不能为纯大写字母，不能为纯特殊符号，至少八位。
+                    },
+                    repass:{
+                        required:true,
+                        equalTo:"#password"
+                    },
+                    emails:{
+                        required:true,
+                        email: true
+                    }
+                },
+                messages:{
+                    telPhone:{
+                        required:"请输入手机号码",
+                        regex:"请输入正确的手机号码格式"
+                    },
+                    userName:{
+                        required: "请输入用户名，4-12个中英字符",
+                        regex:"用户名要求为4-12个中英字符",
+                        remote: "用户名已存在，请重设"
+                    },
+                    password:{
+                        required:"请输入密码",
+                        regex:"密码至少八位，且包含大小写字母，数字其中两种"
+                    },
+                    repass:{
+                        required:"请确认密码",
+                        equalTo:"密码必须相同"
+                    },
+                    emails:{
+                        required:"请输入邮箱",
+                        email:"请输入正确的电子邮箱格式"
+                    }
+                },
+                submitHandler:function (form) {
+                    $.ajax({
+                        url:"http://localhost:8080/insert",
+                        type:"post",
+                        data:{
+                            "userName":$("input[name='userName']").val(),
+                            "phone":$("input[name='telPhone']").val(),
+                            "password":$("input[name='password']").val(),
+                            "email":$("input[name='emails']").val()
+                        },
+                        dataType:"json",
+                        success:function () {
+                            alert("注册成功！");
+                            location.href="http://localhost:8080/login.html";
+                        }
+                        
+                    })
+
+
+                }
+            });
+        });
+
+    </script>
+</head>
+<body>
+<div class="header">
+    <div class="w">
+        <a class="logo"></a>
+        <div class="logo-title">欢迎注册</div>
+        <div class="have-account">已有账号？<a href="login.html">请登录></a></div>
+    </div>
+</div>
+<div class="container w">
+    <div class="progress-bar clearfix">
+        <div class="pro-step done-step">
+            <span class="step-index"></span>
+            <p class="step-desc">验证手机号</p>
+        </div>
+        <div class="pro-line pro-line1 person-pro-line person-pro-line1 person-cur-line"></div>
+        <div class="pro-step pro-step2 person-pro-step2  cur-step">
+            <span class="step-index">2</span>
+            <p class="step-desc">填写账号信息</p>
+        </div>
+        <div class="pro-line pro-line2 person-pro-line person-pro-line2 "></div>
+        <div class="pro-step pro-step3 person-pro-step3  ">
+            <span class="step-index">3</span>
+            <p class="step-desc">注册成功</p>
+        </div>
+    </div>
+    <div class="main">
+        <div class="reg-form">
+            <form id="register">
+                <div class="item-phone-wrap form-item form-item-phone">
+                    <label class="select-country">
+                        中国 0086
+                        <a class="arrow"></a>
+                    </label>
+                    <div class="item-input-wrap form-item-error">
+                        <input type="text" class="field" name="telPhone" placeholder="建议使用常用手机号" onfocus="this.placeholder=''" onblur="this.placeholder='建议使用常用手机号'">
+                    </div>
+                </div>
+                <div class="input-tip">
+                    <span></span>
+                </div>
+
+                <div class="form-item form-item-account">
+                        <label>用　户　名</label>
+                        <input type="text" id="userName" class="field" name="userName" placeholder="您的账户名和登录名" onfocus="this.placeholder=''" onblur="this.placeholder='您的账户名和登录名'">
+                        <!--<i class="i-status"></i>-->
+                        <!--<i class="i-cancel"></i>-->
+                    </div>
+                <div class="input-tip">
+                        <span></span>
+                    </div>
+
+                <div class="form-item">
+                        <label>设 置 密 码</label>
+                        <input type="password" id="password" class="field" name="password" placeholder="建议使用两种或两种以上字符组合" onfocus="this.placeholder=''" onblur="this.placeholder='建议使用两种或两种以上字符组合'">
+                        <!--<i class="i-status"></i>-->
+                        <!--<i class="i-cancel"></i>-->
+                        <!--<div class="capslock-tip tips">大写已开启<b class="arrow"></b><b class="arrow-inner"></b></div>-->
+                    </div>
+                <div class="input-tip">
+                        <span></span>
+                    </div>
+
+                <div class="form-item">
+                        <label>确 认 密 码</label>
+                        <input type="password"  id="repass" class="field" name="repass" placeholder="请再次输入密码" onfocus="this.placeholder=''" onblur="this.placeholder='请再次输入密码'">
+                        <!--<i class="i-status"></i>-->
+                        <!--<i class="i-cancel"></i>-->
+                    </div>
+                <div class="input-tip">
+                        <span></span>
+                    </div>
+                <div class="item-email-wrap" style="display: block;">
+                        <div class="form-item">
+                            <label>邮 箱 验 证</label>
+                            <input type="text" id="form-email" class="field" name="emails" placeholder="请输入邮箱" onfocus="this.placeholder=''" onblur="this.placeholder='请输入邮箱'">
+                            <!--<i class="i-status"></i>-->
+                            <!--<ul class="suggest-container email-suggest"><li class=""><div class="value">@qq.com</div></li><li class=""><div class="value">@163.com</div></li><li class=""><div class="value">@126.com</div></li><li class=""><div class="value">@Gmail.com</div></li><li class=""><div class="value">@Sohu.com</div></li><li class="suggest-li-last "><div class="value">@Sina.com</div></li></ul>-->
+                        </div>
+                        <div class="input-tip">
+                            <span></span>
+                        </div>
+                    </div>
+                <div class="form-agreen"></div>
+                <input type="submit" class="btn-register" value="立即注册">
+                    <!--<div class="btn-register">立即注册</div>-->
+                <div class="input-tip">
+                        <span></span>
+                    </div>
+            </form>
+        </div>
+        <div class="reg-other clearfix">
+            <a class="reg-other-item reg-other-person">
+                <i class="reg-ohter-icon"></i>
+                企业用户注册
+            </a>
+            <a class="reg-other-item reg-other-inter">
+                <i class="reg-ohter-icon"></i>
+                海外用户注册
+            </a>
+        </div>
+    </div>
+</div>
+<div id="form-footer" class="footer w">
+    <div class="links">
+        <a > 关于我们</a>|
+        <a >联系我们</a>|
+        <a >人才招聘</a>|
+        <a >商家入驻</a>|
+        <a >广告服务</a>|
+        <a >手机京东</a>|
+        <a >友情链接</a>|
+        <a >销售联盟</a>|
+        <a >京东社区</a>|
+        <a >京东公益</a>|
+        <a >English Site</a>
+    </div>
+    <div class="copyright">
+        Copyright©2004-2019&nbsp;&nbsp;京东JD.com&nbsp;版权所有
+    </div>
+</div>
+
+
+
+</body>
+
+</html>

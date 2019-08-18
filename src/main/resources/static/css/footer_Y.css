@@ -1,0 +1,99 @@
+/*底部*/
+
+#footer {
+    height: 630px;
+    width: 1190px;
+    background-color: #ffffff;
+    margin: 0px auto;
+}
+
+#service-2014 {
+    margin-bottom: 20px;
+}
+
+#service-2014 dl {
+    margin-top: 100px;
+    float: left;
+    width: 120px;
+    padding-left: 20px;
+    font-size: 12px;
+    font-family: "Microsoft YaHei UI";
+    text-align: center;
+    color: #666666;
+    margin-left: 40px;
+}
+
+#service-2014 dl.fore5 {
+    margin-top: 100px;
+    width: 110px;
+
+}
+
+#service-2014 dt {
+    padding: 6px 0;
+    font: 400 16px/24px "microsoft yahei";
+}
+
+#service-2014 dd {
+    line-height: 20px;
+    margin: 0px;
+}
+#service-2014 .slogan img {
+    margin-right: 20px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+#service-2014 .slogan {
+    height: 54px;
+    padding: 20px 0;
+    margin-bottom: 14px;
+    background: #F5F5F5;
+    text-align: center
+}
+
+#service-2014 .slogan img {
+    margin-right: 20px;
+    text-align: center;
+}
+
+#service-2014 .item {
+    display: inline-block;
+    left: 50%;
+    top: 20px;
+    width: 240px;
+    height: 54px;
+    text-align: center;
+    vertical-align: middle;
+    font: 400 18px/50px "microsoft yahei"
+}
+
+#coverage {
+    margin-top: 100px;
+    float: right;
+    width: 300px;
+    height: 168px;
+    background: url("../images/dt.png") no-repeat 60px -131px;
+    font-size: 12px;
+    font-family: "Microsoft YaHei UI";
+    text-align: center;
+    color: #666666;
+}
+
+#coverage .dt {
+    padding: 6px 40px 15px 80px;
+    font: 400 16px/24px "microsoft yahei"
+}
+
+#coverage .dd {
+    padding: 0 40px 15px 80px
+}
+
+.copyright {
+    clear: both;
+    text-align: center;
+    font-size: 12px;
+    font-family: "Microsoft YaHei UI";
+    color: #666666;
+
+}

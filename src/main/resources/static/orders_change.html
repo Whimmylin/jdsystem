@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--京东商城后台管理系统-->
+<head>
+    <meta charset="UTF-8">
+    <title>修改订单</title>
+    <link rel="stylesheet" href="js/bootstrap.min.css">
+    <!--<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>-->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.validate.js"></script>
+    <script src="js/jquery.validate.regex.js"></script>
+    <script src="js/vue.min.js"></script>
+    <script>
+        $(function () {
+            $("#addForm").validate({
+                rules: {
+                    order_id: {
+                        required: false,
+                        regex: /^[1-9]\d*$/
+                    },
+                    order_money: {
+                        required: false,
+                        regex: /^[1-9]\d*$/
+                    },
+                    user_id: {
+                        required: false,
+                        regex: /^[1-9]\d*$/
+                    },
+                    pay_way:{
+                        required:false,
+                        regex:/^[\u4e00-\u9fa5]{4}$/
+                    },
+                    order_sum:{
+                        required:false,
+                        regex:/^[1-9]\d*$/
+                    },
+                    rec_name:{
+                        required:false,
+                        regex:/^[\u4e00-\u9fa5]{1,12}$/
+                    },
+                    rec_phone:{
+                        required:false,
+                        regex:/^[1-9]\d*$/
+                    },
+                    rec_address:{
+                        required:false,
+                        regex:/^.{0,200}$/
+                    }
+                },
+                messages: {
+                    order_id: {
+                        required: "请输入订单编号",
+                        regex:"订单编号为正整数"
+                    },
+                    user_id: {
+                        required: "请输入订单金额",
+                        regex: "订单金额为正整数"
+                    },
+                    order_money: {
+                        required: "请输入用户编号",
+                        regex: "用户编号为正整数"
+                    },
+                    pay_way:{
+                        required:"请输入支付方式",
+                        regex:"在线支付/货到付款"
+                    },
+                    order_sum:{
+                        required:"请输入订单数目",
+                        regex:"订单数目为正整数"
+                    },
+                    rec_name:{
+                        required:"请输入收货人姓名",
+                        regex:"请输入正确的收货人姓名"
+                    },
+                    rec_phone:{
+                        required:"请输入收货人手机号",
+                        regex:"请输入正确的手机号"
+                    },
+                    rec_address:{
+                        required:"",
+                        regex:"请输入200字以内的描述"
+                    }
+                }
+            });
+            var vm = new Vue({
+                el: '#tree',
+                data: {
+                    orders: []
+                }
+            });
+
+            $("#souSuo").click(function () {
+                var indexId =  parseInt($("input[name='order_id']").val());
+                $.ajax({
+                    url:"http://localhost:8080/selectOrdersOne",
+                    type:"post",
+                    data:{"indexId":indexId},
+                    dataType:"json",
+                    success:function (data) {
+                        $("#addForm").remove();
+                        if(data.length<1){
+                            alert("该商品编号不存在，请重新输入！")
+                        }else{
+                            for (var i = 0; i < data.length; i++) {
+                                vm.orders.push({
+                                    order_id: data[i].orderId,
+                                    order_money: data[i].orderMoney,
+                                    user_id: data[i].users.userId,
+                                    pay_way: data[i].payWay,
+                                    order_sum: data[i].orderSum,
+                                    rec_name: data[i].recName,
+                                    rec_phone: data[i].recPhone,
+                                    rec_address: data[i].recAddress
+                                })
+                            }
+                        }
+                    }
+                })
+            });
+            $("#xiuGai").click(function () {
+                $.ajax({
+                    url:"http://localhost:8080/updateOrders",
+                    type:"post",
+                    data:{
+                        "orderId": $("input[name='order_id']").val(),
+                        "orderMoney": $("input[name='order_money']").val(),
+                        "userId": $("input[name='user_id']").val(),
+                        "payWay":$("input[name='pay_way']").val(),
+                        "orderTime":$("input[name='order_time']").val(),
+                        "orderSum": $("input[name='order_sum']").val(),
+                        "recName": $("input[name='rec_name']").val(),
+                        "recPhone": $("input[name='rec_phone']").val(),
+                        "recAddress":$("input[name='rec_address']").val()
+                    },
+                    dataType:"json",
+                    success:function (data) {
+                        if(data){
+                            alert("成功修改商品信息！")
+                        }
+                    }
+                })
+            })
+
+
+        })
+
+    </script>
+</head>
+<body>
+<div class="row">
+    <div class="col-md-2">
+        <img src="images/logo-201305-b.png">
+    </div>
+    <div class="col-md-10">
+        <h2 class="text-primary text-center">京东商城后台管理系统</h2>
+    </div>
+</div>
+
+<div class="row"  style="background-color:#F5F5F5;">
+    <!--侧边菜单-->
+    <div class="col-md-2 text-center"  >
+        <a href="#" class="list-group-item active">商品种类管理</a>
+        <a href="sort1.html" class="list-group-item">添加商品种类</a>
+        <a href="sort2.html" class="list-group-item">管理商品种类</a>
+        <a href="sort3.html" class="list-group-item">商品品牌管理</a>
+        <a href="sort4.html" class="list-group-item">商品品牌查询</a>
+        <a href="#" class="list-group-item active">商品管理</a>
+        <a href="product_add.html" class="list-group-item">商品添加</a>
+        <a href="product_delete.html" class="list-group-item">商品删除</a>
+        <a href="product_change.html" class="list-group-item">商品修改</a>
+        <a href="product_select.html" class="list-group-item">商品查询</a>
+        <a href="#" class="list-group-item active">订单管理</a>
+        <a href="orders_select.html" class="list-group-item">查看订单</a>
+        <a href="orders_change.html" class="list-group-item color">修改订单</a>
+        <a href="#" class="list-group-item active">用户管理</a>
+    </div>
+    <div class="col-md-10">
+        <!--面包屑导航-->
+        <ol class="breadcrumb">
+            <li><a href="#">首页</a></li>
+            <li><a href="#">订单管理</a></li>
+            <li><a href="#">修改订单</a></li>
+            <!--<li class="active">十一月</li>-->
+        </ol>
+        <div style="padding: 10px 100px 10px;" id="tree">
+            <div class="input-group">
+                <button type="button" class="btn" style="float: right;" id="souSuo">搜索</button>
+                <span class="input-group-addon">订单编号</span>
+                <input type="text" class="form-control" name="order_id" placeholder="请输入订单编号">
+            </div>
+            <br>
+            <form class="bs-example bs-example-form" id="addForm" role="form" v-for="(orderY,index) in orders">
+                <div class="input-group">
+                    <span class="input-group-addon">订单金额</span>
+                    <span class="input-group-addon">{{orderY.order_money}}</span>
+                    <input type="text" class="form-control" name="order_money" placeholder="请修改订单金额">
+                </div><br>
+                <div class="input-group">
+                    <span class="input-group-addon">用户id</span>
+                    <span class="input-group-addon">{{orderY.user_id}}</span>
+                    <input type="text" class="form-control" name="user_id" placeholder="请修改用户id">
+                </div><br>
+                <div class="input-group">
+                    <span class="input-group-addon">支付方式</span>
+                    <span class="input-group-addon">{{orderY.pay_way}}</span>
+                    <input type="text" class="form-control" name="pay_way" placeholder="请修改支付方式">
+                </div><br>
+                <div class="input-group">
+                    <span class="input-group-addon">数目</span>
+                    <span class="input-group-addon">{{orderY.order_sum}}</span>
+                    <input type="text" class="form-control" name="order_sum" placeholder="请修改数目">
+                </div><br>
+                <div class="input-group">
+                    <span class="input-group-addon">收货人</span>
+                    <span class="input-group-addon">{{orderY.rec_name}}</span>
+                    <input type="text" class="form-control" name="rec_name" placeholder="请修改收货人">
+                </div><br>
+                <div class="input-group">
+                    <span class="input-group-addon">收货人电话</span>
+                    <span class="input-group-addon">{{orderY.rec_phone}}</span>
+                    <input type="text" class="form-control" name="rec_phone" placeholder="请修改收货人电话">
+                </div><br>
+                <div class="input-group">
+                    <span class="input-group-addon">收货人地址</span>
+                    <span class="input-group-addon">{{orderY.rec_address}}</span>
+                    <input type="text" class="form-control" name="rec_address" placeholder="请修改收货人地址">
+                </div><br>
+            </form>
+            <button type="button" class="btn btn-success" id="xiuGai">修改</button>
+        </div>
+
+    </div>
+
+
+
+</div>
+
+
+
+
+</body>
+</html>

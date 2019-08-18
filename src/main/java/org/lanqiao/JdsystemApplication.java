@@ -9,9 +9,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 @MapperScan("org.lanqiao.mapper")
 public class JdsystemApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(JdsystemApplication.class, args);
 	}
-
 }

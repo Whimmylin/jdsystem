@@ -1,0 +1,523 @@
+body{
+    width: 1519.2px;
+    height: 698.7px;
+    font: 12px Arial ,Verdana,宋体;
+    background: #ffffff;
+}
+*{
+   margin: 0px;
+    padding: 0px;
+    float: left;
+}
+
+#logo{
+    position: relative;
+    width: 300px;
+    height: 60px;
+    color: #666666;
+    margin: 10px 273px;
+    float: left;
+}
+#logo b{
+    display: block;
+    width: 110px;
+    height: 40px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background: url(//misc.360buyimg.com/user/passport/1.0.0/css/i/l-icon.png) no-repeat;
+}
+/*顶部信息*/
+.c1 b{
+    display: inline-block;
+    width: 18px;
+    height: 14px;
+    margin: 0 5px;
+    background: url(//misc.360buyimg.com/user/passport/1.0.0/css/i/q-icon.png) no-repeat;
+    overflow: hidden;
+    vertical-align: middle;
+}
+.c1{
+    top:52px;
+    left:250px;
+    position: relative;
+    color: #999999;
+    text-decoration: none;
+}
+.c1:hover{
+    color: #F20215;
+    text-decoration: underline;
+}
+.c2{
+    width: 1519.2px;
+    height: 38.5px;
+    background-color: #fff8f0;
+    text-align: center;
+    display: block;
+}
+.c2 .d1{
+    width: 1519.2px;
+    height: 18.5px;
+    margin: 10px 0px;
+}
+.c2 .d2{
+    height: 18.5px;
+    width: 1000px;
+    line-height: 18.5px;
+    color: #999999;
+    position: absolute;
+    left: 23%;
+}
+.c2 .i1{
+    background: url(//misc.360buyimg.com/user/passport/1.0.0/widget/login-form-2018-0827/i/icon-tips.png);
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    margin-right: 5px;
+    position: relative;
+    top:1px;
+}
+p{
+    vertical-align: middle;
+    color: #666666;
+    font-size: 12px;
+    display: inline-block;
+    text-align: center;
+}
+#a1{
+    color: black;
+    text-decoration: none;
+}
+#a1:hover{
+    text-decoration:underline;
+}
+/*主体部分*/
+#main{
+    width: 1519.2px;
+    height: 475px;
+    color: #666666;
+    background-color: #A92D2D;
+}
+.c3{
+    width: 990px;
+    height: 475px;
+    background: url("../images/bg.jpg") no-repeat;
+    position: relative;
+    left: 260px;
+}
+#login{
+    width: 346px;
+    height: 436.5px;
+    background: white;
+    float: right;
+    position: relative;
+    top:10px;
+}
+.c4{
+    width: 286px;
+    height: 18.5px;
+    padding: 10px 30px;
+    line-height: 18.5px;
+}
+.tip{
+    width: 173px;
+    height: 55px;
+    font-size: 18px;
+    font-family: "microsoft yahei";
+    border-bottom: 1px solid #f4f4f4;
+    background: #ffffff;
+    position: relative;
+    z-index: 1;
+}
+.tip a{
+    height:20px;
+    width: 172px;
+    text-decoration: none;
+    color: #666666;
+    text-align: center;
+    line-height: 20px;
+    border-right: 1px solid #f4f4f4;
+    position:relative;
+    top:20px;
+}
+.tip a:hover{
+    font-weight: bold;
+    color: #F20215;
+}
+.tip .checked{
+    font-weight: bold;
+    color: #F20215;
+}
+.tip .lo{
+    color: #666666;
+    font-weight: normal;
+}
+
+.visible{
+    visibility: visible;
+    width: 308px;
+    height: 297px;
+    color: #666666;
+    padding: 20px 18px 20px 20px;
+    background:white;
+    display: block;
+    position: relative;
+    top:-392px;
+}
+.hidden{
+    visibility:hidden;
+}
+
+/*登陆框&二维码登录*/
+.c5{
+    width: 308px;
+    height: 297px;
+    color: #666666;
+    padding: 20px 18px 20px 20px;
+    background:white;
+    display: block;
+    position: relative;
+    top:-55px;
+}
+/*二维码&动画  第一个窗口*/
+.c6{
+    width: 306px;
+    height: 168px;
+    color: #666666;
+    margin-top: 65px;
+    background: white;
+}
+.b1{
+    border: 1px solid #f4f4f4;
+    padding: 8px;
+    width: 155px;
+    position: absolute;
+    left: 84px;
+}
+.b1 img{
+    vertical-align: middle;
+    position: relative;
+    left: 2px;
+}
+.c7{
+    width: 257px;
+    height: 18px;
+    position: relative;
+    top:180px;
+
+}
+.c7 .u1{
+    width: 200px;
+    height: 18px;
+    background: white;
+    list-style: none;
+    line-height: 18px;
+    margin-left: 70px;
+}
+.u1 span{
+    text-align: center;
+}
+.u1 li{
+    margin-left: 10px;
+}
+.red{
+    color: #F20215;
+}
+.c8{
+    width: 266px;
+    height: 25px;
+    line-height: 25px;
+    position: relative;
+    top: 190px;
+}
+.u2{
+    width: 266px;
+    height: 25px;
+    background: white;
+    list-style: none;
+    margin-left: 30px;
+}
+.u2 li {
+    text-align: left;
+    position: relative;
+    margin-right: 18px;
+}
+
+.u2 li b{
+    width: 25px;
+    height: 25px;
+    display: block;
+    background: url(//misc.360buyimg.com/user/passport/1.0.0/widget/login-form-2018-0827/i/qr-coagent.png) no-repeat;
+    margin: 0 auto;
+    position: absolute;
+    left: 0;
+}
+.u2 li em{
+    padding-left: 32px;
+    font-style: normal;
+    font-family: "Microsoft YaHei UI";
+    color: #999999;
+}
+.u2 li .faster{
+    background-position: -27px;
+}
+.u2 li .more-safe{
+    background-position: -54px;
+}
+
+/*第二个账户登录窗口*/
+.box_login{
+    visibility: hidden;
+    width: 308px;
+    height: 297px;
+    color: #666666;
+    padding: 20px 18px 20px 20px;
+    background:white;
+    display: block;
+    position: relative;
+    top:-392px;
+}
+/*输入框*/
+.msg{
+    display: block;
+    width: 306px;
+    height: 23px;
+    background: white;
+    position: relative;
+    margin: 5px 0px;
+    top: 35px;
+}
+/*表单*/
+#formlogin{
+    display: block;
+    background: white;
+    position: relative;
+    top: 35px;
+    height: 192px;
+    width: 306px;
+}
+.m1{
+    border: 1px solid #bdbdbd;
+    height: 38px;
+    width: 304px;
+    position: relative;
+    margin-bottom: 20px;
+    display: block;
+    z-index: 6;
+}
+.m2{
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    width: 38px;
+    height: 38px;
+    border-right: 1px solid #bdbdbd;
+    background: url(//misc.360buyimg.com/user/passport/1.0.0/widget/login-form-2018-0827/i/pwd-icons-new.png) no-repeat;
+}
+.m3{
+    background-position: -48px 0px;
+}
+.itxt{
+    line-height: 18px;
+    height: 18px;
+    border: 0;
+    padding: 10px 0 10px 50px;
+    width: 254px;
+    float: none;
+    overflow: hidden;
+    font-size: 14px;
+    font-family: "Microsoft YaHei UI";
+}
+.m4{
+    width: 306px;
+    height: 18px;
+}
+.m4 a{
+    float: right;
+    text-decoration: none;
+    list-style: none;
+    color: #666666;
+}
+.m4 a:hover{
+    color: #F20215;
+    text-decoration: underline;
+}
+.login_btn{
+    border: 1px solid #cb2a2d;
+    margin: 0 auto;
+    height: 32px;
+    width: 99%;
+    position: relative;
+    top: 10px;
+}
+.login_btn a{
+    width: 304px;
+    height: 33px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    font-family: 微软雅黑;
+    text-decoration: none;
+    list-style: none;
+    line-height: 33px;
+    text-align: center;
+    background-color: #E1251B;
+}
+.login_btn a:hover{
+    color: #666666;
+
+}
+
+
+/*主体部分底部*/
+.c9{
+    width: 306px;
+    position: relative;
+    height: 50px;
+    top: -365px;
+    padding-left: 20px;
+    padding-right: 20px;
+    line-height: 50px;
+    border-top: 1px solid #f4f4f4;
+    background-color: #fcfcfc;
+}.c9 ul{
+    list-style: none;
+ }
+.c9 ul li{
+    /*background: #F20215;*/
+    height: 50px;
+    width: 70px;
+}
+.c9 ul .b2{
+    width: 77px;
+    position: absolute;
+    right: 20px;
+}
+.c9 ul li .pdl{
+    display: inline-block;
+    position: relative;
+    padding-left: 24px;
+}
+.c9 ul li .pdl b {
+    width: 19px;
+    height: 18px;
+    display: block;
+    background: url(//misc.360buyimg.com/user/passport/1.0.0/widget/login-form-2018-0827/i/QQ-weixin.png) no-repeat;
+    margin: 0 auto;
+    position: absolute;
+    float: left;
+    left: 0;
+    top: 16px;
+}
+.c9 ul li .pdl span{
+    color: #666666;
+}
+.c9 ul li .pdl span:hover{
+    text-decoration: underline;
+    color: #F20215;
+}
+
+.c9 li .line {
+    color: #ccc;
+    padding: 0 12px;
+    height: 50px;
+    line-height: 50px;
+}
+.c9 li a.pdl b.weixin-icon {
+    background-position: -20px 0;
+}
+.b2 a{
+    list-style: none;
+    text-decoration: none;
+    color: #F20215;
+    font-size: 14px;
+}
+.b2 a:hover{
+    text-decoration: underline;
+}
+.b2 b{
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    overflow: hidden;
+    background: url(//misc.360buyimg.com/user/passport/1.0.0/widget/login-form-2018-0827/i/pwd-icons-new.png) -104px -75px no-repeat;
+    vertical-align: middle;
+    margin-right: 5px;
+    position: relative;
+    top: 15px;
+}
+
+
+
+
+
+
+
+
+/*底部*/
+#foot{
+    width: 990px;
+    height: 55.2px;
+    padding-bottom: 30px;
+    text-align: center;
+    font: 12px/150% Arial,Verdana,宋体;
+    color: #666666;
+    position: relative;
+    left: 260px;
+    top:22px;
+}
+.links{
+    width: 990px;
+    height: 17.6px;
+    color: #666666;
+    text-align: center;
+    padding-left: 50px;
+
+}
+.links a{
+    width: 51.33px;
+    height: 13.6px;
+    color: #666666;
+    line-height: 13.6px;
+    text-decoration: none;
+    margin: 2px 8px;
+}
+.links a:hover{
+    text-decoration: underline;
+    color: #F20215;
+}
+
+.links span{
+    height: 13.6px;
+    line-height: 13.6px;
+    margin: 1px 5px;
+}
+.copyright{
+    width: 990px;
+    height: 17.6px;
+    margin: 10px 0px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
