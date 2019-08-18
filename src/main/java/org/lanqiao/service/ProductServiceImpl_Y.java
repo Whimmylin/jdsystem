@@ -1,6 +1,8 @@
 package org.lanqiao.service;
 
+import org.lanqiao.entity.ProductImg_Y;
 import org.lanqiao.entity.Product_Y;
+import org.lanqiao.mapper.ProductImg_YMapper;
 import org.lanqiao.mapper.ProductMapper_Y;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +13,8 @@ import java.util.List;
 public class ProductServiceImpl_Y implements ProductService_Y {
     @Autowired
     ProductMapper_Y productMapper_y;
+    @Autowired
+    ProductImg_YMapper productImg_yMapper;
 
     @Override
     public int deleteProduct(int indexDelete) {
@@ -26,6 +30,11 @@ public class ProductServiceImpl_Y implements ProductService_Y {
     @Override
     public int updateProduct(Product_Y product) {
         return productMapper_y.updateByPrimaryKeySelective(product);
+    }
+
+    @Override
+    public int addProductImg(ProductImg_Y productImg_y) {
+        return productImg_yMapper.insert(productImg_y);
     }
 
     @Override

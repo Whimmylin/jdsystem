@@ -96,6 +96,12 @@
 <!--			   enableSelectByExample="false" enableUpdateByExample="false">-->
 <!--			<property name="useActualColumnNames" value="false" />-->
 <!--		</table>-->
+		<table tableName="productimg" domainObjectName="productImg_Y"
+		enableCountByExample="false" enableDeleteByExample="false"
+		enableSelectByExample="false" enableUpdateByExample="false">
+		<property name="useActualColumnNames" value="false" />
+		<!--value为true时，保留_,value为false为取消_ （驼峰命名法）-->
+		</table>
 
 	</context>
 </generatorConfiguration>
