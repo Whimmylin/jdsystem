@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>订单页</title>
+    <link href="css/orderPage.css" rel="stylesheet">
+    <link href="css/base.css" rel="stylesheet">
+    <script src="js_W/jquery-3.4.1.js"></script>
+    <script src="js_W/jquery.validate.js"></script>
+    <script src="js_W/jquery.validate.regex.js"></script>
+    <script src="js_W/vue.min.js"></script>
+
+    <script>
+        $(function () {
+            var index1;
+            var vm = new Vue({
+                el:"#mainPart",
+                data:{
+                    addresses:[],
+                    items:[],
+                },created: function () {
+                    $.ajax({
+                        url: "http://localhost:8080/getAddresses",
+                        type: "post",
+                        dataType: "json",
+                        success:function (data) {
+                            // alert(data);
+                            $(".addr-detail").remove();
+                            for(var i=0;i<data.length;i++){
+                                vm.addresses.push({rec_person:data[i].recPerson,rec_address:data[i].recAddress,rec_phone:data[i].phone})
+
+                            }
+                        }
+                    });
+                    $.ajax({
+                        url: "http://localhost:8080/getOrderItem",
+                        type: "post",
+                        dataType: "json",
+                        data:{
+                            "id":1,
+                        },
+                        success:function (data) {
+                            // alert(data);
+                            $(".goods-list").remove();
+                            for(var i=0;i<data.length;i++){
+                                vm.items.push({pro_name:data[i].proName,pro_num:data[i].proNum,pro_price:data[i].product.proPrice,pro_sum:data[i].proNum * data[i].product.proPrice, pro_Img:data[i].productImg.imgUrl});
+                            }
+                        }
+                    });
+
+                },methods:{
+                   // 计算总价
+                    calcTotal:function(){
+                        var total =0;
+                        for(var j=0;j < this.items.length;j++){
+                            total +=  this.items[j].pro_sum;
+                        }
+                        return total;
+                    },
+                    // 计算总数
+                    calcNum:function(){
+                        var sum =0;
+                        for(var j=0;j < this.items.length;j++){
+                            sum +=  this.items[j].pro_num;
+                        }
+                        return sum;
+                    },
+                    // 地址事件
+                    chooseAdd:function (index) {
+                        // console.log(this.addresses[index].rec_person);
+                        $(".addr-detail").removeClass("addColor_01");
+                        $(".addr-detail").eq(index).addClass("addColor_01");
+                        index1=index;
+                    }
+                }
+            });
+            // 支付方式
+            $(".btn-default").click(function () {
+                $(this).removeClass("btn-default");
+                $(this).addClass("btn-primary");
+                $(this).siblings().removeClass("btn-primary");
+                $(this).siblings().addClass("btn-default");
+            });
+
+            var user = {userName:"david",password:"123"};
+            var sumMoney = document.getElementById("sumPayPriceId");
+            var sumNum = document.getElementById("ftx-01");
+            var addName = document.getElementById("addr-name");
+
+
+            $("#order-submit").click(function () {
+                console.log(vm.addresses[index1]);
+                console.log(vm.addresses[index1].rec_person);
+                console.log(vm.addresses[index1].rec_address);
+                console.log(vm.addresses[index1].rec_phone);
+                console.log($(".btn-primary").val());
+                console.log(sumMoney.innerText);
+                console.log(sumNum.innerText);
+                // console.log(vm.items);
+                // console.log(vm.addresses);
+                $.ajax({
+                    // url:"http://localhost:8080/insertOrder",
+                    url:"http://localhost:8080/updateOrder",
+                    data:
+                        {
+                            orderId:1,
+                            payWay:$(".btn-primary").val(),
+                            orderMoney:sumMoney.innerText,
+                            orderSum:sumNum.innerText,
+                            recName:vm.addresses[index1].rec_person,
+                            recPhone:vm.addresses[index1].rec_address,
+                            recAddress:vm.addresses[index1].rec_phone,
+
+                    },
+                    // JSON.stringify(cartvo),//{name:'david',pass：'123'} => name=david&pass=123
+                    dataType:"json",
+                    type:"post",
+                    // contentType: "application/json;charset-UTF-8",
+                    success: function (text) {
+                        if (text) {
+                            alert("插入成功！");
+                        }
+                    }
+                });
+            });
+
+
+
+        });
+    </script>
+</head>
+<body>
+<!--头部导航栏-->
+<div id="headNavigationPart">
+    <div id="headMain">
+        <ul class="f1">
+            <li id="jdHome_logo">
+                <i class="iconfont"></i>
+                <a>京东首页</a>
+            </li>
+            <li id="address_part">
+                <i class="iconfont"></i>
+                <a>厦门</a>
+            </li>
+        </ul>
+        <ul class="fr">
+            <li class="foreBox01" id="ttbar-login">
+                <div class="dt cw-icon" >
+                    <i class="icon-plus-nickname"></i>
+                    <a class="nickname">用户名</a>
+                    <i class="iconfont"></i>
+                </div>
+            </li>
+            <li class="spacer"></li>
+            <li class="foreBox02">
+                <div class="dt">
+                    <a>我的订单</a>
+                </div>
+            </li>
+            <li class="spacer"></li>
+            <li class="foreBox02">
+                <div class="dt cw-icon">
+                    <a>我的京东</a>
+                    <i class="iconfont"></i>
+                </div>
+            </li>
+            <li class="spacer"></li>
+            <li class="foreBox02">
+                <div class="dt">
+                    <a>京东会员</a>
+                </div>
+            </li>
+            <li class="spacer"></li>
+            <li class="foreBox02">
+                <div class="dt cw-icon">
+                    <a>企业采购</a>
+                    <i class="iconfont"></i>
+                </div>
+            </li>
+            <li class="spacer"></li>
+            <li class="foreBox02">
+                <div class="dt cw-icon">
+                    <a>客户服务</a>
+                    <i class="iconfont"></i>
+                </div>
+            </li>
+            <li class="spacer"></li>
+            <li class="foreBox02">
+                <div class="dt cw-icon">
+                    <a>网站导航</a>
+                    <i class="iconfont"></i>
+                </div>
+            </li>
+            <li class="spacer"></li>
+            <li class="foreBox02">
+                <div class="dt">
+                    <a>手机京东</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<div id="mainBody">
+<!--    logo部分-->
+    <div class="w w1 header clearFix">
+        <div id="logo-2014">
+            <a class="logo"></a>
+            <a class="link2"><b></b>"结算页"</a>
+        </div>
+        <div class="stepFlex" id="#sflex03">
+            <dl class="first done">
+                <dt class="s-num">1</dt>
+                <dd class="s-text">1.我的购物车<s></s><b></b></dd>
+            </dl>
+            <dl class="normal doing">
+                <dt class="s-num">2</dt>
+                <dd class="s-text">2.填写核对订单信息<s></s><b></b></dd>
+            </dl>
+            <dl class="normal last">
+                <dt class="s-num">3</dt>
+                <dd class="s-text">3.成功提交订单<s></s><b></b></dd>
+            </dl>
+        </div>
+    </div>
+<!--    主体部分-->
+    <div id="mainPart">
+        <div class="checkout-tit">
+            <span class="tit-txt">填写并核对订单信息</span>
+        </div>
+        <div class="checkout-steps">
+<!--            收货人信息-->
+            <div class="step-tit">
+                <h3>收货人信息</h3>
+                <div class="extra-r">
+                    <a class="ftx-05 J_consignee_global" >新增收货地址</a>
+                </div>
+            </div>
+<!--            收货人详细信息-->
+            <div class="step-cont">
+                    <div class="addr-detail addColor" v-for="(address,index) in addresses" @click="chooseAdd(index)">
+<!--                        <input type="checkbox" class="single_input" name="address">-->
+                        <span id="addr-name">{{address.rec_person}}</span>
+                        <span id="addr-info">{{address.rec_address}}</span>
+                        <span id="addr-tel">{{address.rec_phone}}</span>
+                    </div>
+            </div>
+            <div class="hr"></div>
+<!--            支付方式-->
+            <div class="step-tit">
+                <h3>支付方式</h3>
+            </div>
+            <div class="step-cont">
+                <div class="consignee_addr1" class="consignee-content">
+                    <button id="zhifubao" class="btn-default" value="支付宝">支付宝</button>
+                    <button id="weixin" class="btn-default" value="微信">微信</button>
+                    <button id="baitiao" class="btn-default" value="京东白条">京东白条</button>
+                    <button id="yinlian" class="btn-default" value="银联">银联</button>
+<!--                    <ul class="payment">-->
+<!--                        <li class="paymentLi">-->
+<!--                            <a>支付宝</a>-->
+<!--                        </li>-->
+<!--                        <li class="paymentLi">-->
+<!--                            <a>微信</a>-->
+<!--                        </li>-->
+<!--                        <li class="paymentLi">-->
+<!--                            <a>京东白条</a>-->
+<!--                        </li>-->
+<!--                        <li class="paymentLi">-->
+<!--                            <a>银联</a>-->
+<!--                        </li>-->
+<!--                        <li class="paymentMore">-->
+<!--                            <a>更多</a>-->
+<!--                            <b></b>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+                </div>
+
+            </div>
+            <div class="hr"></div>
+<!--            送货清单-->
+            <div class="step-tit">
+                <h3>送货清单</h3>
+                <div class="extra-r">
+                    <a class="price-desc" id="price-desc"  data-tips="因可能存在系统缓存、页面更新导致价格变动异常等不确定性情况出现，商品售价以本结算页商品价格为准。">
+                        <i></i>&nbsp;价格说明
+                    </a>
+                    <a  id="cartRetureUrl" class="return-edit ftx-05" >返回修改购物车</a>
+                </div>
+            </div>
+            <div class="shopping-list ABTest">
+                <div class="dis-modes" id="11">
+                    <div class="mode-item mode-tab">
+                        <div class="mode-item-tit">
+                            <h4>配送方式</h4>
+                            <div class="extral-r"><a id="jd-goods-item" class="cor-goods" href="#none"><i></i>对应商品</a></div>
+                        </div>
+                        <div class="mode-tab-nav">
+                            <ul>
+                                <input type="hidden" id="containFactoryShip" value="0">
+                                <li class="mode-tab-item jd curr" id="jd_shipment_item">
+                                    <span id="jdShip-span-tip" class="m-txt">京东快递<i class="qmark-icon qmark-tip" data-tips="此订单支持预约配送，您可以选择指定的时间段"></i></span><b></b>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="mode-tab-con  ui-switchable-panel-selected" id="jd_shipment">
+                            <ul class="mode-list">
+                                <li id="shipment_times">
+                                    <div class="fore1 hide" id="Honor_tip_0"></div>
+                                    <div class="fore1" id="jd_shipment_calendar_date" data-text="    ">
+                                        <span class="mode-label ftx-03">标&nbsp;&nbsp;准&nbsp;&nbsp;达：</span>
+                                        <div class="mode-infor">预计&nbsp;8月8日[周四]&nbsp;09:00-15:00&nbsp;送达</div>
+                                    </div>
+                                    <div class="fore2" id="jdshipdate_eidt_id" ><a href="#none" class="ftx-05">修改</a></div>
+                                    <div id="forcedChoice-sales" class="fresh-tip-cont hide">
+                                        <span class="fl fresh-tip-left"><i></i>京准达</span>
+                                        <span class="fl fresh-tip-right">限时免费，准时送达</span>
+                                    </div>
+                                </li>
+                                <li class="delivery-info-li" id="delivery-info-li-zxj">
+                                      <span class="delivery-tips fr">
+                                          <i class="d-ico fl mr5"></i><i class="d-arr"></i>							                      <a id="zxj_show_id" href="#none" class="mr5" onclick="doEdit311Time(3)">京准达</a>
+                                          <a id="311_show_id"  class="mr5">标准达</a>
+                                          <a id="411_show_id"  class="mr5 hide">极速达</a>配送服务全面升级							                  </span>
+                                </li>
+                                <li class="pb10 buyer_insurance hide"  style="display: block;">
+                                    <p class="mb5">
+                                        <label class="l-for-check">
+                                            <input id="vender_0" type="checkbox" class="mr5 buyer_freight_insurance" onclick="selectBuyerFreightInsurance(this, 0)">
+                                            退换无忧
+                                        </label>
+                                        <span class="ftx-01 ml10">￥0.50</span></p>
+                                    <p class="ftx-03">自签收后7天内退货，15天内换货，可享1次上门取件服务<a href="#none" class="ftx-05 ml5" id="abcd_0">查看详情</a></p>
+                                    <span class="mode-infor-tips mode-infor-tips-sec" id="mode-infor-tips-secid_0" style="display: none;"><i id="0" class="d-arr d-arr-jd"></i>自签收后7天内退货、15天内换货时，可以享受1次上门取件服务，此服务不再单独收费且此服务不影响商品的七天无理由退货政策。不在京东取件范围内可享受相应运费补偿。<a target="_blank" href="//help.jd.com/user/issue/480-1693.html">查看详情</a></span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="clr"></div>
+                    </div>
+
+                </div>
+                <div class="goods-list" v-for="(item,index) in items">
+                    <div class="goods-tit">
+                        <h4 class="vendor_name_h vendor_name_0">商家：京东自营</h4>
+                    </div>
+                    <div class="goods-items">
+                        <div class="goods-suit goods-last">
+                            <div class="goods-suit-tit">
+                                <span class="sales-icon">换购</span>
+                                <strong>已购满1件 ，您可以返回购物车加价换购商品</strong>
+                                <div class="p-price_title ">
+                                    <strong class="jd-price">单价</strong>
+                                    <span class="p-num">数量</span>
+                                    <span class="pre-state" class="p-state" skuid="100003034541">小计</span>
+                                    <!--<span class="p-weight">3.760kg</span>-->
+                                </div>
+                            </div>
+                            <div data-service=""></div>
+                            <div class="goods-item goods-item-extra">
+                                <div class="p-img">
+<!--                                    <a><img src="images_W/shop01_orderPage.jpg"></a>-->
+                                    <a><img :src="item.pro_Img"></a>
+                                </div>
+                                <div class="goods-msg">
+                                    <div class="goods-msg-gel">
+                                        <div class="p-name">
+                                            <em class="selection-icon mr5" title="京东精选"></em>
+                                            <a>
+                                                <!--华硕(ASUS) -->
+                                                {{item.pro_name}}
+                                            </a>
+                                        </div>
+                                        <div class="p-price ">
+                                            <strong class="jd-price">￥ {{item.pro_price}}<em class=""></em></strong>
+                                            <span class="p-num">x{{item.pro_num}}</span>
+                                            <span id="pre-state" class="p-state" skuid="100003034541">￥ {{item.pro_sum}}</span>
+                                            <!--<span class="p-weight">3.760kg</span>-->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-extra-continer">
+                                    <div class="p-extra-line">
+                                        <div class="fl"><strong>颜色,尺码：</strong><span>【GTX1660Ti-6G显卡】,高性能锐龙7 8G 512GSSD 火陨</span></div>
+                                    </div>
+                                </div>
+                                <div class="p-icon-continer">
+                                    <i class="p-icon p-icon-w sevenicon"></i>
+                                    <span class="ftx-07 withouthk seven">支持7天无理由退货（激活后不支持）</span>
+                                </div>
+                                <div class="clr"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clr"></div>
+            <div class="hr"></div>
+        </div>
+<!--            商品总额-->
+            <div class="order-summary">
+                <div class="statistic fr mt20">
+                    <div class="list">
+                        <span><em id="ftx-01">{{calcNum()}}</em> 件商品，总商品金额：</span>
+                        <em class="price" id="warePriceId" v="6999">￥{{calcTotal()}} </em>
+                    </div>
+                    <div class="list">
+                        <span>运费：</span>
+                        <em class="price" id="freightPriceId"><i class="freight-icon"></i><font color="#FF6600"> ￥0.00</font></em>
+                    </div>
+                    <div class="list" id="showCouponPrice" style="display:block;">
+                        <input id="couponPriceNum" type="hidden" value="1">
+                        <input id="couponPricehidden" type="hidden" value="6">
+                        <span>商品优惠：</span><em class="price" id="couponPriceId" style="display: block;">-￥0.00</em>
+                    </div>
+                    <div class="clr"></div>
+                </div>
+            </div>
+            <div class="trade-foot">
+                <div id="plusInfoByFreight" class="hide"></div>
+                <div id="plusInfo">
+                    <p class="plus ar pr20"><i class="plus-icon mr5"></i>开通PLUS会员，享受商品会员价&nbsp;&nbsp;
+                        <em id="totalPriceEm">省¥551.00</em>
+                        <i class="plus-tips"></i>
+                        <a class="ftx-08 ml20" >立即开通&nbsp;&gt;</a>
+                    </p>
+                </div>
+            </div>
+            <div class="trade-foot-detail-com">
+                <div class="fc-price-info">
+                    <span class="price-tit">应付总额：</span>
+                    <span class="price-num" id="sumPayPriceId">{{calcTotal()}}</span>
+                </div>
+<!--                <div class="fc-consignee-info" v-for="(produce,index) in produces">-->
+<!--                    <span class="mr20" id="sendAddr">寄送至： {{produce.rec_address}}</span>-->
+<!--                    <span id="sendMobile">收货人：{{produce.rec_address}},{{produce.telePhone}}</span>-->
+<!--                </div>-->
+            </div>
+            <div class="group" id="checkout-floatbar">
+                <div class="ui-ceilinglamp checkout-buttons">
+                    <div class="sticky-wrap">
+                        <div class="inner">
+                            <button type="submit" class="checkout-submit" id="order-submit" >
+                                提交订单<b></b>
+                            </button>
+                            <button type="submit" id="enterPriseUserPaymentSubmit" style="display:none;" class="checkout-submit-combine"  data-tips="若您要下多个订单，可以先提交订单再去订单中心合并支付，效率更高哟~">
+                                提交订单暂不支付
+                            </button>
+                            <span id="checkCodeDiv"></span>
+
+                            <div class="checkout-submit-tip" id="changeAreaAndPrice" style="display: none;">
+                                由于价格可能发生变化，请核对后再提交订单
+                            </div>
+                            <!--div style="display:none" id="factoryShipCodShowDivBottom" class="dispatching">
+                              部分商品货到付款方式：先由京东配送“提货单”并收款，然后厂商发货。
+                            </div-->
+                        </div>
+                        <span id="submit_message" style="display:none" class="submit-error"></span>
+                        <div class="submit-check-info" id="submit_check_info_message" style="display:none"></div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+</div>
+<!--最底部部分-->
+<div id="footer">
+    <div id="service-2014">
+        <div class="slogan">
+            <img src="images_W/service_items_1.png">
+            <img src="images_W/service_items_2.png">
+            <img src="images_W/service_items_3.png">
+            <img src="images_W/service_items_4.png">
+        </div>
+        <div class="w">
+            <dl class="fore1">
+                <dt>购物指南</dt>
+                <dd>
+                    <div><a>购物流程</a>
+                    </div>
+                    <div><a>会员介绍</a>
+                    </div>
+                    <div><a>生活旅行/团购</a>
+                    </div>
+                    <div><a>常见问题</a></div>
+                    <div><a>大家电</a>
+                    </div>
+                    <div><a>联系客服</a></div>
+                </dd>
+            </dl>
+            <dl class="fore2">
+                <dt>配送方式</dt>
+                <dd>
+                    <div><a>上门自提</a>
+                    </div>
+                    <div><a>211限时达</a>
+                    </div>
+                    <div><a>配送服务查询</a>
+                    </div>
+                    <div><a>配送费收取标准</a>
+                    </div>
+                    <div><a>海外配送</a></div>
+                </dd>
+            </dl>
+            <dl class="fore3">
+                <dt>支付方式</dt>
+                <dd>
+                    <div><a>货到付款</a>
+                    </div>
+                    <div><a>在线支付</a>
+                    </div>
+                    <div><a>分期付款</a>
+                    </div>
+                    <div><a>邮局汇款</a>
+                    </div>
+                    <div><a>公司转账</a>
+                    </div>
+                </dd>
+            </dl>
+            <dl class="fore4">
+                <dt>售后服务</dt>
+                <dd>
+                    <div><a>售后政策</a>
+                    </div>
+                    <div><a>价格保护</a>
+                    </div>
+                    <div><a>退款说明</a>
+                    </div>
+                    <div><a>返修/退换货</a>
+                    </div>
+                    <div><a>取消订单</a>
+                    </div>
+                </dd>
+            </dl>
+            <dl class="fore5">
+                <dt>特色服务</dt>
+                <dd>
+                    <div><a >夺宝岛</a></div>
+                    <div><a >DIY装机</a></div>
+                    <div><a >延保服务</a></div>
+                    <div><a >京东E卡</a></div>
+                    <div><a >京东通信</a></div>
+                    <div><a >京东JD+</a></div>
+                </dd>
+            </dl>
+            <div id="coverage">
+                <div class="dt">
+                    京东自营覆盖区县
+                </div>
+                <div class="dd">
+                    <p>京东已向全国2649个区县提供自营配送服务，支持货到付款、POS机刷卡和售后上门服务。</p>
+                    <p class="ar"><a>查看详情&nbsp;&gt;</a>
+                    </p>
+                </div>
+            </div>
+            <span class="clr"></span>
+        </div>
+    </div>
+    <div class="copyright">
+        <a target="_blank" href=""><img src="images_W/ga.png"> 京公网安备11000002000088号</a>&nbsp;&nbsp;|&nbsp;&nbsp;京ICP证070359号&nbsp;&nbsp;|&nbsp;&nbsp;
+        <a target="_blank" href="">互联网药品信息服务资格证编号(京)-经营性-2014-0008</a>&nbsp;&nbsp;|&nbsp;&nbsp;新出发京零&nbsp;字第大120007号<br>互联网出版许可证编号新出网证(京)字150号&nbsp;&nbsp;|&nbsp;&nbsp;
+        <a href="" target="_blank">出版物经营许可证</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="" target="_blank">网络文化经营许可证京网文[2014]2148-348号</a>&nbsp;&nbsp;|&nbsp;&nbsp;违法和不良信息举报电话：4006561155<br>Copyright&nbsp;©&nbsp;2004&nbsp;-&nbsp;2016&nbsp;&nbsp;京东JD.com&nbsp;版权所有&nbsp;&nbsp;|&nbsp;&nbsp;消费者维权热线：4006067733<br>京东旗下网站：<a href="" target="_blank">京东钱包</a>
+    </div>
+
+</div>
+</body>
+<script>
+    $(function () {
+        $(".addr-detail").bind("click",function(){
+            //this = 当前点击的哪一个按钮         //siblings意思的同级其他元素式
+            $(this).addClass("content_Sty").siblings().removeClass("content_Sty");
+        });
+    })
+</script>
+</html>
