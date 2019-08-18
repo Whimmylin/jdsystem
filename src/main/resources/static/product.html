@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>商品详情页</title>
     <style class="vjs-styles-defaults">
         .video-js {
             width: 300px;
@@ -25,11 +25,46 @@
         }
     </style>
     <link  rel="stylesheet" href="css/goods.css">
-    <link  rel="stylesheet" href="css/footer.css">
+    <link  rel="stylesheet" href="css/footer_Y.css">
     <script src="js/jquery.min.js" type="application/javascript"></script>
     <script src="js/jquery.validate.js" type="application/javascript"></script>
     <script src="js/jquery.validate.regex.js" type="application/javascript"></script>
     <script src="js/vue.min.js"></script>
+    <style>
+        #pic_wrap{
+            position: relative;
+            width: 452px;
+            height: 452px;
+
+        }
+        #float_box{
+            width: 200px;
+            height: 200px;
+            background-color: green;
+            filter:opacity(alpha:30);
+            opacity: 0.3;
+            position: absolute;
+            display: none;
+        }
+        #big_img{
+            /*background-image: url("images/productimgs/c.jpg");*/
+            height: 800px;
+            width: 800px;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+        }
+        #show{
+            width: 400px;
+            height: 400px;
+            float: left;
+            background-color: white;
+            opacity: 1;
+            filter: opacity(alpha:1);
+            overflow: hidden;
+            display: none;
+        }
+    </style>
 <script>
     $(function () {
 
@@ -114,9 +149,85 @@
                lis[i].onmousemove=function () {
                   var newsrc=$(this).find("img").attr("src");
                    $("#spec-n1 #spec-img").attr('src',newsrc);
+                   $("#big_img").attr('src',newsrc);
                }
            }
         });
+
+        //1、鼠标移入时，放大镜能显示出来，加onmouseover事件
+        //2、鼠标没有移除，且鼠标在图片内不停地一点，加onmousemove事件。
+        //3、鼠标完全移除后，加onmouseout事件
+        //4、onmouseover事件需要让放大镜和可视窗口显示出来。
+        //5、onmousemove事件，让放大镜和可视窗口中的图片同时移动。
+        // 6、onmouseout时间，让放大镜和可是窗口消失！
+        var pic_wrap=document.getElementById('spec-n1'),
+            float_box=document.getElementById('float_box'),
+            show=document.getElementById('show'),
+            big_img=document.getElementById('big_img');
+        //鼠标移入事件onmouseover让放大镜和可视窗口显示
+        pic_wrap.onmouseover=function () {
+            float_box.style.display="block";
+            show.style.display="block";
+        }
+        //鼠标不断移动时触发，实时更新放大镜得到的图片
+        pic_wrap.onmousemove = function(event) {
+            floatMove(float_box, pic_wrap, event);
+            showPic();
+        }
+        //鼠标移出后，放大镜和放大区隐藏
+        pic_wrap.onmouseout = function() {
+            float_box.style.display = "none";
+            show.style.display = "none";
+        }
+        function getStyle(obj, attr) {
+            if (window.currentStyle) {
+                return parseInt(obj.currentStyle[attr]);
+            }
+            else {
+                return parseInt(getComputedStyle(obj,null)[attr]);
+            }
+        }
+        //运动框架，控制放大镜在原图中的位置！
+        function floatMove(argu1, argu2, event) {
+            var e = event ||window.event;
+            var minLeft = getStyle(argu1, "width");
+            var maxLeft = getStyle(argu2, "width") - minLeft/2;
+            var minHeight = getStyle(argu1, "height");
+            var maxHeight = getStyle(argu2, "height") - minHeight/2;
+            console.log(maxLeft);
+            console.log(maxLeft - minLeft/2);
+            if (e.clientX < minLeft/2) {
+                float_box.style.left = "0px";//防止放大镜超出左边框
+            }
+            else if (e.clientX > maxLeft) {
+                float_box.style.left = getStyle(argu2, "width") - getStyle(argu1, "width") + "px";//防止放大镜超出右边框
+            }
+            else {
+                float_box.style.left = event.clientX - minLeft/2 + "px"; //放大镜完全在图片内时正常移动
+            }
+            if (e.clientY < minHeight/2) {
+                float_box.style.top = "0px"; //防止放大镜超出上边框
+            }
+            else if (e.clientY > maxHeight) {
+                float_box.style.top = getStyle(argu2, "height") - getStyle(argu1, "height") + "px"; //防止放大镜超出下边框
+            }
+            else {
+                float_box.style.top = event.clientY - minLeft/2 + "px";
+            }
+        }
+        //用来显示放大镜得到的图片，利用坐标计算！实时更新可视区域
+        function showPic() {
+            var iCurLeft = getStyle(float_box,"left");
+            var iCurTop = getStyle(float_box,"top");
+            var a = getStyle(pic_wrap,"width") - getStyle(float_box,"width");
+            var b = getStyle(big_img,"width") - getStyle(show,"width");
+            var moveWidth = -(iCurLeft/a)*b;
+            big_img.style.left = moveWidth + "px";
+            var c = getStyle(pic_wrap,"height") - getStyle(float_box,"height");
+            var d = getStyle(big_img,"height") - getStyle(show,"height");
+            var moveHigth = -(iCurTop/c)*d;
+            big_img.style.top = moveHigth + "px";
+        }
 
     });
 
@@ -138,6 +249,7 @@
         }
         if(flag>-1){
             $("#spec-n1 #spec-img").attr('src',imgs[flag].imgUrl);
+            $("#big_img").attr('src',imgs[flag].imgUrl);
         }
         for (var i=0;i<imgs.length;i++){
             $("#spec-list .lh").children().eq(i).find("img").attr('src',imgs[i].imgUrl);
@@ -395,9 +507,16 @@
                         </li>
                     </ul>
 <!--主图-->
-                    <img id="spec-img"  width="450" src="//img12.360buyimg.com/n1/s450x450_jfs/t1/49259/35/4834/243670/5d280111E19cbe7cb/9c2d3dff5a821433.jpg">
-                    <i></i>
-                    <div id="belt"></div>
+                    <div id="pic_wrap">
+                        <div id="float_box"></div>
+                        <img id="spec-img"  width="450" src="//img12.360buyimg.com/n1/s450x450_jfs/t1/49259/35/4834/243670/5d280111E19cbe7cb/9c2d3dff5a821433.jpg">
+                        <i></i>
+                    </div>
+                    <!--主图-->
+                    <div id="show">
+                    <!-- 预留的放大后的图片 -->
+                    <img src=" " id="big_img">
+                     </div>
                 </div>
 
 <!--左右箭头图标-->

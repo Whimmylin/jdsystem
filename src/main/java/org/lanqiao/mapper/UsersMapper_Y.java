@@ -4,7 +4,7 @@ import org.lanqiao.entity.Users;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Set;
+//import java.util.Set;
 
 @Repository
 public interface UsersMapper_Y {
@@ -14,7 +14,7 @@ public interface UsersMapper_Y {
 //
 //    int insertSelective(Users record);
 //
-      Set<Users> selectByPrimaryKey(String userName, String password);
+      List<Users> selectByPrimaryKey(String userName, String password);
 //
 //    int updateByPrimaryKeySelective(Users record);
 //

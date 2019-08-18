@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的购物车</title>
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/cart.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/vue.min.js"></script>
+    <script src="js/cart.js"></script>
+
+</head>
+<body>
+    <div id="shortcut">
+        <div id="shortcut_body">
+            <i class="iconfont iconfont-location"></i>
+            <div id="location"><a href="">福建</a>
+            </div>
+            <ul id="ulFr">
+                <li class="fr frs"><a href="">你好，请登录</a></li>
+                <li class="fr"><a href="" class="coc">免费注册</a></li>
+                <li class="fr">|</li>
+                <li class="fr frs"><a href="">我的订单</a></li>
+                <li class="fr">|</li>
+                <li class="fr frs"><a href="">我的京东</a></li>
+                <li class="fr">|</li>
+                <li class="fr frs"><a href="">京东会员</a></li>
+                <li class="fr">|</li>
+                <li class="fr frs"><a href="">企业采购</a></li>
+                <li class="fr">|</li>
+                <li class="fr frs"><a href="">客户服务</a></li>
+                <li class="fr">|</li>
+                <li class="fr frs"><a href="">网站导航</a></li>
+                <li class="fr">|</li>
+                <li class="fr frs"><a href="">企业京东</a></li>
+                <li class="fr">|</li>
+            </ul>
+        </div>
+
+    </div>
+    <div id="w">
+        <div id="logo-2014">
+            <a href="" id="logo-img">
+                <img src="images_G/jdlogo-201708-@1x.png">
+            </a>
+            <span>购物车</span>
+        </div>
+        <div id="cart-search">
+            <form id="search_form">
+                <input type="text" id="key">
+                <input type="button" value="搜索" id="search_bottom">
+            </form>
+        </div>
+    </div>
+    <div id="container">
+        <div id="login_mes">
+            <div id="noLogon_tip">
+                <span class="wicon"></span>
+                <span>
+		            您还没有登录！登录后购物车的商品将保存到您账号中
+                </span>
+                <a href="" id="login_now">
+                    立即登录
+                </a>
+            </div>
+            <div id="cart_filter_bar">
+               <a id="switch_cart">
+                   <em>全部商品</em>
+                   <span id="number">1</span>
+               </a>
+                <div id="cart-store">
+                    <span>配送至：</span>
+                    <div id="ui-area-text-wrap">
+                        <div id="ui-area-text">
+                            福建厦门市集美区灌口镇
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom-line">
+            </div>
+        </div>
+        <div class="cart-warp">
+            <div id="item-list">
+                <div class="cart-head">
+                    <div class="column t-check">
+                        <input type="checkbox" name="all" id="all" @click="all">
+                        全选
+                    </div>
+                    <div class="column t-goods">
+                        商品
+                    </div>
+                    <div class="column t-prop">
+
+                    </div>
+                    <div class="column t-price">
+                        单价
+                    </div>
+                    <div class="column t-quantity">
+                        数量
+                    </div>
+                    <div class="column t-sum">
+                        小计
+                    </div>
+                    <div class="column t-action">
+                        操作
+                    </div>
+                </div>
+                <div class="shop">
+                </div>
+                <div class="item-form" v-for="(good,i) in goods">
+                    <div class="cell p-checkbox">
+                        <input type="checkbox" name="good-check" checked="good.check" v-model="good.check">
+                    </div>
+                    <div class="cell p-goods">
+                        <div class="p-img">
+                            <a href="">
+                                <img :src="good.img">
+                            </a>
+                        </div>
+                        <div class="p-msg">
+                            <div class="p-name">
+                                <a href="">
+                                    <em></em>
+<!--                                    乐事（Lay’s）无限薯片 休闲零食 104g*3组合装（原味+烤肉+番茄）百事食品-->
+                                    {{good.name}}
+                                </a>
+                            </div>
+                            <div class="promise">
+                                <i class="jd-giftcard-icon"></i>
+                                <span>选服务</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cell p-prop">
+                        <span></span>
+                    </div>
+                    <div class="cell p-price">
+                        <span>￥{{good.price}}</span>
+                    </div>
+                    <div class="cell p-quantity">
+                        <div class="change_num">
+                            <input type="button" value="-" class="dev" @click="sub(i)">
+                            <input type="text" name="num" value="1" v-model="good.num" class="change_quantity">
+                            <input type="button" value="+" class="add" @click="add(i)">
+                        </div>
+                        <span class="is_lack">有货</span>
+                    </div>
+                    <div class="cell p-sum">
+                        <span>￥{{sumcount(i)}}</span>
+                    </div>
+                    <div class="cell p-action">
+                        <span class="deleteThis" @click="deleteThis(i)">删除</span>
+                        <span>移到我的关注</span>
+                    </div>
+                </div>
+                <div id="option-box">
+                    <div id="select-all">
+                        <input type="checkbox" name="all-goods" @click="allSelect">
+                        <span >全选</span>
+                    </div>
+                    <div id="operation">
+                        <span @click="deleteChoose">删除选中商品</span>
+                        <span>移到关注</span>
+                        <span id="clear" @click="clearCart">清理购物车</span>
+                    </div>
+                    <div id="normal">
+                        <div id="amount-sum">
+                            <span>已选择</span>
+                            <span id="amount-sum-num">{{chooseGoods()}}</span>
+                            <span>件商品</span>
+
+                        </div>
+                        <div id="price-sum">
+                            <div id="price-sum-num">
+                                <span>总价：</span>
+                                <em>￥{{allSumCount()}}</em>
+                                <b></b>
+                            </div>
+                            <div id="price-cuxiao">
+                                <span>促销：</span>
+                                <span>-￥0.00</span>
+                            </div>
+                        </div>
+                        <div id="count-button" @click="gotoOrder">
+                            <a>
+                                <span>去结算</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="footer">
+        <div id="service-2014">
+            <div class="slogan">
+                <img src="images_G/service_items_1.png">
+                <img src="images_G/service_items_2.png">
+                <img src="images_G/service_items_3.png">
+                <img src="images_G/service_items_4.png">
+            </div>
+            <div class="w">
+                <dl class="fore1">
+                    <dt>购物指南</dt>
+                    <dd>
+                        <div><a>购物流程</a>
+                        </div>
+                        <div><a>会员介绍</a>
+                        </div>
+                        <div><a>生活旅行/团购</a>
+                        </div>
+                        <div><a>常见问题</a></div>
+                        <div><a>大家电</a>
+                        </div>
+                        <div><a>联系客服</a></div>
+                    </dd>
+                </dl>
+                <dl class="fore2">
+                    <dt>配送方式</dt>
+                    <dd>
+                        <div><a>上门自提</a>
+                        </div>
+                        <div><a>211限时达</a>
+                        </div>
+                        <div><a>配送服务查询</a>
+                        </div>
+                        <div><a>配送费收取标准</a>
+                        </div>
+                        <div><a>海外配送</a></div>
+                    </dd>
+                </dl>
+                <dl class="fore3">
+                    <dt>支付方式</dt>
+                    <dd>
+                        <div><a>货到付款</a>
+                        </div>
+                        <div><a>在线支付</a>
+                        </div>
+                        <div><a>分期付款</a>
+                        </div>
+                        <div><a>邮局汇款</a>
+                        </div>
+                        <div><a>公司转账</a>
+                        </div>
+                    </dd>
+                </dl>
+                <dl class="fore4">
+                    <dt>售后服务</dt>
+                    <dd>
+                        <div><a>售后政策</a>
+                        </div>
+                        <div><a>价格保护</a>
+                        </div>
+                        <div><a>退款说明</a>
+                        </div>
+                        <div><a>返修/退换货</a>
+                        </div>
+                        <div><a>取消订单</a>
+                        </div>
+                    </dd>
+                </dl>
+                <dl class="fore5">
+                    <dt>特色服务</dt>
+                    <dd>
+                        <div><a >夺宝岛</a></div>
+                        <div><a >DIY装机</a></div>
+                        <div><a >延保服务</a></div>
+                        <div><a >京东E卡</a></div>
+                        <div><a >京东通信</a></div>
+                        <div><a >京东JD+</a></div>
+                    </dd>
+                </dl>
+                <div id="coverage">
+                    <div class="dt">
+                        京东自营覆盖区县
+                    </div>
+                    <div class="dd">
+                        <p>京东已向全国2649个区县提供自营配送服务，支持货到付款、POS机刷卡和售后上门服务。</p>
+                        <p class="ar"><a>查看详情&nbsp;&gt;</a>
+                        </p>
+                    </div>
+                </div>
+                <span class="clr"></span>
+            </div>
+        </div>
+        <div class="copyright">
+            <a target="_blank" href=""><img src="images_G/ga.png"> 京公网安备11000002000088号</a>&nbsp;&nbsp;|&nbsp;&nbsp;京ICP证070359号&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a target="_blank" href="">互联网药品信息服务资格证编号(京)-经营性-2014-0008</a>&nbsp;&nbsp;|&nbsp;&nbsp;新出发京零&nbsp;字第大120007号<br>互联网出版许可证编号新出网证(京)字150号&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="" target="_blank">出版物经营许可证</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="" target="_blank">网络文化经营许可证京网文[2014]2148-348号</a>&nbsp;&nbsp;|&nbsp;&nbsp;违法和不良信息举报电话：4006561155<br>Copyright&nbsp;©&nbsp;2004&nbsp;-&nbsp;2016&nbsp;&nbsp;京东JD.com&nbsp;版权所有&nbsp;&nbsp;|&nbsp;&nbsp;消费者维权热线：4006067733<br>京东旗下网站：<a href="" target="_blank">京东钱包</a>
+        </div>
+    </div>
+
+</body>
+</html>

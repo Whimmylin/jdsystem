@@ -1,5 +1,6 @@
 package org.lanqiao.controller;
 
+import org.lanqiao.entity.ProductImg_Y;
 import org.lanqiao.entity.Product_Y;
 import org.lanqiao.service.ProductService_Y;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,5 +41,10 @@ public class ProductController_Y {
     @RequestMapping("/updateProduct")
     public int updateProduct(Product_Y product){
         return productService_y.updateProduct(product);
+    }
+
+    @RequestMapping("/addProductImg")
+    public  int addProductImg(ProductImg_Y productImg_y){
+        return productService_y.addProductImg(productImg_y);
     }
 }

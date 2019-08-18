@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.lanqiao.mapper.UsersMapper" >
-  <resultMap id="UsersResultMap" type="org.lanqiao.entity.Users" >
+  <resultMap id="BaseResultMap" type="org.lanqiao.entity.Users" >
     <id column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="user_name" property="userName" jdbcType="VARCHAR" />
     <result column="phone" property="phone" jdbcType="VARCHAR" />
@@ -14,9 +14,10 @@
     <result column="is_VIP" property="isVip" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    user_id, user_name, phone, password, email, IDcard, sex, zip_code, birthday, is_VIP
+    user_id, cart_id, user_name, phone, password, email, IDcard, sex, zip_code, birthday, 
+    is_VIP
   </sql>
-  <select id="selectByPrimaryKey" resultMap="UsersResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from users
@@ -27,20 +28,23 @@
     where user_id = #{userId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="org.lanqiao.entity.Users" >
-    insert into users (user_id, user_name, phone, 
-      password, email, IDcard, 
-      sex, zip_code, birthday, 
-      is_VIP)
-    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
-      #{password,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{idcard,jdbcType=VARCHAR}, 
-      #{sex,jdbcType=VARCHAR}, #{zipCode,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, 
-      #{isVip,jdbcType=VARCHAR})
+    insert into users (user_id, cart_id, user_name, 
+      phone, password, email, 
+      IDcard, sex, zip_code, 
+      birthday, is_VIP)
+    values (#{userId,jdbcType=INTEGER}, #{cartId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{idcard,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{zipCode,jdbcType=VARCHAR}, 
+      #{birthday,jdbcType=DATE}, #{isVip,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="org.lanqiao.entity.Users" >
     insert into users
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
         user_id,
+      </if>
+      <if test="cartId != null" >
+        cart_id,
       </if>
       <if test="userName != null" >
         user_name,
@@ -74,6 +78,9 @@
       <if test="userId != null" >
         #{userId,jdbcType=INTEGER},
       </if>
+      <if test="cartId != null" >
+        #{cartId,jdbcType=INTEGER},
+      </if>
       <if test="userName != null" >
         #{userName,jdbcType=VARCHAR},
       </if>
@@ -106,6 +113,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="org.lanqiao.entity.Users" >
     update users
     <set >
+      <if test="cartId != null" >
+        cart_id = #{cartId,jdbcType=INTEGER},
+      </if>
       <if test="userName != null" >
         user_name = #{userName,jdbcType=VARCHAR},
       </if>
@@ -138,7 +148,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="org.lanqiao.entity.Users" >
     update users
-    set user_name = #{userName,jdbcType=VARCHAR},
+    set cart_id = #{cartId,jdbcType=INTEGER},
+      user_name = #{userName,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},

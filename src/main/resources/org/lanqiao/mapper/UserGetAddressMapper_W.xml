@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.lanqiao.mapper.UserGetAddressMapper_W" >
+  <resultMap id="UserGerAddressesResultMap" type="org.lanqiao.entity.UserGetAddress_W" >
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="rec_person" property="recPerson" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="rec_address" property="recAddress" jdbcType="VARCHAR" />
+    <association property="users" resultMap="UsersResultMap"></association>
+    <association property="orders" resultMap="OrdersResultMap"></association>
+  </resultMap>
+  <resultMap id="UsersResultMap" type="org.lanqiao.entity.Users_W" >
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="cart_id" property="cartId" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="IDcard" property="idcard" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="zip_code" property="zipCode" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="DATE" />
+    <result column="is_VIP" property="isVip" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <resultMap id="OrdersResultMap" type="org.lanqiao.entity.Orders_W" >
+    <id column="order_id" property="orderId" jdbcType="INTEGER" />
+<!--    <result column="order_item_id" property="orderItemId" jdbcType="INTEGER" />-->
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="order_money" property="orderMoney" jdbcType="INTEGER" />
+    <result column="pay_way" property="payWay" jdbcType="VARCHAR" />
+    <result column="order_time" property="orderTime" jdbcType="DATE" />
+    <result column="order_sum" property="orderSum" jdbcType="INTEGER" />
+    <result column="rec_name" property="recName" jdbcType="VARCHAR" />
+    <result column="rec_phone" property="recPhone" jdbcType="VARCHAR" />
+    <result column="rec_address" property="recAddress" jdbcType="VARCHAR" />
+  </resultMap>
+
+
+  <select id="getAddresses" resultMap="UserGerAddressesResultMap" parameterType="java.lang.Integer" >
+    select user_id, rec_person, phone, rec_address from usergetaddress where user_id = 1;
+  </select>
+
+
+  <insert id="insert" parameterType="org.lanqiao.entity.UserGetAddress_W" >
+    insert into usergetaddress (user_id, rec_person, phone, 
+      rec_address)
+    values (#{userId,jdbcType=INTEGER}, #{recPerson,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{recAddress,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.lanqiao.entity.UserGetAddress_W" >
+    insert into usergetaddress
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="recPerson != null" >
+        rec_person,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="recAddress != null" >
+        rec_address,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="recPerson != null" >
+        #{recPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="recAddress != null" >
+        #{recAddress,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

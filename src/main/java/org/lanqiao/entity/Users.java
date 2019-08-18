@@ -5,7 +5,6 @@ import java.util.Date;
 public class Users {
     private Integer userId;
 
-
     private String userName;
 
     private String phone;
@@ -31,6 +30,7 @@ public class Users {
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
+
 
     public String getUserName() {
         return userName;

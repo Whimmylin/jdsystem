@@ -9,8 +9,11 @@
     <script src="js/jquery.validate.regex.js"></script>
     <script>
         $(function () {
+            //cookie判断
+
+
             // box切换功能
-            $("#zhanhao").click(function () {
+            $("#zhanhao").click(function (){
                 $(".box_login").removeClass("box_login").addClass("visible");
                 $("#zhanhao").removeClass("lo").addClass("checked");
                 $("#saoma").removeClass("checked").addClass("lo")
@@ -60,7 +63,7 @@
                         success:function (data){
                             alert(data);
                             if(data){
-                                location.href="http://www.baidu.com";
+                                location.href="index.html";
                             }
                         }
                     })
@@ -141,7 +144,7 @@
                     </div>
                     <div class="m1">
                         <lable class="m2 m3 "></lable>
-                        <input  type="text" class="itxt" name="loginpassword" tabindex="1" autocomplete="off" value="" placeholder="密码">
+                        <input  type="password" class="itxt" name="loginpassword" tabindex="1" autocomplete="off" value="" placeholder="密码">
                     </div>
                     <div class="m4"><a href="">忘记密码</a></div>
                     <div class="login_btn">

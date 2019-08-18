@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--京东商城后台管理系统-->
+<head>
+    <meta charset="UTF-8">
+    <title>添加商品</title>
+    <link rel="stylesheet" href="js/bootstrap.min.css">
+    <!--<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>-->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/vue.min.js"></script>
+    <script src="js/jquery.validate.js"></script>
+    <script src="js/jquery.validate.regex.js"></script>
+    <script>
+        $(function () {
+            $("#addForm").validate({
+                rules: {
+                    pro_id: {
+                        required: true,
+                        regex: /^[1-9]\d*$/
+                    },
+                    img_detail: {
+                        required: false,
+                        regex: /^.{0,200}$/
+                    },
+                    img_URL:{
+                        required:true,
+                        regex:/^.{0,255}$/
+                    },
+                    is_img_main:{
+                        required:true,
+                        regex:/^.{0,4}$/
+                    }
+                },
+                messages: {
+                    pro_id: {
+                        required: "请输入商品编号",
+                        regex: "商品编号为正整数"
+                    },
+                    img_detail: {
+                        required: "请输入图片详情",
+                        regex: "图片详情不多于200字"
+                    },
+                    img_URL:{
+                        required:"请输入图片地址",
+                        regex:"图片地址不超过255字符"
+                    },
+                    is_img_main:{
+                        required:"请确定是否为主图",
+                        regex:"请输入0-4个字符"
+                    }
+                }
+            });
+
+            $("#postForm").click(function (){
+                if ($('#addForm').valid()==true){
+                    $.ajax({
+                        url:"http://localhost:8080/addProductImg",
+                        type:"post",
+                        data:{
+                            "proId":$("input[name='pro_id']").val(),
+                            "imgDetail":$("input[name='img_detail']").val(),
+                            "imgUrl":$("input[name='img_URL']").val(),
+                            "isImgMain":$("input[name='is_img_main']").val(),
+                        },
+                        dataType:"json",
+                        success:function (data){
+                            alert("插入图片成功");
+                            if(data){
+                                location.href="http://localhost:8080/product_addImg.html";
+                            }
+                        }
+                    })
+                }
+            });
+
+        })
+
+    </script>
+</head>
+<body >
+<div class="row">
+    <div class="col-md-2">
+        <img src="images/logo-201305-b.png">
+    </div>
+    <div class="col-md-10">
+        <h2 class="text-primary text-center">京东商城后台管理系统</h2>
+    </div>
+</div>
+
+<div class="row"  style="background-color:#F5F5F5;">
+    <!--侧边菜单-->
+    <div class="col-md-2 text-center"  >
+        <a href="#" class="list-group-item active">商品种类管理</a>
+        <a href="sort1.html" class="list-group-item">添加商品种类</a>
+        <a href="sort2.html" class="list-group-item">管理商品种类</a>
+        <a href="sort3.html" class="list-group-item">商品品牌管理</a>
+        <a href="sort4.html" class="list-group-item">商品品牌添加</a>
+        <a href="#" class="list-group-item active">商品管理</a>
+        <a href="product_add.html" class="list-group-item ">商品添加</a>
+        <a href="product_delete.html" class="list-group-item">商品删除</a>
+        <a href="product_change.html" class="list-group-item">商品修改</a>
+        <a href="product_select.html" class="list-group-item">商品查询</a>
+        <a href="product_addImg.html" class="list-group-item color" >商品图片添加</a>
+        <a href="#" class="list-group-item active">订单管理</a>
+        <a href="orders_select.html" class="list-group-item">查看订单</a>
+        <a href="orders_change.html" class="list-group-item">修改订单</a>
+        <a href="#" class="list-group-item active">用户管理</a>
+    </div>
+    <div class="col-md-10">
+        <!--面包屑导航-->
+        <ol class="breadcrumb">
+            <li><a href="#">首页</a></li>
+            <li><a href="#">商品管理</a></li>
+            <li><a href="#">添加商品</a></li>
+            <!--<li class="active">十一月</li>-->
+        </ol>
+        <div style="padding: 10px 100px 10px;">
+            <form class="bs-example bs-example-form" id="addForm" role="form">
+                <div class="input-group">
+                    <span class="input-group-addon">商品编号</span>
+                    <input type="text" class="form-control" name="pro_id" placeholder="请输入商品名称">
+                </div><br>
+                <div class="warn"></div>
+                <div class="input-group">
+                    <span class="input-group-addon">图片详情</span>
+                    <input type="text" class="form-control" name="img_detail" placeholder="请输入商品种类编号">
+                </div><br>
+                <div class="input-group">
+                    <span class="input-group-addon">图片路径</span>
+                    <input type="text" class="form-control" name="img_URL" placeholder="请输入商品品牌编号">
+                </div><br>
+                <div class="input-group">
+                    <span class="input-group-addon">是否主图</span>
+                    <input type="text" class="form-control" name="is_img_main" placeholder="请输入商品价格">
+                </div><br>
+            </form>
+            <button type="button" class="btn btn-success" id="postForm">添加</button>
+        </div>
+
+    </div>
+
+
+
+
+</div>
+
+
+
+
+</body>
+</html>
