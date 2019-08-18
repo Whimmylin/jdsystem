@@ -80,5 +80,4 @@ public class Orderdetail {
     public void setProNum(Integer proNum) {
         this.proNum = proNum;
     }
-
 }
