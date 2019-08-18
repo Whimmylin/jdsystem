@@ -1,6 +1,5 @@
 package org.lanqiao.controller;
 
-import org.lanqiao.entity.Users;
 import org.lanqiao.service.UserService_Y;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import org.lanqiao.entity.Users;
 
 
 @RestController

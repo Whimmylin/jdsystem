@@ -1,6 +1,6 @@
 package org.lanqiao.mapper;
 
-import org.lanqiao.entity.Orders_W;
+import org.lanqiao.entity.Orders;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -8,17 +8,17 @@ import java.util.List;
 public interface OrdersMapper_W {
     int deleteByPrimaryKey(Integer orderId);
 
-    int insert(Orders_W orders);
+    int insert(Orders orders);
 
-    int updateOrderItem(Orders_W orders);
+    int updateOrderItem(Orders orders);
 
-    int insertSelective(Orders_W record);
+    int insertSelective(Orders record);
 
-    Orders_W selectByPrimaryKey(Integer orderId);
+    Orders selectByPrimaryKey(Integer orderId);
 
-    int updateByPrimaryKeySelective(Orders_W record);
+    int updateByPrimaryKeySelective(Orders record);
 
-    int updateByPrimaryKey(Orders_W record);
+    int updateByPrimaryKey(Orders record);
 
-    List<Orders_W> getOrderId();
+    List<Orders> getOrderId();
 }

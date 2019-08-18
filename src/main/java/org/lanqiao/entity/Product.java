@@ -1,9 +1,8 @@
 package org.lanqiao.entity;
 
-import java.util.Date;
 import java.util.Set;
 
-public class ProductLL {
+public class Product {
     private Integer proId;
 
     private Integer brandId;
@@ -16,7 +15,7 @@ public class ProductLL {
 
     private Integer proStock;
 
-    private Date proOut;
+    private String proOut;
 
     private String proState;
 
@@ -27,6 +26,22 @@ public class ProductLL {
     private  ProductBrand productBrand;
 
     private Set<ProductImg> productImgs;
+
+    private Orderdetail orderDetail;
+
+    private Set<ProductBrand> productbrand;
+
+    private Set<ProductSort> productsort;
+
+    private ProductImg productimg;
+
+    public Orderdetail getOrderDetail() {
+        return orderDetail;
+    }
+
+    public void setOrderDetail(Orderdetail orderDetail) {
+        this.orderDetail = orderDetail;
+    }
 
     public Integer getProId() {
         return proId;
@@ -76,11 +91,11 @@ public class ProductLL {
         this.proStock = proStock;
     }
 
-    public Date getProOut() {
+    public String getProOut() {
         return proOut;
     }
 
-    public void setProOut(Date proOut) {
+    public void setProOut(String proOut) {
         this.proOut = proOut;
     }
 
@@ -124,18 +139,27 @@ public class ProductLL {
         this.productImgs = productImgs;
     }
 
-    @Override
-    public String toString() {
-        return "ProductLL{" +
-                "proId=" + proId +
-                ", brandId=" + brandId +
-                ", sortId=" + sortId +
-                ", proName='" + proName + '\'' +
-                ", proPrice=" + proPrice +
-                ", proStock=" + proStock +
-                ", proOut=" + proOut +
-                ", proState='" + proState + '\'' +
-                ", proDetail='" + proDetail + '\'' +
-                '}';
+    public Set<ProductBrand> getProductbrand() {
+        return productbrand;
+    }
+
+    public void setProductbrand(Set<ProductBrand> productbrand) {
+        this.productbrand = productbrand;
+    }
+
+    public Set<ProductSort> getProductsort() {
+        return productsort;
+    }
+
+    public void setProductsort(Set<ProductSort> productsort) {
+        this.productsort = productsort;
+    }
+
+    public ProductImg getProductimg() {
+        return productimg;
+    }
+
+    public void setProductimg(ProductImg productimg) {
+        this.productimg = productimg;
     }
 }

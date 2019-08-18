@@ -1,6 +1,6 @@
 package org.lanqiao.mapper;
 
-import org.lanqiao.entity.OrderDetail_W;
+import org.lanqiao.entity.Orderdetail;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -8,17 +8,17 @@ import java.util.List;
 public interface OrderDetailMapper_W {
     int deleteByPrimaryKey(Integer orderItemId);
 
-    int insert(OrderDetail_W record);
+    int insert(Orderdetail record);
 
-    int insertSelective(OrderDetail_W record);
+    int insertSelective(Orderdetail record);
 
-    OrderDetail_W selectByPrimaryKey(Integer orderItemId);
+    Orderdetail selectByPrimaryKey(Integer orderItemId);
 
-    int updateByPrimaryKeySelective(OrderDetail_W record);
+    int updateByPrimaryKeySelective(Orderdetail record);
 
-    int updateByPrimaryKey(OrderDetail_W record);
+    int updateByPrimaryKey(Orderdetail record);
 
-    public List<OrderDetail_W> getOrderItem(int id);
+    public List<Orderdetail> getOrderItem(int id);
 
-    public List<OrderDetail_W> getProductItem();
+    public List<Orderdetail> getProductItem();
 }

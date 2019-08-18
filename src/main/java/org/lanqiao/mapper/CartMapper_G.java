@@ -1,7 +1,7 @@
 package org.lanqiao.mapper;
 
-import org.lanqiao.entity.Cart_G;
-import org.lanqiao.entity.Orderdetail_G;
+import org.lanqiao.entity.Cart;
+import org.lanqiao.entity.Orderdetail;
 import org.lanqiao.entity.Orders;
 import org.springframework.stereotype.Repository;
 
@@ -12,24 +12,24 @@ public interface CartMapper_G {
 
     int deleteByPrimaryKey(Integer cartId);
 
-    int insert(Cart_G record);
+    int insert(Cart record);
 
-    int insertSelective(Cart_G record);
+    int insertSelective(Cart record);
 
-    Cart_G selectByPrimaryKey(Integer cartId);
+    Cart selectByPrimaryKey(Integer cartId);
 
-    int updateByPrimaryKeySelective(Cart_G record);
+    int updateByPrimaryKeySelective(Cart record);
 
-    int updateByPrimaryKey(Cart_G record);
+    int updateByPrimaryKey(Cart record);
 
-    List<Cart_G> selectAllCartGoods();
+    List<Cart> selectAllCartGoods();
 
-    int insertIntoOrderDetail(Orderdetail_G orderdetailG);
+    int insertIntoOrderDetail(Orderdetail orderdetailG);
 
     int insertIntoOrder(Orders orders);
 
     Orders selectOrderId(Integer userId);
 
-    List<Orderdetail_G> show();
+    List<Orderdetail> show();
 
 }

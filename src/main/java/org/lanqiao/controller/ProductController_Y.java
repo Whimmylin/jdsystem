@@ -1,7 +1,7 @@
 package org.lanqiao.controller;
 
-import org.lanqiao.entity.ProductImg_Y;
-import org.lanqiao.entity.Product_Y;
+import org.lanqiao.entity.ProductImg;
+import org.lanqiao.entity.Product;
 import org.lanqiao.service.ProductService_Y;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,12 +15,12 @@ public class ProductController_Y {
     ProductService_Y productService_y;
 
     @RequestMapping("/addProduct")
-    public int addProduct(Product_Y productY){
+    public int addProduct(Product productY){
         return  productService_y.addProduct(productY);
     }
 
     @RequestMapping("/selectProduct")
-    public List<Product_Y> showAll(int pageNum,int pageSize){
+    public List<Product> showAll(int pageNum, int pageSize){
         return productService_y.showAll(pageNum,pageSize);
     }
     @RequestMapping("/productPageCount")
@@ -34,17 +34,17 @@ public class ProductController_Y {
     }
 
     @RequestMapping("/selectProductOne")
-    public  List<Product_Y> selectProductOne(int indexId){
+    public  List<Product> selectProductOne(int indexId){
         return productService_y.selectProductOne(indexId);
     }
 
     @RequestMapping("/updateProduct")
-    public int updateProduct(Product_Y product){
+    public int updateProduct(Product product){
         return productService_y.updateProduct(product);
     }
 
     @RequestMapping("/addProductImg")
-    public  int addProductImg(ProductImg_Y productImg_y){
+    public  int addProductImg(ProductImg productImg_y){
         return productService_y.addProductImg(productImg_y);
     }
 }

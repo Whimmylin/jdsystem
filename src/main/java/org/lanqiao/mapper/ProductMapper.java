@@ -1,17 +1,17 @@
 package org.lanqiao.mapper;
 
-import org.lanqiao.entity.Product_G;
+import org.lanqiao.entity.Product;
 
 public interface ProductMapper {
     int deleteByPrimaryKey(Integer proId);
 
-    int insert(Product_G record);
+    int insert(Product record);
 
-    int insertSelective(Product_G record);
+    int insertSelective(Product record);
 
-    Product_G selectByPrimaryKey(Integer proId);
+    Product selectByPrimaryKey(Integer proId);
 
-    int updateByPrimaryKeySelective(Product_G record);
+    int updateByPrimaryKeySelective(Product record);
 
-    int updateByPrimaryKey(Product_G record);
+    int updateByPrimaryKey(Product record);
 }

@@ -1,7 +1,6 @@
 package org.lanqiao.controller;
-
 import org.lanqiao.entity.Cart;
-import org.lanqiao.entity.ProductLL;
+import org.lanqiao.entity.Product;
 import org.lanqiao.service.CartServiceLL;
 import org.lanqiao.service.ProductServiceLL;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,7 @@ public class ProductControllerLL {
     CartServiceLL cartServiceLL;
 
     @RequestMapping("/getproduct")
-    public ProductLL GetProduct(Integer proId){
+    public Product GetProduct(Integer proId){
         return  productServiceLL.selectByPrimaryKey(proId);
     }
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.lanqiao.mapper.OrderDetailMapper_W" >
-  <resultMap id="OrderDetailResultMap" type="org.lanqiao.entity.OrderDetail_W" >
+  <resultMap id="OrderDetailResultMap" type="org.lanqiao.entity.Orderdetail" >
     <id column="order_item_id" property="orderItemId" jdbcType="INTEGER" />
     <result column="order_id" property="orderId" jdbcType="INTEGER" />
     <result column="pro_id" property="proId" jdbcType="INTEGER" />
@@ -12,7 +12,7 @@
     <collection property="productImg" resultMap="ProductImgResultMap"></collection>
   </resultMap>
 
-  <resultMap id="OrdersResultMap" type="org.lanqiao.entity.Orders_W" >
+  <resultMap id="OrdersResultMap" type="org.lanqiao.entity.Orders" >
     <id column="order_id" property="orderId" jdbcType="INTEGER" />
     <result column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="order_money" property="orderMoney" jdbcType="INTEGER" />
@@ -23,7 +23,7 @@
     <result column="rec_phone" property="recPhone" jdbcType="VARCHAR" />
     <result column="rec_address" property="recAddress" jdbcType="VARCHAR" />
   </resultMap>
-  <resultMap id="ProductResultMap" type="org.lanqiao.entity.Product_W" >
+  <resultMap id="ProductResultMap" type="org.lanqiao.entity.Product" >
     <id column="pro_id" property="proId" jdbcType="INTEGER" />
     <result column="brand_id" property="brandId" jdbcType="INTEGER" />
     <result column="sort_id" property="sortId" jdbcType="INTEGER" />
@@ -34,7 +34,7 @@
     <result column="pro_state" property="proState" jdbcType="VARCHAR" />
     <result column="pro_detail" property="proDetail" jdbcType="VARCHAR" />
   </resultMap>
-  <resultMap id="ProductImgResultMap" type="org.lanqiao.entity.ProductImg_W" >
+  <resultMap id="ProductImgResultMap" type="org.lanqiao.entity.ProductImg" >
     <id column="img_id" property="imgId" jdbcType="INTEGER" />
     <result column="pro_id" property="proId" jdbcType="INTEGER" />
     <result column="img_detail" property="imgDetail" jdbcType="VARCHAR" />
@@ -66,13 +66,13 @@
     where order_item_id = #{orderItemId,jdbcType=INTEGER}
   </delete>
 
-  <insert id="insert" parameterType="org.lanqiao.entity.OrderDetail_W" >
+  <insert id="insert" parameterType="org.lanqiao.entity.Orderdetail" >
     insert into orderdetail (order_item_id, order_id, pro_id, 
       pro_name, pro_num)
     values (#{orderItemId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{proId,jdbcType=INTEGER}, 
       #{proName,jdbcType=VARCHAR}, #{proNum,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="org.lanqiao.entity.OrderDetail_W" >
+  <insert id="insertSelective" parameterType="org.lanqiao.entity.Orderdetail" >
     insert into orderdetail
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="orderItemId != null" >
@@ -109,7 +109,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="org.lanqiao.entity.OrderDetail_W" >
+  <update id="updateByPrimaryKeySelective" parameterType="org.lanqiao.entity.Orderdetail" >
     update orderdetail
     <set >
       <if test="orderId != null" >
@@ -127,7 +127,7 @@
     </set>
     where order_item_id = #{orderItemId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="org.lanqiao.entity.OrderDetail_W" >
+  <update id="updateByPrimaryKey" parameterType="org.lanqiao.entity.Orderdetail" >
     update orderdetail
     set order_id = #{orderId,jdbcType=INTEGER},
       pro_id = #{proId,jdbcType=INTEGER},

@@ -9,6 +9,10 @@ public class Cart {
 
     private Integer proNum;
 
+    private Users users;
+
+    private Product productG;
+
     public Integer getCartId() {
         return cartId;
     }
@@ -39,5 +43,21 @@ public class Cart {
 
     public void setProNum(Integer proNum) {
         this.proNum = proNum;
+    }
+
+    public Users getUsers() {
+        return users;
+    }
+
+    public void setUsers(Users users) {
+        this.users = users;
+    }
+
+    public Product getProductG() {
+        return productG;
+    }
+
+    public void setProductG(Product productG) {
+        this.productG = productG;
     }
 }
