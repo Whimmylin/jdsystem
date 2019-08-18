@@ -1,17 +1,17 @@
 package org.lanqiao.mapper;
 
-import org.lanqiao.entity.ProducTimg_H;
+import org.lanqiao.entity.ProductImg;
 
 public interface ProducTimgMapper_H {
     int deleteByPrimaryKey(Integer imgId);
 
-    int insert(ProducTimg_H record);
+    int insert(ProductImg record);
 
-    int insertSelective(ProducTimg_H record);
+    int insertSelective(ProductImg record);
 
-    ProducTimg_H selectByPrimaryKey(Integer imgId);
+    ProductImg selectByPrimaryKey(Integer imgId);
 
-    int updateByPrimaryKeySelective(ProducTimg_H record);
+    int updateByPrimaryKeySelective(ProductImg record);
 
-    int updateByPrimaryKey(ProducTimg_H record);
+    int updateByPrimaryKey(ProductImg record);
 }

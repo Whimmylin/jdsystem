@@ -1,14 +1,14 @@
 package org.lanqiao.mapper;
 
-import org.lanqiao.entity.UserGetAddress_W;
+import org.lanqiao.entity.UserGetAddress;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
 public interface UserGetAddressMapper_W {
-    int insert(UserGetAddress_W record);
+    int insert(UserGetAddress record);
 
-    int insertSelective(UserGetAddress_W record);
+    int insertSelective(UserGetAddress record);
 
-    public List<UserGetAddress_W> getAddresses();
+    public List<UserGetAddress> getAddresses();
 }

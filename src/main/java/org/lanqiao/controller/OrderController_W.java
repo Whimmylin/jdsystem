@@ -15,27 +15,27 @@ public class OrderController_W {
 
 
     @RequestMapping("/getAddresses")
-    public List<UserGetAddress_W> getAddresses(){
+    public List<UserGetAddress> getAddresses(){
         return orderService.getAddresses();
     }
 
     @RequestMapping("/getOrderItem")
-    public List<OrderDetail_W> getOrderItem(int id){
+    public List<Orderdetail> getOrderItem(int id){
         return orderService.getOrderItem(id);
     }
 
     @RequestMapping("/getProductItem")
-    public List<OrderDetail_W> getProductItem(){
+    public List<Orderdetail> getProductItem(){
         return orderService.getProductItem();
     }
 
     @RequestMapping("/insertOrder")
-    public int createOrder(Orders_W orders){
+    public int createOrder(Orders orders){
         return orderService.insertOrders(orders);
     }
 
     @RequestMapping("/updateOrder")
-    public int updateOrder(Orders_W orders){
+    public int updateOrder(Orders orders){
         return orderService.updateOrderItem(orders);
     }
 

@@ -1,6 +1,6 @@
 package org.lanqiao.entity;
 
-public class UserGetAddress_W {
+public class UserGetAddress {
     private Integer userId;
 
     private String recPerson;
@@ -8,22 +8,22 @@ public class UserGetAddress_W {
     private String phone;
 
     private String recAddress;
-    private Users_W users;
-    private Orders_W orders;
+    private Users users;
+    private Orders orders;
 
-    public Users_W getUsers() {
+    public Users getUsers() {
         return users;
     }
 
-    public void setUsers(Users_W users) {
+    public void setUsers(Users users) {
         this.users = users;
     }
 
-    public Orders_W getOrders() {
+    public Orders getOrders() {
         return orders;
     }
 
-    public void setOrders(Orders_W orders) {
+    public void setOrders(Orders orders) {
         this.orders = orders;
     }
 

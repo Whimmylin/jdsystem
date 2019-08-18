@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.lanqiao.mapper.UsersMapper_W" >
-  <resultMap id="UsersResultMap" type="org.lanqiao.entity.Users_W" >
+  <resultMap id="UsersResultMap" type="org.lanqiao.entity.Users" >
     <id column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="cart_id" property="cartId" jdbcType="INTEGER" />
     <result column="user_name" property="userName" jdbcType="VARCHAR" />
@@ -28,7 +28,7 @@
     delete from users
     where user_id = #{userId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="org.lanqiao.entity.Users_W" >
+  <insert id="insert" parameterType="org.lanqiao.entity.Users" >
     insert into users (user_id, cart_id, user_name, 
       phone, password, email, 
       IDcard, sex, zip_code, 
@@ -38,7 +38,7 @@
       #{idcard,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{zipCode,jdbcType=VARCHAR}, 
       #{birthday,jdbcType=DATE}, #{isVip,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="org.lanqiao.entity.Users_W" >
+  <insert id="insertSelective" parameterType="org.lanqiao.entity.Users" >
     insert into users
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
@@ -111,7 +111,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="org.lanqiao.entity.Users_W" >
+  <update id="updateByPrimaryKeySelective" parameterType="org.lanqiao.entity.Users" >
     update users
     <set >
       <if test="cartId != null" >
@@ -147,7 +147,7 @@
     </set>
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="org.lanqiao.entity.Users_W" >
+  <update id="updateByPrimaryKey" parameterType="org.lanqiao.entity.Users" >
     update users
     set cart_id = #{cartId,jdbcType=INTEGER},
       user_name = #{userName,jdbcType=VARCHAR},

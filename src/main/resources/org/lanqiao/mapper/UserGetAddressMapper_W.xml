@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.lanqiao.mapper.UserGetAddressMapper_W" >
-  <resultMap id="UserGerAddressesResultMap" type="org.lanqiao.entity.UserGetAddress_W" >
+  <resultMap id="UserGerAddressesResultMap" type="org.lanqiao.entity.UserGetAddress" >
     <result column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="rec_person" property="recPerson" jdbcType="VARCHAR" />
     <result column="phone" property="phone" jdbcType="VARCHAR" />
@@ -9,7 +9,7 @@
     <association property="users" resultMap="UsersResultMap"></association>
     <association property="orders" resultMap="OrdersResultMap"></association>
   </resultMap>
-  <resultMap id="UsersResultMap" type="org.lanqiao.entity.Users_W" >
+  <resultMap id="UsersResultMap" type="org.lanqiao.entity.Users" >
     <id column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="cart_id" property="cartId" jdbcType="INTEGER" />
     <result column="user_name" property="userName" jdbcType="VARCHAR" />
@@ -23,7 +23,7 @@
     <result column="is_VIP" property="isVip" jdbcType="VARCHAR" />
   </resultMap>
 
-  <resultMap id="OrdersResultMap" type="org.lanqiao.entity.Orders_W" >
+  <resultMap id="OrdersResultMap" type="org.lanqiao.entity.Orders" >
     <id column="order_id" property="orderId" jdbcType="INTEGER" />
 <!--    <result column="order_item_id" property="orderItemId" jdbcType="INTEGER" />-->
     <result column="user_id" property="userId" jdbcType="INTEGER" />
@@ -42,13 +42,13 @@
   </select>
 
 
-  <insert id="insert" parameterType="org.lanqiao.entity.UserGetAddress_W" >
+  <insert id="insert" parameterType="org.lanqiao.entity.UserGetAddress" >
     insert into usergetaddress (user_id, rec_person, phone, 
       rec_address)
     values (#{userId,jdbcType=INTEGER}, #{recPerson,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
       #{recAddress,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="org.lanqiao.entity.UserGetAddress_W" >
+  <insert id="insertSelective" parameterType="org.lanqiao.entity.UserGetAddress" >
     insert into usergetaddress
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="userId != null" >

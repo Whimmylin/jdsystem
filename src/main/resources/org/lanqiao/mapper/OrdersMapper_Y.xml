@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.lanqiao.mapper.OrdersMapper_Y" >
-  <resultMap id="OrdersResultMap" type="org.lanqiao.entity.Orders_Y" >
+  <resultMap id="OrdersResultMap" type="org.lanqiao.entity.Orders" >
     <id column="order_id" property="orderId" jdbcType="INTEGER" />
     <result column="order_money" property="orderMoney" jdbcType="INTEGER" />
     <result column="pay_way" property="payWay" jdbcType="VARCHAR" />
@@ -39,7 +39,7 @@
     delete from orders
     where order_id = #{orderId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="org.lanqiao.entity.Orders_Y" >
+  <insert id="insert" parameterType="org.lanqiao.entity.Orders" >
     insert into orders (order_id, user_id, order_money, 
       pay_way, order_time, order_sum, 
       rec_name, rec_phone, rec_address
@@ -49,7 +49,7 @@
       #{recName,jdbcType=VARCHAR}, #{recPhone,jdbcType=VARCHAR}, #{recAddress,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="org.lanqiao.entity.Orders_Y" >
+  <insert id="insertSelective" parameterType="org.lanqiao.entity.Orders" >
     insert into orders
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="orderId != null" >
@@ -110,7 +110,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="org.lanqiao.entity.Orders_Y" >
+  <update id="updateByPrimaryKeySelective" parameterType="org.lanqiao.entity.Orders" >
     update orders
     <set >
       <if test="userId != null" >
@@ -140,7 +140,7 @@
     </set>
     where order_id = #{orderId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="org.lanqiao.entity.Orders_Y" >
+  <update id="updateByPrimaryKey" parameterType="org.lanqiao.entity.Orders" >
     update orders
     set user_id = #{userId,jdbcType=INTEGER},
       order_money = #{orderMoney,jdbcType=INTEGER},

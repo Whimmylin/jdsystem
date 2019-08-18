@@ -1,7 +1,7 @@
 package org.lanqiao.service;
 
-import org.lanqiao.entity.Cart_G;
-import org.lanqiao.entity.Orderdetail_G;
+import org.lanqiao.entity.Cart;
+import org.lanqiao.entity.Orderdetail;
 import org.lanqiao.entity.Orders;
 import org.lanqiao.mapper.CartMapper_G;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ public class CartSerciceImpl_G implements CartService_G {
     @Autowired
     CartMapper_G cartMapperG;
     @Override
-    public List<Cart_G> selectAllCartGoods() {
+    public List<Cart> selectAllCartGoods() {
         return cartMapperG.selectAllCartGoods();
     }
 
@@ -25,12 +25,12 @@ public class CartSerciceImpl_G implements CartService_G {
     }
 
     @Override
-    public int updateByPrimaryKey(Cart_G record) {
+    public int updateByPrimaryKey(Cart record) {
         return cartMapperG.updateByPrimaryKey(record);
     }
 
     @Override
-    public int insertIntoOrderDetail(Orderdetail_G orderdetailG) {
+    public int insertIntoOrderDetail(Orderdetail orderdetailG) {
         return cartMapperG.insertIntoOrderDetail(orderdetailG);
     }
     @Override
@@ -44,7 +44,7 @@ public class CartSerciceImpl_G implements CartService_G {
     }
 
     @Override
-    public List<Orderdetail_G> show() {
+    public List<Orderdetail> show() {
         return cartMapperG.show();
     }
 
