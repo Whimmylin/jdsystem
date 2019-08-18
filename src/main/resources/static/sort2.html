@@ -25,6 +25,11 @@
                     {
                         pageMax= Math.ceil(parseInt(count)/4)
                         // alert(pageMax);
+                        for(var j =0;j<pageMax;j++){
+                            vm1.pages.push({
+                                pageNum:j+1
+                            })
+                        }
                     }
                 }
             });
@@ -32,6 +37,43 @@
 
             //1. 默认页面
             ajax();
+
+            var vm1 = new Vue({
+                el: '#app',
+                data: {
+                    pages: []
+                },
+                methods:{
+                    pageUp:function () {
+                        if(pageNum>1){
+                            pageNum--;
+                            $("#tree").remove();
+                            vm.sortList = [];
+                            ajax();
+                        }
+                        else{
+                            alert("没有上一页啦！")
+                        }
+                    },
+                    pageDown:function () {
+                        if(pageNum<pageMax){
+                            pageNum++;
+                            $("#tree").remove();
+                            vm.sortList = [];
+                            ajax();
+                        } else{
+                            alert("已经事最后一页了")
+                        }
+                    },
+                    pageIndex:function (index) {
+                        pageNum = index+1;
+                        $("#tree").remove();
+                        vm.sortList = [];
+                        ajax();
+                    }
+                }
+            });
+
 
            function ajax(){
                $.ajax({
@@ -106,27 +148,6 @@
                                 location.href="http://localhost:8080/sort2.html";
                             }
                         });
-                    },
-                    pageUp:function () {
-                        if(pageNum>1){
-                            pageNum--;
-                            $("#tree").remove();
-                            vm.sortList = [];
-                            ajax();
-                        }
-                        else{
-                            alert("没有上一页啦！")
-                        }
-                    },
-                    pageDown:function () {
-                        if(pageNum<pageMax){
-                            pageNum++;
-                            $("#tree").remove();
-                            vm.sortList = [];
-                            ajax();
-                        } else{
-                            alert("已经事最后一页了")
-                        }
                     }
                 }
             });
@@ -190,17 +211,6 @@
                 </tr>
                 </tbody>
             </table>
-
-            <!-- 分页-->
-            <ul class="pagination">
-                <li id="pageUp" @click="pageUp"><a href="javascript:void(0)">&laquo;</a></li>
-                <li class="active" id="page1"><a href="#">1</a></li>
-                <li id="page2"><a href="#">2</a></li>
-                <li id="page3"><a href="#">3</a></li>
-                <li id="page4"><a href="#">4</a></li>
-                <li id="page5"><a href="#">5</a></li>
-                <li id="pageDown" @click="pageDown"><a href="javascript:void(0)">&raquo;</a></li>
-            </ul>
             <!-- 模态框（Modal） -->
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -220,6 +230,15 @@
                 </div>
             </div>
         </div>
+        <!-- 分页-->
+
+        <ul class="pagination" id="app">
+            <li><a href="javascript:void(0)" @click="pageUp">&laquo;</a></li>
+            <li id="page1"v-for="(page,index) in pages"@click="pageIndex(index)"><a href="#" >{{page.pageNum}}</a></li>
+            <li><a href="javascript:void(0)" @click="pageDown">&raquo;</a></li>
+        </ul>
+
+
     </div>
 </div>
 

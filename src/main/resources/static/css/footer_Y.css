@@ -1,10 +1,9 @@
 /*底部*/
 
 #footer {
-    height: 400px;
-    width: 1519px;
-    /*background-color: #ffffff;*/
-    background-color:#eaeaea;
+    height: 630px;
+    width: 1190px;
+    background-color: #ffffff;
     margin: 0px auto;
 }
 
@@ -13,22 +12,36 @@
 }
 
 #service-2014 dl {
+    margin-top: 100px;
     float: left;
     width: 120px;
     padding-left: 20px;
+    font-size: 12px;
+    font-family: "Microsoft YaHei UI";
+    text-align: center;
+    color: #666666;
+    margin-left: 40px;
 }
 
 #service-2014 dl.fore5 {
-    width: 100px
+    margin-top: 100px;
+    width: 110px;
+
 }
 
 #service-2014 dt {
     padding: 6px 0;
-    font: 400 16px/24px "microsoft yahei"
+    font: 400 16px/24px "microsoft yahei";
 }
 
 #service-2014 dd {
-    line-height: 20px
+    line-height: 20px;
+    margin: 0px;
+}
+#service-2014 .slogan img {
+    margin-right: 20px;
+    text-align: center;
+    margin-top: 30px;
 }
 
 #service-2014 .slogan {
@@ -56,10 +69,15 @@
 }
 
 #coverage {
+    margin-top: 100px;
     float: right;
     width: 300px;
     height: 168px;
-    background: url("../images/tubiao/dt.png") no-repeat 60px -131px;
+    background: url("../images/dt.png") no-repeat 60px -131px;
+    font-size: 12px;
+    font-family: "Microsoft YaHei UI";
+    text-align: center;
+    color: #666666;
 }
 
 #coverage .dt {
@@ -74,4 +92,8 @@
 .copyright {
     clear: both;
     text-align: center;
+    font-size: 12px;
+    font-family: "Microsoft YaHei UI";
+    color: #666666;
+
 }

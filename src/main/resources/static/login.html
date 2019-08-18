@@ -9,8 +9,11 @@
     <script src="js/jquery.validate.regex.js"></script>
     <script>
         $(function () {
+            //cookie判断
+
+
             // box切换功能
-            $("#zhanhao").click(function () {
+            $("#zhanhao").click(function (){
                 $(".box_login").removeClass("box_login").addClass("visible");
                 $("#zhanhao").removeClass("lo").addClass("checked");
                 $("#saoma").removeClass("checked").addClass("lo")
@@ -20,11 +23,13 @@
                 $("#saoma").removeClass("lo").addClass("checked");
                 $("#zhanhao").removeClass("checked").addClass("lo")
             });
+
             $(".b1").hover(function () {
                 $(this).animate({left:"20px"},500)
             },function () {
                 $(this).animate({left:"84px"},500)
             });
+
             // 验证
             $("#formlogin").validate({
                 rules: {
@@ -58,7 +63,7 @@
                         success:function (data){
                             alert(data);
                             if(data){
-                                location.href="http://www.baidu.com";
+                                location.href="index.html";
                             }
                         }
                     })
@@ -80,8 +85,8 @@
         <div class="d2">
             <i class="i1"></i>
             <p>依据《网络安全法》，为保障您的账户安全和正常使用，请尽快完成手机号验证！ 新版</p>
-            <a href="" id="a1"> 《京东隐私政策》 </a>
-            <p>已上线，将更有利于保护您的个人隐私。</p>
+                <a href="" id="a1"> 《京东隐私政策》 </a>
+             <p>已上线，将更有利于保护您的个人隐私。</p>
         </div>
     </div>
 </div>
@@ -99,16 +104,16 @@
             <div class="tip">
                 <a href="javascript:void(0);" class="lo" id="zhanhao">账号登录</a>
             </div>
-            <!--                第一个登录窗口，二维码-->
+<!--                第一个登录窗口，二维码-->
             <div class="c5">
                 <div class="c6">
                     <div class="b1">
                         <img src="//qr.m.jd.com/show?appid=133&amp;size=147&amp;t=1564889551544" alt="">
                     </div>
                     <div class="c7">
-                        <ul class="u1">
-                            <span>打开</span><a href=""><span class="red">手机京东</span></a><li>扫描二维码</li>
-                        </ul>
+                    <ul class="u1">
+                        <span>打开</span><a href=""><span class="red">手机京东</span></a><li>扫描二维码</li>
+                    </ul>
                     </div>
                     <div class="c8">
                         <ul class="u2">
@@ -129,7 +134,7 @@
                 </div>
 
             </div>
-            <!--                第二个登录窗口，账号登录-->
+<!--                第二个登录窗口，账号登录-->
             <div class="box_login">
                 <div class="msg"></div>
                 <form action="doPost.jsp" method="post" id="formlogin">
@@ -139,7 +144,7 @@
                     </div>
                     <div class="m1">
                         <lable class="m2 m3 "></lable>
-                        <input  type="text" class="itxt" name="loginpassword" tabindex="1" autocomplete="off" value="" placeholder="密码">
+                        <input  type="password" class="itxt" name="loginpassword" tabindex="1" autocomplete="off" value="" placeholder="密码">
                     </div>
                     <div class="m4"><a href="">忘记密码</a></div>
                     <div class="login_btn">

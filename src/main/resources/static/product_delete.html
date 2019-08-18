@@ -26,29 +26,44 @@
                     {
                         pageMax= Math.ceil(parseInt(count)/7)
                         // alert(pageMax);
+                        for(var j =0;j<pageMax;j++){
+                            vm1.pages.push({
+                                pageNum:j+1
+                            })
+                        }
                     }
                 }
             });
             //分页实现
             //1. 默认页面
             ajax();
-            // 2.上一页
-            $("#pageUp").click(function () {
-                if(pageNum>1){
-                    pageNum--;
-                    ajax();
-                }
-                else{
-                    alert("没有上一页啦！")
-                }
-            });
-            // 3.下一页
-            $("#pageDown").click(function () {
-                if(pageNum<pageMax){
-                    pageNum++;
-                    ajax();
-                } else{
-                    alert("已经事最后一页了")
+            var vm1 = new Vue({
+                el: '#app',
+                data: {
+                    pages: []
+                },
+                methods:{
+                    pageUp:function () {
+                        if(pageNum>1){
+                            pageNum--;
+                            ajax();
+                        }
+                        else{
+                            alert("没有上一页啦！")
+                        }
+                    },
+                    pageDown:function () {
+                        if(pageNum<pageMax){
+                            pageNum++;
+                            ajax();
+                        } else{
+                            alert("已经事最后一页了")
+                        }
+                    },
+                    pageIndex:function (index) {
+                        pageNum = index+1;
+                        ajax();
+                    }
                 }
             });
 
@@ -172,14 +187,10 @@
                 </tr>
                 </tbody>
             </table>
-            <ul class="pagination">
-                <li id="pageUp"><a href="javascript:void(0)">&laquo;</a></li>
-                <li class="active" id="page1"><a href="#">1</a></li>
-                <li id="page2"><a href="#">2</a></li>
-                <li id="page3"><a href="#">3</a></li>
-                <li id="page4"><a href="#">4</a></li>
-                <li id="page5"><a href="#">5</a></li>
-                <li id="pageDown"><a href="javascript:void(0)">&raquo;</a></li>
+            <ul class="pagination" id="app">
+                <li><a href="javascript:void(0)" @click="pageUp">&laquo;</a></li>
+                <li id="page1"v-for="(page,index) in pages" @click="pageIndex(index)"><a href="#">{{page.pageNum}}</a></li>
+                <li><a href="javascript:void(0)" @click="pageDown">&raquo;</a></li>
             </ul>
         </div>
 
