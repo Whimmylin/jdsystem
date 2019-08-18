@@ -15,6 +15,7 @@ public class ProductImg {
         return imgId;
     }
 
+
     public void setImgId(Integer imgId) {
         this.imgId = imgId;
     }
