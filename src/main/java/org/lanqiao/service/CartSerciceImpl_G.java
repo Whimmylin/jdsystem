@@ -15,8 +15,8 @@ public class CartSerciceImpl_G implements CartService_G {
     @Autowired
     CartMapper_G cartMapperG;
     @Override
-    public List<Cart> selectAllCartGoods() {
-        return cartMapperG.selectAllCartGoods();
+    public List<Cart> selectAllCartGoods(Integer userId) {
+        return cartMapperG.selectAllCartGoods(userId);
     }
 
     @Override

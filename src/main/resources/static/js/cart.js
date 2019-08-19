@@ -6,10 +6,11 @@
 $(function () {
     var cartData;
     var cartLen;
-
+    var uid =  $.cookie('userId');
     $.ajax({
         url:"http://localhost:8080/selectcardgoods",
         type:"post",
+        data:{"userId":uid},
         dataType:"json",
         success:function (info) {
             cartData = info;
@@ -22,7 +23,7 @@ $(function () {
                     price:cartData[i].productG.proPrice,
                     check:false,
                     img:cartData[i].productG.productImgs[0].imgUrl,
-                    user_id:cartData[i].users.userId,
+                    user_id:cartData[i].users.userId
                 });
             }
 
@@ -57,6 +58,7 @@ $(function () {
                 else{
                     var flag = confirm("该商品需要是否移除购物车");
                     if(flag==true){
+                        deletegoods(this.goods[i].id);
                         this.goods.splice(i,1);
                     }
                 }

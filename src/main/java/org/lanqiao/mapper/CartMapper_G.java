@@ -22,7 +22,7 @@ public interface CartMapper_G {
 
     int updateByPrimaryKey(Cart record);
 
-    List<Cart> selectAllCartGoods();
+    List<Cart> selectAllCartGoods(Integer userId);
 
     int insertIntoOrderDetail(Orderdetail orderdetailG);
 

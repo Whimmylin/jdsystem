@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/cart.css">
     <script src="js/jquery.min.js"></script>
     <script src="js/vue.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <script src="js/cart.js"></script>
 
 </head>
@@ -67,7 +68,7 @@
             <div id="cart_filter_bar">
                <a id="switch_cart">
                    <em>全部商品</em>
-                   <span id="number">1</span>
+                   <span id="number"></span>
                </a>
                 <div id="cart-store">
                     <span>配送至：</span>
@@ -184,7 +185,7 @@
                             </div>
                         </div>
                         <div id="count-button" @click="gotoOrder">
-                            <a>
+                            <a href="orderPage_W.html">
                                 <span>去结算</span>
                             </a>
                         </div>

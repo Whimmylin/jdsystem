@@ -7,7 +7,7 @@ import org.lanqiao.entity.Orders;
 import java.util.List;
 
 public interface CartService_G {
-    List<Cart> selectAllCartGoods();
+    List<Cart> selectAllCartGoods(Integer userId);
     int deleteByPrimaryKey(Integer cartId);
     int updateByPrimaryKey(Cart record);
 

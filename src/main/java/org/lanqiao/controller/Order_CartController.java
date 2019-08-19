@@ -44,8 +44,8 @@ public class Order_CartController {
     CartService_G cartServiceG;
 
     @RequestMapping("/selectcardgoods")
-    List<Cart> selectAllCartGoods(){
-        return cartServiceG.selectAllCartGoods();
+    List<Cart> selectAllCartGoods(Integer userId){
+        return cartServiceG.selectAllCartGoods(userId);
     }
     @RequestMapping("/deleteCartGoodsById")
     int deleteByPrimaryKey(Integer cartId){return cartServiceG.deleteByPrimaryKey(cartId);};

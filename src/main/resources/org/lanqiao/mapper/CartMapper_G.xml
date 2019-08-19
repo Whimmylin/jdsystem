@@ -61,8 +61,8 @@
         <result column="rec_address" property="recAddress" jdbcType="VARCHAR" />
     </resultMap>
 
-  <select id="selectAllCartGoods" resultMap="CartBaseMapper">
-    select *  from cart c,product p,productimg pi where c.pro_id=p.pro_id and p.pro_id=pi.pro_id and pi.is_img_main='yes';
+  <select id="selectAllCartGoods" resultMap="CartBaseMapper" parameterType="java.lang.Integer">
+    select *  from cart c,product p,productimg pi where c.pro_id=p.pro_id and p.pro_id=pi.pro_id and user_id = #{userId};
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from cart where cart_id=#{cartId,jdbcType=INTEGER}
@@ -80,7 +80,7 @@
     select * from orderdetail
   </select>
     <select id="selectOrderId" resultMap="OrdersBaseMapper" parameterType="java.lang.Integer">
-        select order_id from orders where user_id = #{userId} and order_money is null limit 1
+        select order_id from orders where user_id = #{userId} and order_money is null;
     </select>
 <!--  <sql id="Base_Column_List" >-->
 <!--    cart_id, user_id-->
