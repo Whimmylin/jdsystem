@@ -1,8 +1,8 @@
 spring:
   datasource:
     username: root
-    password: zgb
-    url: jdbc:mysql://localhost:3306/jingdong?useUnicode=true&characterEncoding=utf-8
+    password: 1998
+    url: jdbc:mysql://localhost:3306/jingdong?characterEncoding=UTF-8
     driver-class-name: com.mysql.jdbc.Driver
 
 mybatis:

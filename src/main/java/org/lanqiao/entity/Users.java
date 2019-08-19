@@ -23,9 +23,7 @@ public class Users {
     private Date birthday;
 
     private String isVip;
-
     private Set<Orders> orders;
-
     private Set<UserGetAddress> userGetAddresses;
 
     public Set<Orders> getOrders() {

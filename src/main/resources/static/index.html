@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <title>京东商城</title>
     <script src="js/jquery-3.4.1.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <script>
        $(function(){
+          var userId =  $.cookie('userId');
+          alert(userId);
            $(document).scroll(function(){
                if($(document).scrollTop()>=200){
                    $("#float_top").fadeIn(500);

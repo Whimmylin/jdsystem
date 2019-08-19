@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>我的购物车</title>
-    <link rel="stylesheet" href="css/footerG.css">
+    <link rel="stylesheet" href="css/footer_b.css">
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/cart.css">
     <script src="js/jquery.min.js"></script>
     <script src="js/vue.min.js"></script>
-    <script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <script src="js/cart.js"></script>
 
 </head>
@@ -68,7 +67,7 @@
             <div id="cart_filter_bar">
                <a id="switch_cart">
                    <em>全部商品</em>
-                   <span id="number"></span>
+                   <span id="number">1</span>
                </a>
                 <div id="cart-store">
                     <span>配送至：</span>
@@ -185,7 +184,7 @@
                             </div>
                         </div>
                         <div id="count-button" @click="gotoOrder">
-                            <a href="orderPage_W.html">
+                            <a>
                                 <span>去结算</span>
                             </a>
                         </div>

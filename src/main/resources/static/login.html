@@ -7,10 +7,15 @@
     <script src="js/jquery-3.4.1.js"></script>
     <script src="js/jquery.validate.js"></script>
     <script src="js/jquery.validate.regex.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <script>
         $(function () {
             //cookie判断
-
+            var userId =  $.cookie('userId');
+            if(userId !=null){
+                alert("已经登录，重新登录将会覆盖之前的用户！")
+            }
+            // alert(userId);
 
             // box切换功能
             $("#zhanhao").click(function (){
