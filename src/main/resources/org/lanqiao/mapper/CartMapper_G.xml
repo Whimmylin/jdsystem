@@ -31,7 +31,7 @@
     <result column="pro_out" property="proOut" jdbcType="DATE" />
     <result column="pro_state" property="proState" jdbcType="VARCHAR" />
     <result column="pro_detail" property="proDetail" jdbcType="VARCHAR" />
-    <collection property="productimgs" resultMap="ProductimgBaseMapper"></collection>
+    <collection property="productImgs" resultMap="ProductimgBaseMapper"></collection>
   </resultMap>
   <resultMap id="ProductimgBaseMapper" type="org.lanqiao.entity.ProductImg" >
     <id column="img_id" property="imgId" jdbcType="INTEGER" />

@@ -13,6 +13,4 @@ public interface UserServiceZ {
 
     //验证名字
     public int UserNameisExist(String UserName);
-
-
 }

@@ -162,4 +162,5 @@ public class Product {
     public void setProductimg(ProductImg productimg) {
         this.productimg = productimg;
     }
+
 }
