@@ -60,6 +60,7 @@
         <result column="rec_phone" property="recPhone" jdbcType="VARCHAR" />
         <result column="rec_address" property="recAddress" jdbcType="VARCHAR" />
     </resultMap>
+
   <select id="selectAllCartGoods" resultMap="CartBaseMapper">
     select *  from cart c,product p,productimg pi where c.pro_id=p.pro_id and p.pro_id=pi.pro_id and pi.is_img_main='yes';
   </select>

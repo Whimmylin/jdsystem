@@ -1,16 +1,9 @@
 /*底部*/
 
 #footer {
-<<<<<<< Updated upstream
     height: 400px;
-    width: 1519px;
-    /*background-color: #ffffff;*/
-    background-color:#eaeaea;
-=======
-    height: 630px;
-    width: 1190px;
+    width: 990px;
     background-color: #ffffff;
->>>>>>> Stashed changes
     margin: 0px auto;
 }
 
@@ -19,7 +12,6 @@
 }
 
 #service-2014 dl {
-<<<<<<< Updated upstream
     float: left;
     width: 120px;
     padding-left: 20px;
@@ -27,46 +19,15 @@
 
 #service-2014 dl.fore5 {
     width: 100px
-=======
-    margin-top: 100px;
-    float: left;
-    width: 120px;
-    padding-left: 20px;
-    font-size: 12px;
-    font-family: "Microsoft YaHei UI";
-    text-align: center;
-    color: #666666;
-    margin-left: 40px;
-}
-
-#service-2014 dl.fore5 {
-    margin-top: 100px;
-    width: 110px;
-
->>>>>>> Stashed changes
 }
 
 #service-2014 dt {
     padding: 6px 0;
-<<<<<<< Updated upstream
     font: 400 16px/24px "microsoft yahei"
 }
 
 #service-2014 dd {
     line-height: 20px
-=======
-    font: 400 16px/24px "microsoft yahei";
-}
-
-#service-2014 dd {
-    line-height: 20px;
-    margin: 0px;
-}
-#service-2014 .slogan img {
-    margin-right: 20px;
-    text-align: center;
-    margin-top: 30px;
->>>>>>> Stashed changes
 }
 
 #service-2014 .slogan {
@@ -94,22 +55,10 @@
 }
 
 #coverage {
-<<<<<<< Updated upstream
     float: right;
     width: 300px;
     height: 168px;
-    background: url("../images/tubiao/dt.png") no-repeat 60px -131px;
-=======
-    margin-top: 100px;
-    float: right;
-    width: 300px;
-    height: 168px;
-    background: url("../images/dt.png") no-repeat 60px -131px;
-    font-size: 12px;
-    font-family: "Microsoft YaHei UI";
-    text-align: center;
-    color: #666666;
->>>>>>> Stashed changes
+    background: url("../images_G/dt.png") no-repeat 60px -131px;
 }
 
 #coverage .dt {
@@ -124,11 +73,4 @@
 .copyright {
     clear: both;
     text-align: center;
-<<<<<<< Updated upstream
-=======
-    font-size: 12px;
-    font-family: "Microsoft YaHei UI";
-    color: #666666;
-
->>>>>>> Stashed changes
 }
