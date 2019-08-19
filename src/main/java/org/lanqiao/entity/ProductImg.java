@@ -11,10 +11,19 @@ public class ProductImg {
 
     private String isImgMain;
 
+    private Orderdetail orderDetail;
+
+    public Orderdetail getOrderDetail() {
+        return orderDetail;
+    }
+
+    public void setOrderDetail(Orderdetail orderDetail) {
+        this.orderDetail = orderDetail;
+    }
+
     public Integer getImgId() {
         return imgId;
     }
-
 
     public void setImgId(Integer imgId) {
         this.imgId = imgId;

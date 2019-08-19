@@ -1,6 +1,6 @@
 package org.lanqiao.mapper;
 
-import org.lanqiao.entity.Product_Y;
+import org.lanqiao.entity.Product;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -9,17 +9,17 @@ import java.util.List;
 public interface ProductMapper_Y {
     int deleteByPrimaryKey(Integer proId);
 
-    int insert(Product_Y productY);
+    int insert(Product productY);
 
-    int insertSelective(Product_Y record);
+    int insertSelective(Product record);
 
-    List<Product_Y> selectByPrimaryKey(int pageNum,int pageSize);
+    List<Product> selectByPrimaryKey(int pageNum, int pageSize);
 
-    List<Product_Y> count();
+    List<Product> count();
 
-    public  List<Product_Y> selectProductOne(int indexId);
+    public  List<Product> selectProductOne(int indexId);
 
-    int updateByPrimaryKeySelective(Product_Y record);
+    int updateByPrimaryKeySelective(Product record);
 
-    int updateByPrimaryKey(Product_Y record);
+    int updateByPrimaryKey(Product record);
 }

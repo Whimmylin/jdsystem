@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.lanqiao.mapper.ProductMapper" >
-  <resultMap id="BaseResultMap" type="org.lanqiao.entity.Product_G" >
+  <resultMap id="BaseResultMap" type="org.lanqiao.entity.Product" >
     <id column="pro_id" property="proId" jdbcType="INTEGER" />
     <result column="brand_id" property="brandId" jdbcType="INTEGER" />
     <result column="sort_id" property="sortId" jdbcType="INTEGER" />
@@ -27,7 +27,7 @@
     delete from productG
     where pro_id = #{proId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="org.lanqiao.entity.Product_G" >
+  <insert id="insert" parameterType="org.lanqiao.entity.Product" >
     insert into productG (pro_id, brand_id, sort_id,
       pro_name, pro_price, pro_stock, 
       pro_out, pro_state, pro_detail
@@ -37,7 +37,7 @@
       #{proOut,jdbcType=DATE}, #{proState,jdbcType=VARCHAR}, #{proDetail,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="org.lanqiao.entity.Product_G" >
+  <insert id="insertSelective" parameterType="org.lanqiao.entity.Product" >
     insert into productG
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="proId != null" >
@@ -98,7 +98,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="org.lanqiao.entity.Product_G" >
+  <update id="updateByPrimaryKeySelective" parameterType="org.lanqiao.entity.Product" >
     update productG
     <set >
       <if test="brandId != null" >
@@ -128,7 +128,7 @@
     </set>
     where pro_id = #{proId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="org.lanqiao.entity.Product_G" >
+  <update id="updateByPrimaryKey" parameterType="org.lanqiao.entity.Product" >
     update productG
     set brand_id = #{brandId,jdbcType=INTEGER},
       sort_id = #{sortId,jdbcType=INTEGER},

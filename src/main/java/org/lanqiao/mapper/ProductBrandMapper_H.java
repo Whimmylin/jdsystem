@@ -1,17 +1,17 @@
 package org.lanqiao.mapper;
 
-import org.lanqiao.entity.ProductBrand_H;
+import org.lanqiao.entity.ProductBrand;
 
 public interface ProductBrandMapper_H {
     int deleteByPrimaryKey(Integer brandId);
 
-    int insert(ProductBrand_H record);
+    int insert(ProductBrand record);
 
-    int insertSelective(ProductBrand_H record);
+    int insertSelective(ProductBrand record);
 
-    ProductBrand_H selectByPrimaryKey(Integer brandId);
+    ProductBrand selectByPrimaryKey(Integer brandId);
 
-    int updateByPrimaryKeySelective(ProductBrand_H record);
+    int updateByPrimaryKeySelective(ProductBrand record);
 
-    int updateByPrimaryKey(ProductBrand_H record);
+    int updateByPrimaryKey(ProductBrand record);
 }

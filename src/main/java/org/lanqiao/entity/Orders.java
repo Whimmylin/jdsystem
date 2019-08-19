@@ -1,6 +1,7 @@
 package org.lanqiao.entity;
 
 import java.util.Date;
+import java.util.Set;
 
 public class Orders {
     private Integer orderId;
@@ -20,6 +21,10 @@ public class Orders {
     private String recPhone;
 
     private String recAddress;
+
+    private Users users;
+
+    private Set<Orderdetail> orderDetails;
 
     public Integer getOrderId() {
         return orderId;
@@ -91,5 +96,21 @@ public class Orders {
 
     public void setRecAddress(String recAddress) {
         this.recAddress = recAddress == null ? null : recAddress.trim();
+    }
+
+    public Users getUsers() {
+        return users;
+    }
+
+    public void setUsers(Users users) {
+        this.users = users;
+    }
+
+    public Set<Orderdetail> getOrderDetails() {
+        return orderDetails;
+    }
+
+    public void setOrderDetails(Set<Orderdetail> orderDetails) {
+        this.orderDetails = orderDetails;
     }
 }

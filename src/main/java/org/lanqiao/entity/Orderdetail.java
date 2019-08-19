@@ -1,6 +1,6 @@
 package org.lanqiao.entity;
 
-public class OrderDetail_W {
+public class Orderdetail {
     private Integer orderItemId;
 
     private Integer orderId;
@@ -10,31 +10,34 @@ public class OrderDetail_W {
     private String proName;
 
     private Integer proNum;
-    private Orders_W orders;
-    private Product_W product;
-    private ProductImg_W productImg;
 
-    public ProductImg_W getProductImg() {
+    private Orders orders;
+
+    private Product product;
+
+    private ProductImg productImg;
+
+    public ProductImg getProductImg() {
         return productImg;
     }
 
-    public void setProductImg(ProductImg_W productImg) {
+    public void setProductImg(ProductImg productImg) {
         this.productImg = productImg;
     }
 
-    public Product_W getProduct() {
+    public Product getProduct() {
         return product;
     }
 
-    public void setProduct(Product_W product) {
+    public void setProduct(Product product) {
         this.product = product;
     }
 
-    public Orders_W getOrders() {
+    public Orders getOrders() {
         return orders;
     }
 
-    public void setOrders(Orders_W orders) {
+    public void setOrders(Orders orders) {
         this.orders = orders;
     }
 
@@ -77,5 +80,4 @@ public class OrderDetail_W {
     public void setProNum(Integer proNum) {
         this.proNum = proNum;
     }
-
 }

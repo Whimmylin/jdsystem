@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.lanqiao.mapper.ProductSortMapper_H" >
-  <resultMap id="ProductSortResultMap" type="org.lanqiao.entity.ProductSort_H" >
+  <resultMap id="ProductSortResultMap" type="org.lanqiao.entity.ProductSort" >
     <id column="sort_id" property="sortId" jdbcType="INTEGER" />
     <result column="sort_name" property="sortName" jdbcType="VARCHAR" />
   </resultMap>
@@ -18,11 +18,11 @@
     delete from productsort
     where sort_id = #{sortId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="org.lanqiao.entity.ProductSort_H" >
+  <insert id="insert" parameterType="org.lanqiao.entity.ProductSort" >
     insert into productsort (sort_id, sort_name)
     values (#{sortId,jdbcType=INTEGER}, #{sortName,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="org.lanqiao.entity.ProductSort_H" >
+  <insert id="insertSelective" parameterType="org.lanqiao.entity.ProductSort" >
     insert into productsort
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="sortId != null" >
@@ -41,7 +41,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="org.lanqiao.entity.ProductSort_H" >
+  <update id="updateByPrimaryKeySelective" parameterType="org.lanqiao.entity.ProductSort" >
     update productsort
     <set >
       <if test="sortName != null" >
@@ -50,7 +50,7 @@
     </set>
     where sort_id = #{sortId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="org.lanqiao.entity.ProductSort_H" >
+  <update id="updateByPrimaryKey" parameterType="org.lanqiao.entity.ProductSort" >
     update productsort
     set sort_name = #{sortName,jdbcType=VARCHAR}
     where sort_id = #{sortId,jdbcType=INTEGER}

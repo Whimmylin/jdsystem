@@ -4,7 +4,7 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.lanqiao.entity.ProductLL;
+import org.lanqiao.entity.Product;
 import org.lanqiao.mapper.ProductMapperLL;
 
 import java.io.Reader;
@@ -41,7 +41,7 @@ public class Test {
 //            }
             //班级表和教师表的一对一，在班级表映射中验证关系
             ProductMapperLL classesMapper=session.getMapper(ProductMapperLL.class);
-            ProductLL classes=classesMapper.selectByPrimaryKey(1);
+            Product classes=classesMapper.selectByPrimaryKey(1);
             System.out.println(classes);
         } finally {
             session.close();

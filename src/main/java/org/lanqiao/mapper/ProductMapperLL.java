@@ -1,19 +1,19 @@
 package org.lanqiao.mapper;
 
-import org.lanqiao.entity.ProductLL;
+import org.lanqiao.entity.Product;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProductMapperLL {
     //int deleteByPrimaryKey(Integer proId);
 
-   // int insert(ProductLL record);
+   // int insert(Product record);
 
-    //int insertSelective(ProductLL record);
+    //int insertSelective(Product record);
 
-    ProductLL selectByPrimaryKey(Integer proId);
+    Product selectByPrimaryKey(Integer proId);
 
-   // int updateByPrimaryKeySelective(ProductLL record);
+   // int updateByPrimaryKeySelective(Product record);
 
-    //int updateByPrimaryKey(ProductLL record);
+    //int updateByPrimaryKey(Product record);
 }

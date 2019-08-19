@@ -1,6 +1,5 @@
 package org.lanqiao.controller;
-
-import org.lanqiao.entity.Orders_Y;
+import org.lanqiao.entity.Orders;
 import org.lanqiao.service.OrdersService_Y;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,13 +8,13 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-public class OrdersController_Y {
+public class Orders_ManaController {
     @Autowired
     OrdersService_Y ordersService_y;
 
     @RequestMapping("/selectOrders")
 
-    public List<Orders_Y> selectOrders(int pageNum,int pageSize){
+    public List<Orders> selectOrders(int pageNum, int pageSize){
         return ordersService_y.showAll(pageNum,pageSize);
     }
 
@@ -25,12 +24,12 @@ public class OrdersController_Y {
     }
 
     @RequestMapping("/selectOrdersOne")
-    public  List<Orders_Y> selectOrdersOne(int indexId){
+    public  List<Orders> selectOrdersOne(int indexId){
         return ordersService_y.selectOrdersOne(indexId);
     }
 
     @RequestMapping("/updateOrders")
-    public  int updateOrders(Orders_Y orders_y){
+    public  int updateOrders(Orders orders_y){
         return ordersService_y.updateOrders(orders_y);
     }
 }

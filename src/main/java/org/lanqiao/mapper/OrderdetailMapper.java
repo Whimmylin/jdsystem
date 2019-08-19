@@ -1,17 +1,17 @@
 package org.lanqiao.mapper;
 
-import org.lanqiao.entity.Orderdetail_G;
+import org.lanqiao.entity.Orderdetail;
 
 public interface OrderdetailMapper {
     int deleteByPrimaryKey(Integer orderItemId);
 
-    int insert(Orderdetail_G record);
+    int insert(Orderdetail record);
 
-    int insertSelective(Orderdetail_G record);
+    int insertSelective(Orderdetail record);
 
-    Orderdetail_G selectByPrimaryKey(Integer orderItemId);
+    Orderdetail selectByPrimaryKey(Integer orderItemId);
 
-    int updateByPrimaryKeySelective(Orderdetail_G record);
+    int updateByPrimaryKeySelective(Orderdetail record);
 
-    int updateByPrimaryKey(Orderdetail_G record);
+    int updateByPrimaryKey(Orderdetail record);
 }

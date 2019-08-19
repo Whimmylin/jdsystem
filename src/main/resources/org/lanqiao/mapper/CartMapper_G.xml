@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.lanqiao.mapper.CartMapper_G" >
-  <resultMap id="CartBaseMapper" type="org.lanqiao.entity.Cart_G" >
+  <resultMap id="CartBaseMapper" type="org.lanqiao.entity.Cart" >
     <id column="cart_id" property="cartId" jdbcType="INTEGER" />
     <result column="pro_num" property="proNum" jdbcType="INTEGER" />
     <association property="users" resultMap="UsersBaseMapper"></association>
@@ -21,7 +21,7 @@
     <result column="is_VIP" property="isVip" jdbcType="VARCHAR" />
   </resultMap>
 
-  <resultMap id="ProductBaseMappper" type="org.lanqiao.entity.Product_G" >
+  <resultMap id="ProductBaseMappper" type="org.lanqiao.entity.Product" >
     <id column="pro_id" property="proId" jdbcType="INTEGER" />
     <result column="brand_id" property="brandId" jdbcType="INTEGER" />
     <result column="sort_id" property="sortId" jdbcType="INTEGER" />
@@ -31,7 +31,7 @@
     <result column="pro_out" property="proOut" jdbcType="DATE" />
     <result column="pro_state" property="proState" jdbcType="VARCHAR" />
     <result column="pro_detail" property="proDetail" jdbcType="VARCHAR" />
-    <collection property="productimgs" resultMap="ProductimgBaseMapper"></collection>
+    <collection property="productImgs" resultMap="ProductimgBaseMapper"></collection>
   </resultMap>
   <resultMap id="ProductimgBaseMapper" type="org.lanqiao.entity.ProductImg" >
     <id column="img_id" property="imgId" jdbcType="INTEGER" />
@@ -41,7 +41,7 @@
     <result column="is_img_main" property="isImgMain" jdbcType="VARCHAR" />
   </resultMap>
 
-  <resultMap id="orderdetailBaseMapper" type="org.lanqiao.entity.Orderdetail_G" >
+  <resultMap id="orderdetailBaseMapper" type="org.lanqiao.entity.Orderdetail" >
     <id column="order_item_id" property="orderItemId" jdbcType="INTEGER" />
     <result column="order_id" property="orderId" jdbcType="INTEGER" />
     <result column="pro_id" property="proId" jdbcType="INTEGER" />
@@ -67,10 +67,10 @@
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from cart where cart_id=#{cartId,jdbcType=INTEGER}
   </delete>
-  <update id="updateByPrimaryKey" parameterType="org.lanqiao.entity.Cart_G">
+  <update id="updateByPrimaryKey" parameterType="org.lanqiao.entity.Cart">
     update cart set pro_num = #{proNum} where cart_id = #{cartId}
   </update>
-  <insert id="insertIntoOrderDetail" parameterType="org.lanqiao.entity.Orderdetail_G">
+  <insert id="insertIntoOrderDetail" parameterType="org.lanqiao.entity.Orderdetail">
     insert into orderdetail(order_id,pro_id,pro_num,pro_name) values (#{orderId},#{proId},#{proNum},#{proName,jdbcType=VARCHAR})
   </insert>
   <insert id="insertIntoOrder" parameterType="org.lanqiao.entity.Orders">

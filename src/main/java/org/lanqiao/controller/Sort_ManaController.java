@@ -1,5 +1,4 @@
 package org.lanqiao.controller;
-
 import org.lanqiao.entity.ProductBrand;
 import org.lanqiao.entity.ProductSort;
 import org.lanqiao.service.ProBrandServiceZ;
@@ -14,7 +13,7 @@ import java.util.List;
  * Created by zhangyilin on 2019/8/14.
  */
 @RestController
-public class ManaController {
+public class Sort_ManaController {
     @Autowired
     ProductSortServiceZ productSortServiceZ;
 
@@ -70,4 +69,6 @@ public class ManaController {
     public int sort3PageCount(){
         return proBrandServiceZ.sort3PageCount();
     }
+
+
 }

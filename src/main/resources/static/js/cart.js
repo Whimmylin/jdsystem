@@ -21,7 +21,7 @@ $(function () {
                     num:cartData[i].proNum,
                     price:cartData[i].productG.proPrice,
                     check:false,
-                    img:cartData[i].productG.productimgs[0].imgUrl,
+                    img:cartData[i].productG.productImgs[0].imgUrl,
                     user_id:cartData[i].users.userId,
                 });
             }

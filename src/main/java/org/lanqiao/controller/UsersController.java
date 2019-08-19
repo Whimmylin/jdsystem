@@ -1,6 +1,6 @@
 package org.lanqiao.controller;
 
-import org.lanqiao.entity.Users;
+import org.lanqiao.service.UserServiceZ;
 import org.lanqiao.service.UserService_Y;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,10 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import org.lanqiao.entity.Users;
 
 
 @RestController
-public class UsersController_Y {
+public class UsersController {
 @Autowired
     UserService_Y userService_y;
 @RequestMapping("/checked")
@@ -28,4 +29,17 @@ public boolean selectByPrimaryKey(HttpServletResponse response, String userName 
    }
        return false;
    }
+
+    @Autowired
+    UserServiceZ userServiceZ;
+
+    @RequestMapping("/insert")
+    public int insert(Users users){
+        return userServiceZ.addUsers(users);
+    }
+
+    @RequestMapping("/check")
+    public int checkUser(String userName){
+        return userServiceZ.UserNameisExist(userName);
+    }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.lanqiao.mapper.OrdersMapper_W" >
-  <resultMap id="OrdersResultMap" type="org.lanqiao.entity.Orders_W" >
+  <resultMap id="OrdersResultMap" type="org.lanqiao.entity.Orders" >
     <id column="order_id" property="orderId" jdbcType="INTEGER" />
 <!--    <result column="order_item_id" property="orderItemId" jdbcType="INTEGER" />-->
     <result column="user_id" property="userId" jdbcType="INTEGER" />
@@ -16,7 +16,7 @@
 
   </resultMap>
 
-  <resultMap id="OrderDetailResultMap" type="org.lanqiao.entity.OrderDetail_W" >
+  <resultMap id="OrderDetailResultMap" type="org.lanqiao.entity.Orderdetail" >
     <id column="order_item_id" property="orderItemId" jdbcType="INTEGER" />
     <result column="order_id" property="orderId" jdbcType="INTEGER" />
     <result column="pro_id" property="proId" jdbcType="INTEGER" />
@@ -57,7 +57,7 @@
 
 
 
-  <insert id="insert" parameterType="org.lanqiao.entity.Orders_W" >
+  <insert id="insert" parameterType="org.lanqiao.entity.Orders" >
     insert into orders (order_id, user_id,
       order_money, pay_way, order_time, 
       order_sum, rec_name, rec_phone, 
@@ -138,7 +138,7 @@
 <!--      </if>-->
 <!--    </trim>-->
 <!--  </insert>-->
-  <update id="updateOrderItem" parameterType="org.lanqiao.entity.Orders_W" >
+  <update id="updateOrderItem" parameterType="org.lanqiao.entity.Orders" >
     update orders
     <set >
 <!--      <if test="orderItemId != null" >-->
